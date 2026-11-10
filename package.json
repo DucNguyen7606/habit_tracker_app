@@ -1,0 +1,38 @@
+{
+  "name": "capy-chien-binh",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Capy Chiến Binh",
+  "author": "DucNguyen7606",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.ducnguyen.capychienbinh",
+    "productName": "Capy Chiến Binh",
+    "directories": {
+      "output": "ban-dong-goi"
+    },
+    "files": [
+      "ThoiQuen.html",
+      "app-icon.ico",
+      "electron/**"
+    ],
+    "win": {
+      "icon": "app-icon.ico",
+      "executableName": "Capy Chien Binh",
+      "artifactName": "Capy-Chien-Binh-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Capy Chiến Binh"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0"
+  }
+}

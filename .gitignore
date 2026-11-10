@@ -1,0 +1,16 @@
+# Dữ liệu cá nhân: chỉ nằm trên máy, không đưa lên GitHub
+du-lieu.json
+cai-dat.json
+sao-luu/
+khoi-phuc-tu-excel.json
+danh-sach-cong-viec.xlsx
+capy-log.txt
+
+# Bản cũ, không còn dùng
+ThoiQuen-ban-cu-truoc-sua.html
+Capy.ps1
+Mo-Capy.vbs
+
+# Thư viện và file cài đặt đã đóng gói (tạo lại bằng npm install / npm run dist)
+node_modules/
+ban-dong-goi/

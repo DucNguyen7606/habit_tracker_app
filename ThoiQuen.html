@@ -1,0 +1,1749 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capy Chiến Binh</title>
+<style>
+:root{--bg:#fbf5ea;--card:#fffdf8;--text:#4a3b2c;--muted:#9a8873;--line:#efe1c9;--accent:#e9944a;--accent2:#7fbf7a;--gold:#f2b544;--soft:#fcefdb;--btntext:#fff;--shadow:0 3px 0 #f1e3cb,0 10px 24px rgba(160,110,60,.12);--scales:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg opacity='.13'%3E%3Cg transform='translate%2818 22%29'%3E%3Ccircle cx='12' cy='13.5' r='8.5' fill='%23ffb13b'/%3E%3Cpath d='M12 5q3-4 8-2.6-2 4-8 2.6z' fill='%236cbf5a'/%3E%3C/g%3E%3Cg transform='translate%2896 90%29 rotate%2828 12 12%29'%3E%3Cpath d='M2 14q10-14 22-8-8 14-22 8z' fill='%237fbf7a'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme=dark]{--bg:#1f1914;--card:#2a221b;--text:#f5ead8;--muted:#b5a48d;--line:#3d3226;--accent:#f0a35e;--accent2:#8fd18a;--gold:#f2c063;--soft:#352b21;--btntext:#fff;--shadow:0 3px 0 #17120e,0 10px 24px rgba(0,0,0,.35);--scales:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg opacity='.08'%3E%3Cg transform='translate%2818 22%29'%3E%3Ccircle cx='12' cy='13.5' r='8.5' fill='%23ffb13b'/%3E%3Cpath d='M12 5q3-4 8-2.6-2 4-8 2.6z' fill='%236cbf5a'/%3E%3C/g%3E%3Cg transform='translate%2896 90%29 rotate%2828 12 12%29'%3E%3Cpath d='M2 14q10-14 22-8-8 14-22 8z' fill='%237fbf7a'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1f1914;--card:#2a221b;--text:#f5ead8;--muted:#b5a48d;--line:#3d3226;--accent:#f0a35e;--accent2:#8fd18a;--gold:#f2c063;--soft:#352b21;--btntext:#fff;--shadow:0 3px 0 #17120e,0 10px 24px rgba(0,0,0,.35);--scales:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg opacity='.08'%3E%3Cg transform='translate%2818 22%29'%3E%3Ccircle cx='12' cy='13.5' r='8.5' fill='%23ffb13b'/%3E%3Cpath d='M12 5q3-4 8-2.6-2 4-8 2.6z' fill='%236cbf5a'/%3E%3C/g%3E%3Cg transform='translate%2896 90%29 rotate%2828 12 12%29'%3E%3Cpath d='M2 14q10-14 22-8-8 14-22 8z' fill='%237fbf7a'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 "Segoe UI",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:860px;margin:0 auto;padding:16px 16px 60px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.logo{font-weight:700;font-size:20px;margin-right:auto}
+#tabs{overflow:visible;flex-wrap:wrap}#tabs .pop{left:0;right:auto}#tabs .pop button{color:var(--text);font-weight:500}#tabs .pop button.on{color:#fff}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}.duo .card{margin-bottom:0}
+.sug{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.att{display:block;width:100%;text-align:left;padding:8px 10px;border-radius:8px}.att:hover{background:var(--soft)}
+.tabs{display:flex;overflow-x:auto;max-width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;gap:2px}
+.tabs button{padding:7px 14px;border-radius:9px;color:var(--muted);font-weight:600}
+.tabs button.on{background:var(--accent);color:#fff}
+.fsb{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:13px;color:var(--muted)}
+.fsb.warn{background:#f59e0b;border-color:#f59e0b;color:#fff;font-weight:600}.fsb.bad{background:#ef4444;border-color:#ef4444;color:#fff;font-weight:600}
+.icon-btn{width:38px;height:38px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:17px}
+.primary{background:var(--accent);color:#fff;padding:9px 16px;border-radius:10px;font-weight:600}
+.ghost{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.danger{color:#ef4444;padding:9px 14px;border-radius:10px;border:1px solid #ef444455;margin-right:auto}
+.daynav{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:16px}
+.daynav h2{margin:0;font-size:19px}.daynav p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.daynav .grow{flex:1}
+.ring{width:64px;height:64px;position:relative;flex:none}
+.ring svg{transform:rotate(-90deg)}.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:14px}
+.habit{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:var(--shadow);cursor:pointer;border:2px solid transparent;transition:border-color .15s}
+.habit:hover{border-color:color-mix(in srgb,var(--c) 40%,transparent)}
+.habit.done{background:color-mix(in srgb,var(--c) 12%,var(--card))}
+.habit.off{opacity:.55}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:color-mix(in srgb,var(--c) 18%,transparent);flex:none}
+.info{flex:1;min-width:0}.name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.done .name{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--c) 60%,transparent)}
+.meta{color:var(--muted);font-size:13px}
+.bar{height:6px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c);transition:width .2s}
+.check{width:38px;height:38px;border-radius:50%;border:2.5px solid var(--c);color:#fff;font-size:20px;font-weight:700;flex:none;transition:transform .1s}
+.check:active{transform:scale(.9)}.done .check{background:var(--c)}
+.counter{display:flex;align-items:center;gap:6px;flex:none}
+.counter button{width:32px;height:32px;border-radius:50%;background:color-mix(in srgb,var(--c) 18%,transparent);font-size:18px;font-weight:700}
+.counter span{min-width:62px;text-align:center;font-size:13px;font-weight:600}
+.edit{color:var(--muted);font-size:16px;padding:6px;border-radius:8px;flex:none}.edit:hover{background:var(--soft)}
+.section{color:var(--muted);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin:22px 4px 8px}
+.empty{text-align:center;background:var(--card);border-radius:16px;padding:36px 20px;box-shadow:var(--shadow)}
+.empty h3{margin:6px 0}.empty p{color:var(--muted);margin:0 0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.chip:hover{border-color:var(--accent)}
+.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th{font-size:12px;color:var(--muted);font-weight:600;padding:6px 2px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.stat b{font-size:24px;display:block}.stat span{color:var(--muted);font-size:13px}
+.hhead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.nums{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}.nums div{font-size:13px;color:var(--muted)}.nums b{display:block;font-size:18px;color:var(--text)}
+.heat{display:grid;grid-template-rows:repeat(7,13px);grid-auto-flow:column;grid-auto-columns:13px;gap:3px}
+.heat i{border-radius:3px;background:var(--line)}.heat i.x{background:transparent}
+dialog{border:0;border-radius:18px;padding:0;background:var(--card);color:var(--text);width:min(460px,calc(100vw - 32px));box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(10,12,20,.45)}
+form{padding:20px}form h3{margin:0 0 14px}
+label.f{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:14px 0 6px}
+input[type=text],input[type=number]{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.pick{display:flex;flex-wrap:wrap;gap:6px}
+.pick button{width:36px;height:36px;border-radius:10px;font-size:18px;border:2px solid transparent;background:var(--bg)}
+.pick button.on{border-color:var(--accent)}
+.pick.col button{border-radius:50%}.pick.col button.on{border-color:var(--text)}
+.days{display:flex;gap:5px;flex-wrap:wrap}.days button{flex:1;min-width:40px;padding:8px 0;border-radius:9px;background:var(--bg);border:1px solid var(--line);font-weight:600;font-size:13px}
+.days button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.presets{display:flex;gap:6px;margin-top:6px}.presets button{font-size:12px;color:var(--accent);padding:2px 6px}
+.row{display:flex;gap:10px}.row>div{flex:1}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(100px);background:var(--text);color:var(--bg);padding:12px 20px;border-radius:12px;font-weight:600;transition:transform .3s;z-index:9}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.menu{position:relative}.menu .pop{position:absolute;right:0;top:44px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.15);padding:6px;min-width:200px;display:none;z-index:5}
+.menu.open .pop{display:block}.pop button{display:block;width:100%;text-align:left;padding:9px 12px;border-radius:8px}.pop button:hover{background:var(--soft)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+select,input[type=date]{padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+form select,form input[type=date]{width:100%;background:var(--bg)}
+.area{margin-bottom:20px}
+.ahead{display:flex;align-items:center;gap:10px;margin:14px 4px 8px;font-weight:700;flex-wrap:wrap}.ahead .meta{font-weight:400;margin-left:auto}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
+.ghead{font-size:13px;font-weight:600;color:var(--muted);margin:12px 4px 6px}
+.task{display:block;background:var(--card);border-radius:12px;padding:10px 12px;margin-bottom:6px;box-shadow:var(--shadow);cursor:pointer;border-left:4px solid var(--c)}
+.task.trow{display:flex;align-items:center;gap:12px}.task .grow{flex:1;min-width:0}
+.task.ck{background:color-mix(in srgb,var(--c) 10%,var(--card))}.task.ck .check{background:var(--c)}
+.task.isdone .name{text-decoration:line-through;color:var(--muted)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;align-items:center}
+.tag{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+button.tag:hover{border-color:var(--accent)}
+.st-Doing{background:#f59e0b22;border-color:#f59e0b88}.st-Done{background:#22c55e22;border-color:#22c55e88}
+.wrap.wide{max-width:1600px}
+.gwrap{overflow:auto;max-height:calc(100vh - 190px);min-height:300px;background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.gantt{border-collapse:separate;border-spacing:0;font-size:13px}
+.gantt th,.gantt td{border-bottom:1px solid var(--line);padding:0;height:46px;background:var(--card)}
+.gantt thead th{position:sticky;top:0;z-index:2;height:26px;font-weight:600;color:var(--muted);font-size:11px;white-space:nowrap;text-align:left;padding:0 6px}
+.gantt thead tr+tr th{top:26px;height:32px;text-align:center;padding:0;line-height:1.15}
+.gantt thead th.gm{border-left:1px solid var(--line);color:var(--text)}
+.gantt .s1,.gantt .s2,.gantt .s3,.gantt .sa{position:sticky;z-index:1}
+.gantt thead .s1,.gantt thead .s2,.gantt thead .s3{z-index:3;top:0}
+.gantt .s1{left:0;width:300px;min-width:300px;max-width:300px;padding:4px 10px;cursor:pointer}
+.gantt .s2{left:300px;width:104px;min-width:104px;text-align:center}
+.gantt .s3{left:404px;width:100px;min-width:100px;text-align:center;border-right:2px solid var(--line)}
+.gantt .sa{left:0;padding:0 10px;text-align:left;font-weight:700;border-right:2px solid var(--line)}
+.gantt tr.ar td{background:var(--soft);height:34px}
+.gantt tr.gr td{height:38px}.gantt tr.gr .s1{font-weight:600;color:var(--muted);font-size:12px}
+.gantt tr.gr{cursor:pointer}.gtg{all:unset;display:block;width:100%;font-size:12px;font-weight:600;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}.gtg b{font-size:16px;line-height:1;color:var(--accent);margin-right:2px}.gtg:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.gantt tbody tr:not(.ar):hover td{background:color-mix(in srgb,var(--accent) 6%,var(--card))}
+.gantt .name{font-size:13px}.gantt .meta{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gantt .d{width:var(--w);min-width:var(--w);max-width:var(--w)}.gantt td.d{position:relative}
+.gantt td.we,.gantt th.we{background:color-mix(in srgb,var(--line) 45%,var(--card))}
+.gantt td.tdy,.gantt th.tdy{background:color-mix(in srgb,#ef4444 10%,var(--card))}
+.gantt th.tdy{color:#ef4444}
+.gantt td.mst{border-left:1px solid var(--line)}
+.gb{position:absolute;left:0;right:0;top:14px;height:18px;background:color-mix(in srgb,var(--c) 38%,transparent)}
+.gb.Doing{background:color-mix(in srgb,var(--c) 72%,transparent)}.gb.Done{background:var(--c)}
+.gb.bs{left:2px;border-radius:6px 0 0 6px}.gb.be{right:2px;border-radius:0 6px 6px 0}.gb.bs.be{border-radius:6px}
+.gb.late{background:repeating-linear-gradient(45deg,#ef444466 0 4px,transparent 4px 8px)}
+.gb.grp{top:16px;height:7px;background:var(--muted);opacity:.55}
+.lg{position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:var(--text);border:2px solid var(--card)}
+.hk{position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px;border-radius:3px;border:1.5px solid var(--line)}.hk.on{background:var(--c);border-color:var(--c)}
+.rc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:13px;color:#8b5cf6;line-height:1}.rc.ok{color:#22c55e}
+.rgrid{display:grid;grid-template-columns:1fr;gap:6px}.rrow{display:flex;align-items:center;gap:6px}.rrow input[type=date]{flex:1;min-width:0}
+.tk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:13px;font-weight:800;color:var(--text);line-height:1}
+.gantt td[data-act]{cursor:pointer}.gantt td[data-act]:hover{outline:2px solid var(--accent);outline-offset:-2px}
+.gantt td.off,.gantt th.off,.heat i.off,.offsw{background:repeating-linear-gradient(135deg,color-mix(in srgb,#06b6d4 22%,var(--card)) 0 5px,var(--card) 5px 10px)}
+.offsw{display:inline-block;width:18px;height:10px;border-radius:3px;vertical-align:middle;margin-right:4px}
+.hrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.hrow .grow{flex:1;min-width:0}
+.gantt thead th.ovl{background:#ef4444;color:#fff}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 4px 10px;align-items:center}
+.legend i{display:inline-block;width:22px;height:10px;border-radius:4px;vertical-align:middle;margin-right:4px;--c:var(--accent);position:static}
+.mini{height:4px;border-radius:2px;background:var(--line);margin:4px 10px 0;overflow:hidden}.mini i{display:block;height:100%;background:var(--c)}
+.hbars{display:flex;align-items:flex-end;gap:6px;height:160px}
+.hbars div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:11px;color:var(--muted);min-width:24px}
+.hbars i{width:100%;max-width:34px;background:var(--accent);border-radius:6px 6px 0 0;min-height:1px}
+.pbar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;min-width:70px;flex:1}.pbar i{display:block;height:100%;background:var(--c,var(--accent))}
+.prog{display:flex;align-items:center;gap:8px}
+table.data{min-width:560px}table.data td,table.data th{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);font-size:13px}
+table.data tr.sum td{font-weight:700}
+.pos{color:#16a34a}.neg{color:#ef4444}
+.card h4{margin:0 0 12px}
+.check-row{display:flex;align-items:center;gap:8px;margin-top:38px}
+@media (max-width:640px){.gantt .s1{width:190px;min-width:190px;max-width:190px}.gantt .s2,.gantt .s3{position:static}}
+@media (max-width:560px){.tabs button{padding:7px 10px}.counter span{min-width:44px}}
+
+/* ---------- cute capybara warrior theme ("Capy Chiến Binh") ---------- */
+body{font:15px/1.5 "Nunito","Quicksand","Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;background:radial-gradient(900px 420px at 50% -10%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 65%),var(--scales),var(--bg);background-attachment:fixed}
+h2,h3,h4,.logo b,.rank b,.stat b{font-family:"Nunito","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;font-weight:800}
+header{gap:10px}header .logo{order:0;margin-right:auto}
+#tabs{order:5;flex:1 1 100%;justify-content:center}
+.logo{display:flex;align-items:center;gap:10px}
+.logo b{display:block;font-size:23px;background:linear-gradient(90deg,#e07b39,var(--accent) 45%,#62b06a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-top:-2px;max-width:270px;line-height:1.3}
+#logohero .hero{width:54px;height:54px;animation:bob 3.4s ease-in-out infinite}
+.rankchip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:color-mix(in srgb,var(--accent) 10%,var(--card));font-weight:800;font-size:13px;color:var(--accent)}
+.tabs{border-radius:999px;border:2px solid var(--line);background:var(--card);padding:5px}
+.tabs button{border-radius:999px;font-weight:700}
+.tabs button.on,#tabs .pop button.on{background:linear-gradient(135deg,#f4b16a,var(--accent));color:#fff;box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 35%,transparent)}
+.menu .pop{border-radius:18px;border:2px solid var(--line)}
+.primary{background:linear-gradient(135deg,#f4b16a,var(--accent));color:#fff;border-radius:999px;font-weight:800;box-shadow:0 4px 0 color-mix(in srgb,var(--accent) 55%,#7a4a1c),0 8px 18px color-mix(in srgb,var(--accent) 28%,transparent);transition:transform .1s,box-shadow .1s}
+.primary:hover{transform:translateY(-1px)}.primary:active{transform:translateY(2px);box-shadow:0 2px 0 color-mix(in srgb,var(--accent) 55%,#7a4a1c)}
+.ghost,.icon-btn,.fsb{border-radius:999px;border:2px solid var(--line)}
+.ghost:hover,.icon-btn:hover{border-color:var(--accent)}
+.fsb.warn{background:linear-gradient(135deg,#8fd18a,#5fae5f);color:#fff;border-color:transparent}
+.daynav,.card,.stat,.empty,.habit,.task{border-radius:22px;border:2px solid var(--line);background:var(--card)}
+.daynav{position:relative;padding:18px 20px;background:linear-gradient(135deg,var(--card) 35%,color-mix(in srgb,var(--soft) 85%,var(--card)))}
+.daynav h2{font-size:21px}
+.ring b{font-weight:800;color:var(--accent)}
+/* a little yuzu sticker on every habit and task card */
+.habit,.task{position:relative;margin-top:12px;transition:transform .15s,border-color .15s}
+.habit:hover,.task:hover{transform:translateY(-2px) rotate(-.3deg);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.habit::before,.task::before{content:'';position:absolute;top:-10px;right:18px;width:24px;height:24px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='13.5' r='8.5' fill='%23ffb13b' stroke='%23c97a14' stroke-width='1.4'/%3E%3Cpath d='M12 5q3-4 8-2.6-2 4-8 2.6z' fill='%236cbf5a' stroke='%233f8a35' stroke-width='1'/%3E%3Ccircle cx='9' cy='11' r='1.7' fill='%23ffd98a'/%3E%3C/svg%3E") no-repeat center/contain;transform:rotate(14deg);transition:transform .25s}
+.habit:hover::before,.task:hover::before{transform:rotate(-10deg) scale(1.15)}
+.task{border-left:6px solid var(--c)}
+.habit.done,.task.ck{border-color:color-mix(in srgb,var(--accent2) 55%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--accent2) 13%,var(--card)),var(--card))}
+.ico{border-radius:16px}
+.check{border-width:3px;display:grid;place-items:center}
+.check svg{width:20px;height:20px;fill:#fff}
+.done .check,.task.ck .check{background:linear-gradient(135deg,#f4b16a,var(--accent))!important;border-color:color-mix(in srgb,var(--accent) 70%,#7a4a1c);animation:pop .4s ease-out}
+@keyframes pop{0%{transform:scale(.5) rotate(-20deg)}60%{transform:scale(1.2) rotate(6deg)}100%{transform:scale(1)}}
+.stat{position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;right:-6px;bottom:-8px;width:54px;height:54px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='13.5' r='8.5' fill='%23ffb13b' stroke='%23c97a14' stroke-width='1.4'/%3E%3Cpath d='M12 5q3-4 8-2.6-2 4-8 2.6z' fill='%236cbf5a' stroke='%233f8a35' stroke-width='1'/%3E%3Ccircle cx='9' cy='11' r='1.7' fill='%23ffd98a'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.16;transform:rotate(-16deg)}
+.stat b{color:var(--accent)}
+.empty .hero{width:124px;height:124px}
+.chip{border-width:2px;font-weight:700}.chip:hover{border-color:var(--accent);background:var(--soft)}
+dialog{border-radius:26px;border:3px solid var(--line)}
+form h3{color:var(--accent)}
+.toast{border-radius:999px;background:linear-gradient(135deg,#f4b16a,var(--accent));color:#fff;box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 38%,transparent)}
+.toast::before{content:'🍊 '}
+/* mascot + speech + rank */
+.mascot{flex:none;cursor:pointer;line-height:0}
+.mascot .hero{width:76px;height:76px;animation:bob 3.4s ease-in-out infinite}
+.mascot:hover .hero{animation:wiggle .6s ease-in-out}
+.bubble{display:inline-block;margin-top:8px;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:4px 12px;font-size:13px;font-weight:700;position:relative}
+.bubble::before{content:'';position:absolute;left:-9px;top:50%;margin-top:-6px;border:6px solid transparent;border-right-color:var(--line);border-left:0}
+.quote{display:flex;align-items:center;gap:14px}.quote .hero{width:60px;height:60px;flex:none}
+.quote p{margin:0;font-size:15px;font-weight:700}.quote small{color:var(--accent);font-weight:800}
+.rank{display:flex;align-items:center;gap:12px;margin-top:12px;max-width:420px}
+.badge{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:23px;background:radial-gradient(circle at 32% 30%,#fff3dc,#f4b16a 55%,#d9772f);box-shadow:0 3px 0 #b8622a,0 6px 14px rgba(233,148,74,.35)}
+.rank b{color:var(--accent);font-size:15px}.rank small{color:var(--muted);font-size:12px}
+.xpbar{height:10px;border-radius:999px;background:var(--line);overflow:hidden;margin:4px 0 3px}
+.xpbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8fd18a,#f4b16a,var(--accent));transition:width .4s}
+.hero .eye{animation:blink 5s infinite;transform-origin:center;transform-box:fill-box}
+.hero .steam{animation:steam 2.4s ease-in-out infinite;transform-box:fill-box}
+.hero .aura{animation:pulse 2.4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes steam{0%,100%{transform:translateY(0);opacity:.75}50%{transform:translateY(-4px);opacity:.3}}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
+/* sparkles + yuzu rain */
+.spark,.coin{position:fixed;pointer-events:none;z-index:60}
+.spark{width:10px;height:10px;border-radius:50%;animation:sparkfly .8s ease-out forwards}
+.coin{top:-40px;width:28px;height:28px;animation:coinfall linear forwards}
+.coin svg{width:100%;height:100%}
+@keyframes sparkfly{from{transform:translate(-50%,-50%) scale(1);opacity:1}to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.3);opacity:0}}
+@keyframes coinfall{to{transform:translateY(calc(100vh + 80px)) rotate(var(--r));opacity:.95}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><span id="logohero"></span><span><b>Capy Chiến Binh</b><small>Thói quen & Kế hoạch · chậm mà chắc, mỗi ngày một trận thắng ⚔️</small></span></div>
+    <span class="rankchip" id="rankchip"></span>
+    <nav class="tabs" id="tabs">
+      <button data-v="home">🏠 Tổng quan</button>
+      <div class="menu" data-g="h" data-l="🔁 Thói quen"><button class="grp" data-act="menu">🔁 Thói quen ▾</button><div class="pop">
+        <button data-v="h-today">✅ Hôm nay</button>
+        <button data-v="h-list">📝 Danh sách thói quen</button>
+        <button data-v="h-stats">📊 Thống kê thói quen</button></div></div>
+      <div class="menu" data-g="t" data-l="📋 Công việc"><button class="grp" data-act="menu">📋 Công việc ▾</button><div class="pop">
+        <button data-v="t-today">📌 Việc hôm nay</button>
+        <button data-v="t-plan">🗓️ Kế hoạch (Gantt)</button>
+        <button data-v="t-log">📒 Lịch sử đã làm</button>
+        <button data-v="t-stats">📊 Thống kê công việc</button></div></div>
+    </nav>
+    <button class="fsb" id="fsb" data-act="fs" hidden></button>
+    <button class="fsb" id="langb" data-act="lang" title="Ngôn ngữ / Language"></button>
+    <div class="menu">
+      <button class="icon-btn" data-act="menu" aria-label="Cài đặt">⚙️</button>
+      <div class="pop">
+        <button data-act="sound" id="soundb"></button>
+        <button data-act="theme">🌓 Đổi giao diện sáng/tối</button>
+        <button data-act="export">💾 Sao lưu dữ liệu (.json)</button>
+        <button data-act="import">📂 Khôi phục từ file</button>
+        <button data-act="hmgr">🏖️ Ngày nghỉ & kỳ nghỉ…</button>
+        <button data-act="wipe" style="color:#ef4444">🗑️ Xoá toàn bộ dữ liệu</button>
+        <button data-act="fsbak">🕘 Khôi phục bản tự sao lưu…</button>
+        <button data-act="fsdir">📁 Mở thư mục dữ liệu & sao lưu</button>
+      </div>
+    </div>
+  </header>
+  <main id="main"></main>
+</div>
+
+<dialog id="dlg"><form id="form" method="dialog"></form></dialog>
+<dialog id="hdlg"><form id="hform" method="dialog"></form></dialog>
+<dialog id="cdlg"><form id="cform" method="dialog"></form></dialog>
+<dialog id="tdlg"><form id="tform" method="dialog"></form></dialog>
+<input type="file" id="file" accept=".json" hidden>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='habit-tracker-v1';
+// ---------- everything is stored in files on this computer (du-lieu.json, cai-dat.json, sao-luu\),
+// read and written through electron/main.cjs. Nothing is kept in the browser. ----------
+if(window.capyNative){window.alert=capyNative.alert;window.confirm=capyNative.confirm}
+const SRV=/^https?:$/.test(location.protocol);
+function xhr(method,url,body){const x=new XMLHttpRequest();x.open(method,url,false);if(method!=='GET')x.setRequestHeader('X-Capy','1');x.send(body);
+  if(x.status<200||x.status>=300)throw new Error(x.responseText||('HTTP '+x.status));return x.responseText}
+let PREFS={};try{if(SRV)PREFS=JSON.parse(xhr('GET','/prefs')||'{}')}catch(e){}
+const store={getItem:k=>k in PREFS?PREFS[k]:null,
+  setItem:(k,v)=>{PREFS[k]=String(v);if(SRV)try{xhr('POST','/prefs',JSON.stringify(PREFS))}catch(e){}}};
+// ---------- language (VI default, EN optional; switching reloads the page) ----------
+const LANG=(()=>{try{return store.getItem(KEY+'-lang')==='en'?'en':'vi'}catch(e){return'vi'}})();
+// English text keyed by the Vietnamese text; stored values (area names, priorities) stay Vietnamese and are only translated on display
+const EN={
+"Capy Chiến Binh": "Capy Warrior",
+"Thói quen & Kế hoạch · chậm mà chắc, mỗi ngày một trận thắng ⚔️": "Habits & Planner · slow and steady, a win every day ⚔️",
+"🍊 Lời Capy hôm nay": "🍊 Capy's word of the day",
+"Bạn đã đạt tước vị cao nhất! 🏆": "You have reached the highest rank! 🏆",
+"Đế Chế Kỷ Luật": "Empire of Discipline",
+"Thói quen & Kế hoạch · mỗi ngày chinh phục một vùng đất ⚔️": "Habits & Planner · conquer new ground every day ⚔️",
+"📜 Chiếu chỉ hôm nay": "📜 Royal decree of the day",
+"🏆 Toàn thắng! Mọi việc hôm nay đã hoàn thành": "🏆 Total victory! Every task for today is done",
+"Bấm để cổ vũ": "Click for a battle cry",
+"Còn": "Need",
+"để lên": "more to reach",
+"Bạn đã đạt tước vị cao nhất! 🐉": "You have reached the highest rank! 🐉",
+"Thăng cấp": "Rank up",
+"Mèo Chăm Chỉ": "Hardworking Kitty",
+"Thói quen & Kế hoạch · mỗi ngày một bước 🐾": "Habits & Planner · one step a day 🐾",
+"💬 Lời mèo hôm nay": "💬 Kitty's word of the day",
+"🎉 Xong hết việc hôm nay! Mèo thưởng bạn một con cá 🐟": "🎉 All of today's tasks done! Kitty gives you a fish 🐟",
+"Đã đủ chỗ": "There is room now",
+"Đã đạt giới hạn": "You have reached the limit of",
+"thói quen mỗi ngày": "habits per day",
+"Bây giờ có thể thêm": "You can now add",
+"Thêm": "Adding",
+"sẽ làm những ngày này có quá": "would put more than",
+"thói quen:": "habits on:",
+"Nên xoá bớt một thói quen để giữ sức, rồi mới thêm cái mới:": "Best to delete one habit to keep things doable, then add the new one:",
+"Thêm ngay": "Add now",
+"Vẫn thêm (vượt giới hạn)": "Add anyway (over the limit)",
+"Chắc chắn thêm vượt giới hạn? Quá nhiều thói quen một ngày dễ khiến bạn bỏ cuộc.": "Add it over the limit? Too many habits a day makes it easy to give up.",
+"Quá tải — chưa lưu được": "Overloaded — not saved",
+"Mỗi ngày tối đa": "Each day allows at most",
+"mỗi lĩnh vực tối đa": "and each area at most",
+"làm quá tải": "would overload",
+"ngày khác": "more days",
+"Hãy đổi ngày bắt đầu/đến hạn, đổi lĩnh vực, hoặc đánh dấu Hoàn thành một việc khác trong những ngày đó.": "Change the start/due date or the area, or mark another task on those days as Completed.",
+"Quay lại sửa": "Back to edit",
+"Dời sang": "Move to",
+"Đã dời ngày — bấm Lưu để lưu": "Dates moved — click Save to save",
+"tối đa": "max",
+"lĩnh vực": "area",
+"■ Ngày quá tải": "■ Overloaded day",
+"Ngày nghỉ": "Rest day",
+"Bỏ ngày nghỉ": "Remove rest day",
+"Đánh dấu ngày nghỉ": "Mark as rest day",
+"Ngày nghỉ được bỏ qua khi tính chuỗi 🔥 và tiến độ công việc": "Rest days are skipped for 🔥 streaks and task progress",
+"ngày nghỉ: làm thì tốt, không làm cũng không mất chuỗi 🔥": "rest day: doing it is a bonus, skipping it won't break your 🔥 streak",
+"ngày nghỉ: không bắt buộc làm, tiến độ không bị tính chậm": "rest day: nothing required, progress won't fall behind",
+"hôm nay là ngày nghỉ, chuỗi và tiến độ được giữ nguyên": "today is a rest day, streaks and progress are kept",
+"🏖️ Ngày nghỉ": "🏖️ Rest day",
+"Ngày nghỉ & kỳ nghỉ": "Rest days & holidays",
+"Ngày nghỉ được bỏ qua khi tính chuỗi 🔥 của thói quen và khi tính tiến độ công việc. Có thể đánh dấu cả ngày đã qua để giữ chuỗi.": "Rest days are skipped when counting habit 🔥 streaks and task progress. You can also mark past days to keep a streak.",
+"Chưa có ngày nghỉ nào.": "No rest days yet.",
+"Thêm kỳ nghỉ": "Add a holiday",
+"VD: Tết, nghỉ phép, ốm": "e.g. New Year, vacation, sick day",
+"Từ ngày": "From",
+"Đến ngày": "To",
+"Đóng": "Close",
+"+ Thêm kỳ nghỉ": "+ Add holiday",
+"Xoá kỳ nghỉ": "Delete holiday",
+"Chuỗi có thể bị ngắt ở những ngày bạn chưa làm.": "Streaks may break on days you did not do it.",
+"Hãy chọn ngày bắt đầu kỳ nghỉ": "Choose the first day of the holiday",
+"Ngày kết thúc phải sau ngày bắt đầu": "The end date must be after the start date",
+"Đã thêm kỳ nghỉ 🏖️": "Holiday added 🏖️",
+"Bỏ đánh dấu ngày nghỉ? Chuỗi có thể bị ngắt nếu bạn chưa làm hôm đó.": "Unmark this rest day? Streaks may break if you did not do it that day.",
+"Bỏ ngày này khỏi kỳ nghỉ": "Remove this day from the holiday",
+"Các ngày còn lại của kỳ nghỉ vẫn giữ.": "The other days of the holiday are kept.",
+"Đã bỏ ngày nghỉ": "Rest day removed",
+"Tên ngày nghỉ (VD: Tết, nghỉ phép, ốm):": "Name of the rest day (e.g. New Year, vacation, sick day):",
+"Đã đánh dấu ngày nghỉ 🏖️ — chuỗi được giữ nguyên": "Marked as rest day 🏖️ — your streaks are kept",
+"🏖️ Ngày nghỉ & kỳ nghỉ…": "🏖️ Rest days & holidays…",
+"\nKhông thể hoàn tác. Nên bấm \"Sao lưu dữ liệu\" trước nếu chưa chắc.": "\nThis cannot be undone. Use \"Back up data\" first if you are not sure.",
+"\" chuyển sang Hoàn thành": "\" marked as Completed",
+"\" cùng toàn bộ lịch sử? Không thể hoàn tác.": "\" and all its history? This cannot be undone.",
+"\" thành thói quen (": "\" into a habit (",
+"% trong 30 ngày": "% in 30 days",
+"(theo tuần)": "(by week)",
+"(đã ôn)": "(reviewed)",
+") — chưa làm hôm nay": ") — not done today",
+"). App không ghi đè lên file này; dữ liệu vẫn được giữ trong trình duyệt.": "). The app will not overwrite this file; your data is still kept in the browser.",
+")? Công việc sẽ được bỏ khỏi Kế hoạch.": ")? The task will be removed from the Plan.",
+"+ Công việc": "+ Task",
+"+ Thói quen": "+ Habit",
+"+ Tạo thói quen mới": "+ Create a new habit",
+"/ngày": "/day",
+"30 ngày": "30 days",
+"30 ngày qua": "Last 30 days",
+": bấm để": ": click to",
+": bỏ lỡ": ": missed",
+": ôn tập lần": ": review",
+": đã làm": ": done",
+"? Không thể hoàn tác.": "? This cannot be undone.",
+"? Phần dữ liệu tương ứng hiện tại sẽ bị thay thế.": "? The matching current data will be replaced.",
+"Active Recall đã ôn / đến hạn": "Active Recall reviewed / due",
+"Active Recall – bấm để đánh dấu lần này đã ôn": "Active Recall – click to mark this review as done",
+"Biểu tượng": "Icon",
+"Buổi dự kiến": "Planned sessions",
+"Buổi đã làm / dự kiến": "Sessions done / planned",
+"Bấm \"+ Công việc\" để lập kế hoạch.": "Click \"+ Task\" to start planning.",
+"Bấm nút 🔓 trên cùng để cho phép app ghi vào file": "Click the 🔓 button at the top to let the app write to the file",
+"Bấm nút 🔓 trên cùng để mở file dữ liệu": "Click the 🔓 button at the top to open your data file",
+"Bấm tên công việc để sửa · bấm trạng thái để đổi": "Click a task name to edit · click the status to change it",
+"Bấm vào thẻ để đánh dấu đã làm · ✎ để sửa": "Click a card to mark it done · ✎ to edit",
+"Bấm để đổi trạng thái": "Click to change the status",
+"Bấm để đổi trạng thái của cả công việc": "Click to change the status of the whole task",
+"Bấm ✓ khi hôm nay đã làm việc đó · bấm lại để bỏ tích · bấm \"Đang làm/Hoàn thành\" khi xong hẳn cả việc.": "Click ✓ when you worked on a task today · click again to untick · use \"In progress/Completed\" when the whole task is finished.",
+"Bấm ✓ trên một công việc ở \"Việc hôm nay\" để bắt đầu.": "Click ✓ on a task in \"Today's tasks\" to start.",
+"Bắt đầu xây dựng thói quen": "Start building habits",
+"Bỏ tích": "Untick",
+"Bỏ tích hôm nay": "Untick today",
+"Bấm để đóng/mở nhóm": "Click to collapse or expand this group",
+"Đã hoàn thành — bấm trạng thái để mở lại nếu muốn làm tiếp": "Completed — click the status to reopen it if you want to keep working",
+"Bỏ tích đã làm ngày này": "Untick this day",
+"Bỏ đánh dấu": "Unmark",
+"Chuyển \"": "Convert \"",
+"Chuyển công việc thành thói quen": "Convert task into a habit",
+"Chuyển cả": "Convert all",
+"Chuyển tất cả": "Convert all",
+"Chuỗi dài nhất": "Longest streak",
+"Chuỗi dài nhất hiện tại": "Longest current streak",
+"Chuỗi hiện tại (": "Current streak (",
+"Chuỗi kỷ lục (": "Best streak (",
+"Chênh lệch": "Difference",
+"Chưa bắt đầu": "Not started",
+"Chưa có chuỗi": "No streak yet",
+"Chưa có công việc": "No tasks yet",
+"Chưa có công việc nào": "No tasks yet",
+"Chưa có công việc nào. Bấm \"+ Công việc\".": "No tasks yet. Click \"+ Task\".",
+"Chưa có kế hoạch": "No plan yet",
+"Chưa có lịch sử": "No history yet",
+"Chưa có thói quen hay công việc nào cho hôm nay": "No habits or tasks for today",
+"Chưa có thói quen nào. Thêm nhanh:": "No habits yet. Quick add:",
+"Chưa làm": "Not started",
+"Chưa đủ": "Below",
+"Chọn nhanh một gợi ý bên dưới hoặc tự tạo thói quen của riêng bạn.": "Pick a suggestion below or create your own habit.",
+"Chọn ít nhất 1 ngày trong tuần": "Choose at least 1 day of the week",
+"Chủ nhật": "Sunday",
+"Cuối tuần": "Weekends",
+"Các ngày đã tích ✓ sẽ thành ngày đã hoàn thành của thói quen (giữ được chuỗi 🔥). Công việc được bỏ khỏi Kế hoạch.": "Ticked days become completed days of the habit (your 🔥 streak is kept). The task is removed from the Plan.",
+"Công việc": "Tasks",
+"Công việc hoàn thành": "Tasks completed",
+"Công việc mới": "New task",
+"Cần đạt đến nay": "Due by today",
+"Danh sách thói quen": "Habit list",
+"Dữ liệu Thói quen & Kế hoạch": "Habits & Planner data",
+"Dữ liệu đang tự lưu vào": "Data is being saved automatically to",
+"File không đúng định dạng": "The file format is not valid",
+"Ghi chú": "Note",
+"Giảm": "Decrease",
+"Gắn mục tiêu": "Linked goal",
+"Gắn với mục tiêu trong Kế hoạch (tuỳ chọn)": "Link to a goal in the Plan (optional)",
+"Hoàn thành": "Completed",
+"Huỷ": "Cancel",
+"Hãy nhập ngày đến hạn trước": "Enter the due date first",
+"Hãy nhập nội dung công việc": "Enter the task description",
+"Hãy nhập tên lĩnh vực mới": "Enter a name for the new area",
+"Hãy nhập tên thói quen": "Enter a habit name",
+"Hôm nay": "Today",
+"Hôm nay đã làm": "Worked on it today",
+"Hôm nay: xong": "Today: done",
+"Hôm qua": "Yesterday",
+"Khôi phục": "Restore",
+"Không có công việc nào cho ngày này": "No tasks for this day",
+"Không có công việc nào cho ngày này.": "No tasks for this day.",
+"Không có công việc nào khớp bộ lọc.": "No tasks match the filter.",
+"Không có gì cần chú ý. Tốt lắm! 👏": "Nothing needs attention. Well done! 👏",
+"Không có thói quen nào theo lịch": "No habits scheduled",
+"Không kết nối được file:": "Could not connect the file:",
+"Không lưu được dữ liệu! Hãy dùng \"Sao lưu dữ liệu\" để tránh mất.\n": "Could not save your data! Use \"Back up data\" to avoid losing it.\n",
+"Không mạng xã hội sau 22h": "No social media after 10pm",
+"Không theo lịch ngày này": "Not scheduled on this day",
+"Không đọc được file:": "Could not read the file:",
+"Lĩnh vực": "Area",
+"Lưu": "Save",
+"Lần": "Review",
+"Lặp lại": "Repeats",
+"Lịch ôn tập (Active Recall) — tối đa 4 lần, không cần thì để trống": "Review schedule (Active Recall) — up to 4 reviews, leave empty if not needed",
+"Lọc lĩnh vực": "Filter by area",
+"Lọc trạng thái": "Filter by status",
+"Màu": "Colour",
+"Màu sắc": "Colour",
+"Mọi thay đổi được tự lưu vào file này trên máy bạn": "Every change is saved automatically to this file on your computer",
+"Mọi trạng thái": "All statuses",
+"Mỗi ngày": "Every day",
+"Một \"buổi\" = một ngày bạn tích ✓ cho việc đó. Buổi dự kiến = số bạn đặt, hoặc mỗi ngày từ ngày bắt đầu đến ngày đến hạn là 1 buổi. Chênh lệch = buổi đã làm − buổi cần đạt đến hôm nay: âm là đang chậm. Mức hoàn thành = việc đã xong tính đủ, việc đang làm tính theo số buổi đã làm (tối đa bằng dự kiến). Tích đủ số buổi dự kiến thì việc tự chuyển sang Hoàn thành.": "A \"session\" = a day you ticked ✓ for that task. Planned sessions = the number you set, or one session per day from the start date to the due date. Difference = sessions done − sessions due by today: negative means behind schedule. Plan completion = completed tasks count in full, tasks in progress count their sessions done (up to the plan). A task is marked Completed automatically once all planned sessions are ticked.",
+"Mở Kế hoạch để đặt ngày →": "Open the Plan to set dates →",
+"Mục tiêu mỗi ngày": "Daily goal",
+"Mục tiêu/ngày": "Goal/day",
+"Mức hoàn thành": "Completion",
+"Mức hoàn thành KH": "Plan completion",
+"Mức hoàn thành kế hoạch": "Plan completion",
+"Ngày": "Date",
+"Ngày bắt đầu": "Start date",
+"Ngày cố định": "Fixed days",
+"Ngày sau": "Next day",
+"Ngày thường": "Weekdays",
+"Ngày trước": "Previous day",
+"Ngày ôn tập lần": "Review date",
+"Ngày đến hạn": "Due date",
+"Ngày đến hạn phải sau ngày bắt đầu": "The due date must be after the start date",
+"Ngủ trước 23h": "Sleep before 11pm",
+"Nhóm mục tiêu (tuỳ chọn)": "Goal group (optional)",
+"Nội dung công việc": "Task",
+"Quá hạn": "Overdue",
+"So với tiến độ": "vs. schedule",
+"So với tiến độ (cần": "vs. schedule (need",
+"Số buổi dự kiến (tuỳ chọn)": "Planned sessions (optional)",
+"Số buổi đã làm / dự kiến": "Sessions done / planned",
+"Số lần mỗi tuần": "Times per week",
+"Số ngày có làm": "Active days",
+"Số việc đã làm mỗi ngày (14 ngày qua)": "Tasks worked on per day (last 14 days)",
+"Sửa công việc": "Edit task",
+"Sửa thói quen": "Edit habit",
+"Theo lĩnh vực": "By area",
+"Theo ngày": "By day",
+"Thiền": "Meditate",
+"Thu gọn": "Compact",
+"Tháng 1": "January",
+"Tháng 2": "February",
+"Tháng 3": "March",
+"Tháng 4": "April",
+"Tháng 5": "May",
+"Tháng 6": "June",
+"Tháng 7": "July",
+"Tháng 8": "August",
+"Tháng 9": "September",
+"Tháng 10": "October",
+"Tháng 11": "November",
+"Tháng 12": "December",
+"Thêm công việc ở tab Kế hoạch để xem thống kê.": "Add tasks in the Plan to see statistics.",
+"Thói quen": "Habits",
+"Thói quen mới": "New habit",
+"Thói quen ·": "Habit ·",
+"Thứ Hai": "Monday",
+"Thứ Ba": "Tuesday",
+"Thứ Tư": "Wednesday",
+"Thứ Năm": "Thursday",
+"Thứ Sáu": "Friday",
+"Thứ Bảy": "Saturday",
+"Tiến độ": "Progress",
+"Tiến độ từng công việc": "Progress per task",
+"Trạng thái": "Status",
+"Trống = mỗi ngày 1 buổi": "Empty = 1 session per day",
+"Tuần này": "This week",
+"Tên lĩnh vực mới": "New area name",
+"Tên thói quen": "Habit name",
+"Tích: hôm nay đã làm": "Tick: worked on it today",
+"Tăng": "Increase",
+"Tất cả lĩnh vực": "All areas",
+"Tần suất": "Frequency",
+"Tập thể dục": "Exercise",
+"Tỉ lệ 30 ngày": "30-day rate",
+"Tỉ lệ hoàn thành 30 ngày (": "30-day completion (",
+"Tổng cộng": "Total",
+"Tổng lần hoàn thành": "Total completions",
+"Tổng quan ·": "Overview ·",
+"Từ giờ mọi thay đổi tự lưu vào": "From now on every change is saved to",
+"Uống nước": "Drink water",
+"VD: 4. Luyện thi Tiếng Anh TOEIC": "e.g. 4. TOEIC exam prep",
+"VD: Đọc sách 20 phút": "e.g. Read for 20 minutes",
+"Việc lặp lại mãi (VD: tập 30 phút/ngày)? Nên quản lý như một thói quen để theo dõi chuỗi 🔥.": "Does this repeat forever (e.g. exercise 30 min/day)? Track it as a habit to follow your 🔥 streak.",
+"Việc lặp lại mãi nên theo dõi bằng chuỗi 🔥. Các ngày đã tích ✓ sẽ thành ngày đã làm của thói quen. Sau khi chuyển có thể bấm ✎ để đổi tên, ngày lặp.": "Things that repeat forever are better tracked with a 🔥 streak. Ticked days become done days of the habit. After converting you can click ✎ to rename it or change the days.",
+"Việc xong": "Tasks done",
+"Việc đã xong": "Tasks done",
+"Về hôm nay": "Back to today",
+"Xem việc hôm nay →": "See today's tasks →",
+"Xong hôm nay": "Done today",
+"Xoá": "Delete",
+"Xoá \"": "Delete \"",
+"Xoá TOÀN BỘ thói quen, công việc và lịch sử đã làm?": "Delete ALL habits, tasks and history?",
+"buổi": "sessions",
+"buổi đến nay)": "sessions by today)",
+"buổi — \"": "sessions — \"",
+"buổi — chuyển lại Đang làm": "sessions — back to In progress",
+"bỏ tích": "untick",
+"chưa bắt đầu ·": "not started ·",
+"công việc": "tasks",
+"công việc lặp lại nên chuyển thành thói quen": "recurring tasks should become habits",
+"công việc lặp lại thành thói quen?": "recurring tasks into habits?",
+"công việc thành thói quen 🔁": "tasks into habits 🔁",
+"cùng": "with",
+"cũng sẽ được làm trống.": "will also be emptied.",
+"không có lịch": "not scheduled",
+"không đọc được (": "could not be read (",
+"liên tiếp": "in a row",
+"ly, trang, phút…": "glasses, pages, minutes…",
+"lượt)": "check-ins)",
+"lần": "times",
+"lần mỗi tuần (thứ Hai – Chủ nhật), làm ngày nào cũng được": "times per week (Monday – Sunday), on any day",
+"lần/tuần (ngày nào cũng được)": "times/week (any day)",
+"mục khác": "more",
+"ngày": "days",
+"ngày đã tích": "ticked days",
+"ngày)": "days)",
+"sai định dạng": "invalid format",
+"thói quen": "habits",
+"thói quen · đã làm": "habits · worked on",
+"tuần": "weeks",
+"tích đã làm": "mark as done",
+"việc": "tasks",
+"việc chưa có kế hoạch (chưa có ngày hoặc số buổi) không tính vào tiến độ": "tasks without a plan (no dates or session count) are not counted in progress",
+"việc chưa lên lịch nên chưa hiện ở đây.": "tasks are not scheduled yet, so they are not shown here.",
+"· sẽ lặp:": "· repeats:",
+"· 🔁 Ôn:": "· 🔁 Reviews:",
+"Ôn": "Review",
+"Đang làm": "In progress",
+"Đang thực hiện": "In progress",
+"Đánh dấu hoàn thành": "Mark as done",
+"Đánh dấu thói quen hôm nay →": "Check off today's habits →",
+"Đánh dấu đã làm ngày này": "Mark this day as done",
+"Đánh giá": "Assessment",
+"Đã chuyển": "Converted",
+"Đã chuyển thành thói quen 🔁": "Converted into a habit 🔁",
+"Đã cập nhật": "Updated",
+"Đã khôi phục dữ liệu": "Data restored",
+"Đã làm": "Done",
+"Đã làm / KH": "Done / plan",
+"Đã làm hôm nay": "Done today",
+"Đã mở dữ liệu từ": "Loaded data from",
+"Đã thêm công việc": "Task added",
+"Đã thêm thói quen mới ✨": "New habit added ✨",
+"Đã xong": "Done",
+"Đã xoá toàn bộ dữ liệu": "All data deleted",
+"Đã ôn": "Reviewed",
+"Đơn vị (tuỳ chọn)": "Unit (optional)",
+"Đọc sách 20 phút": "Read for 20 minutes",
+"Độ ưu tiên": "Priority",
+"Đủ buổi, chưa đánh dấu xong": "All sessions done, not marked complete",
+"đang làm": "in progress",
+"đã làm ·": "done ·",
+"— Không gắn —": "— None —",
+"— tuyệt vời! 🎉": "— great job! 🎉",
+"— đã tích": "— ticked",
+"… và": "… and",
+"▌Hôm nay": "▌Today",
+"■ Thói quen đã làm · □ bỏ lỡ": "■ Habit done · □ missed",
+"◆ Ngày ôn tập": "◆ Review day",
+"⚠️ Chưa lưu được file — bấm thử lại": "⚠️ Could not save the file — click to retry",
+"⚠️ Quá hạn từ": "⚠️ Overdue since",
+"✅ Thói quen hoàn thành 14 ngày qua": "✅ Habits completed in the last 14 days",
+"✅ Đã lưu:": "✅ Saved:",
+"✎ Sửa": "✎ Edit",
+"✓ Ngày đã làm (bấm ô ngày để tích/bỏ)": "✓ Day worked on (click a day cell to tick/untick)",
+"✓ đủ tuần": "✓ week done",
+"✨ Gợi ý lịch ôn: +1, +3, +7, +14 ngày sau ngày đến hạn": "✨ Suggest reviews: +1, +3, +7, +14 days after the due date",
+"➕ Thêm lĩnh vực mới…": "➕ Add a new area…",
+"🎉 Hoàn thành tất cả thói quen! Giỏi lắm!": "🎉 All habits done! Great job!",
+"🎉 Đủ": "🎉 Reached",
+"🏆 Kỷ lục": "🏆 Best",
+"👀 Cần chú ý (": "👀 Needs attention (",
+"💡 Có": "💡",
+"💾 Bật tự lưu ra file": "💾 Turn on auto-save to file",
+"📋 Công việc": "📋 Tasks",
+"📋 Việc đã làm 14 ngày qua": "📋 Tasks worked on in the last 14 days",
+"📒 Lịch sử các ngày bạn đã tích ✓ cho từng công việc. Muốn sửa thì bấm ô ngày trên Kế hoạch (Gantt) hoặc nút ✓ ở Việc hôm nay.": "📒 History of the days you ticked ✓ for each task. To change it, click a day cell in the Plan (Gantt) or the ✓ button in Today's tasks.",
+"🔁 Chuyển": "🔁 Convert",
+"🔁 Chuyển thành thói quen": "🔁 Convert into a habit",
+"🔁 Thói quen": "🔁 Habits",
+"🔁 Đến ngày ôn tập:": "🔁 Review due:",
+"🔓 Bấm để mở file dữ liệu": "🔓 Click to open your data file",
+"🔥 Chuỗi": "🔥 Streak",
+"🔥 Giữ chuỗi": "🔥 Keep the streak:",
+"Cao": "High",
+"Trung bình": "Medium",
+"Thấp": "Low",
+"Học tập": "Study",
+"Tinh thần & Thể chất": "Mind & Body",
+"Tài chính": "Finance",
+"Sự nghiệp": "Career",
+"Thói Quen & Kế Hoạch": "Habits & Planner",
+"🌱 Thói quen & Kế hoạch": "🌱 Habits & Planner",
+"🏠 Tổng quan": "🏠 Overview",
+"✅ Hôm nay": "✅ Today",
+"📝 Danh sách thói quen": "📝 Habit list",
+"📊 Thống kê thói quen": "📊 Habit statistics",
+"📌 Việc hôm nay": "📌 Today's tasks",
+"🗓️ Kế hoạch (Gantt)": "🗓️ Plan (Gantt)",
+"📒 Lịch sử đã làm": "📒 History",
+"📊 Thống kê công việc": "📊 Task statistics",
+"🌓 Đổi giao diện sáng/tối": "🌓 Toggle light/dark theme",
+"💾 Sao lưu dữ liệu (.json)": "💾 Back up data (.json)",
+"📂 Khôi phục từ file": "📂 Restore from file",
+"🗑️ Xoá toàn bộ dữ liệu": "🗑️ Delete all data",
+"🗂️ Tự lưu ra file mới…": "🗂️ Auto-save to a new file…",
+"📄 Dùng file dữ liệu có sẵn…": "📄 Use an existing data file…",
+"Cài đặt": "Settings"
+};
+const tr=s=>LANG==='en'&&EN[s]||s;
+const DAY_FULL=[tr("Chủ nhật"),tr("Thứ Hai"),tr("Thứ Ba"),tr("Thứ Tư"),tr("Thứ Năm"),tr("Thứ Sáu"),tr("Thứ Bảy")];
+const DAY_SHORT=LANG==='en'?['Sun','Mon','Tue','Wed','Thu','Fri','Sat']:['CN','T2','T3','T4','T5','T6','T7'];
+const MON_FIRST=[1,2,3,4,5,6,0];
+const COLORS=['#6366f1','#22c55e','#f59e0b','#ef4444','#06b6d4','#ec4899','#8b5cf6','#14b8a6','#f97316','#64748b'];
+const EMOJIS=['💧','📚','🏃','🧘','💪','🥗','😴','✍️','🎸','💊','🚭','🧹','💻','🌱','☀️','🙏','🚶','🦷','📵','💰'];
+const TEMPLATES=[
+  {name:tr("Uống nước"),emoji:'💧',color:'#06b6d4',target:8,unit:LANG==='en'?'glasses':'ly'},
+  {name:tr("Đọc sách 20 phút"),emoji:'📚',color:'#f59e0b'},
+  {name:tr("Tập thể dục"),emoji:'🏃',color:'#22c55e',days:[1,3,5]},
+  {name:tr("Thiền"),emoji:'🧘',color:'#8b5cf6'},
+  {name:tr("Ngủ trước 23h"),emoji:'😴',color:'#6366f1'},
+  {name:tr("Không mạng xã hội sau 22h"),emoji:'📵',color:'#ef4444'},
+];
+
+// ---------- date helpers (local time, no UTC drift) ----------
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const mondayOf=d=>addDays(d,-((d.getDay()+6)%7));
+const dm=d=>`${pad(d.getDate())}/${pad(d.getMonth()+1)}`;
+
+// ---------- habit logic ----------
+const count=(S,h,k)=>(S.logs[h.id]||{})[k]||0;
+const isDone=(S,h,k)=>count(S,h,k)>=h.target;
+// ---------- rest days / holidays (S.holidays = [{id,name,from,to}], inclusive) ----------
+// A rest day is skipped by every habit (its streak neither breaks nor grows) and is not a working day for tasks.
+const holidayOn=k=>(S.holidays||[]).find(x=>x.from<=k&&k<=x.to);
+const offDay=k=>!!holidayOn(k);
+const scheduled=(h,d)=>h.days.includes(d.getDay())&&ymd(d)>=h.created&&!offDay(ymd(d));
+
+// flexible weekly habits (h.perWeek = N): any N days in a Mon–Sun week; days is all 7 so it shows every day
+const weekCount=(S,h,d)=>{const m=mondayOf(d);return[...Array(7)].filter((_,i)=>isDone(S,h,ymd(addDays(m,i)))).length};
+// the week's quota shrinks to the days left after rest days; a fully rested week asks for nothing and is skipped
+const weekNeed=(h,d)=>{const m=mondayOf(d);let free=0;for(let i=0;i<7;i++)if(!offDay(ymd(addDays(m,i))))free++;return Math.min(h.perWeek,free)};
+const weekMet=(S,h,d)=>weekCount(S,h,d)>=weekNeed(h,d);
+// non-rest days left in d's week, d included
+const freeLeft=d=>{let n=0;for(let x=d;x.getDay()!==1||x===d;x=addDays(x,1)){if(!offDay(ymd(x)))n++;if(x.getDay()===0)break}return n};
+// "done for today": did it today, or (weekly) the week's quota is already reached
+const doneToday=(S,h,k)=>isDone(S,h,k)||!!h.perWeek&&weekMet(S,h,new Date(k+'T00:00'));
+const sUnit=h=>h.perWeek?tr("tuần"):tr("ngày");
+const weeksOf=(h,now)=>{const out=[];for(let m=mondayOf(new Date(h.created+'T00:00'));m<=now;m=addDays(m,7))out.push(m);return out};
+function streak(S,h,now=today()){
+  if(h.perWeek){
+    let m=mondayOf(now),s=0;
+    if(!weekNeed(h,m)||!weekMet(S,h,m))m=addDays(m,-7); // current week still in progress (or fully rested)
+    for(;ymd(addDays(m,6))>=h.created;m=addDays(m,-7)){if(!weekNeed(h,m))continue;if(weekMet(S,h,m))s++;else break}
+    return s;
+  }
+  let d=now,s=0;
+  if(!isDone(S,h,ymd(d)))d=addDays(d,-1); // today not done yet doesn't break the streak
+  for(let i=0;i<3660&&ymd(d)>=h.created;i++,d=addDays(d,-1)){
+    if(!scheduled(h,d))continue;
+    if(isDone(S,h,ymd(d)))s++;else break;
+  }
+  return s;
+}
+function bestStreak(S,h,now=today()){
+  let best=0,run=0;
+  if(h.perWeek){
+    for(const m of weeksOf(h,now)){if(!weekNeed(h,m))continue;if(weekMet(S,h,m))best=Math.max(best,++run);else if(ymd(m)!==ymd(mondayOf(now)))run=0}
+    return best;
+  }
+  for(let d=new Date(h.created+'T00:00');d<=now;d=addDays(d,1)){
+    if(!scheduled(h,d))continue;
+    if(isDone(S,h,ymd(d)))best=Math.max(best,++run);
+    else if(ymd(d)!==ymd(now))run=0;
+  }
+  return best;
+}
+function rateCounts(S,h,days=30,now=today()){
+  let sched=0,done=0;
+  if(h.perWeek){ // weeks touching the window; the current week only counts once its quota is met
+    const from=mondayOf(addDays(now,1-days));
+    for(const m of weeksOf(h,now).filter(m=>m>=from&&weekNeed(h,m))){const met=weekMet(S,h,m);if(ymd(m)===ymd(mondayOf(now))&&!met)continue;sched++;if(met)done++}
+    return[done,sched];
+  }
+  for(let i=0;i<days;i++){
+    const d=addDays(now,-i),k=ymd(d);
+    if(!scheduled(h,d))continue;
+    if(i===0&&!isDone(S,h,k))continue; // today still in progress
+    sched++;if(isDone(S,h,k))done++;
+  }
+  return[done,sched];
+}
+const rate=(...a)=>{const[d,s]=rateCounts(...a);return s?Math.round(d/s*100):0};
+const total=(S,h)=>Object.keys(S.logs[h.id]||{}).filter(k=>isDone(S,h,k)).length;
+function freqText(h){
+  if(h.perWeek)return`${h.perWeek} ${tr("lần/tuần (ngày nào cũng được)")}`;
+  const s=[...h.days].sort().join();
+  if(h.days.length===7)return tr("Mỗi ngày");
+  if(s==='1,2,3,4,5')return tr("Ngày thường");
+  if(s==='0,6')return tr("Cuối tuần");
+  return MON_FIRST.filter(d=>h.days.includes(d)).map(d=>DAY_SHORT[d]).join(', ');
+}
+
+// ---------- plan / time-tracking logic (from the Google Sheet: Gantt, Daily Plan, Daily Log, Dashboard) ----------
+const AREAS={'Học tập':'#6366f1','Tinh thần & Thể chất':'#22c55e','Tài chính':'#f59e0b','Sự nghiệp':'#ec4899'};
+const PRIOS=['Cao','Trung bình','Thấp'];
+const STATUS={Plan:tr("Chưa làm"),Doing:tr("Đang làm"),Done:tr("Hoàn thành")};
+const areaColor=a=>AREAS[a]||(a?COLORS[[...a].reduce((h,c)=>(h*31+c.charCodeAt(0))>>>0,7)%(COLORS.length-1)]:'#64748b'); // last palette colour (grey) is kept for 'no area'
+const kDate=k=>new Date(k+'T00:00');
+const kdm=k=>k?dm(kDate(k)):'—';
+const span=(a,b)=>Math.round((kDate(b)-kDate(a))/864e5);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+// tasks are tracked by daily check-ins (t.checkins = {"YYYY-MM-DD": true}), not hours
+const ticks=t=>Object.keys(t.checkins||{}).length;
+const checkedOn=(t,k)=>!!(t.checkins||{})[k];
+// a finished task is closed: no new ticks, but a mistaken tick can still be removed
+const canTick=(t,k)=>t.status!=='Done'||checkedOn(t,k);
+// planned sessions: the number the user set, else one per day from start to due (0 = no plan yet)
+// working days between two dates (inclusive); rest days don't count
+const workDays=(a,b)=>{let n=0;for(let d=kDate(a);ymd(d)<=b;d=addDays(d,1))if(!offDay(ymd(d)))n++;return n};
+const target=t=>t.targetN>0?t.targetN:t.start&&t.due?workDays(t.start,t.due):0;
+// sessions that should be done by day k, spread evenly; a Done task owes nothing more
+function neededBy(t,k){
+  const n=target(t);
+  if(t.status==='Done'||!n||!t.start)return ticks(t); // finished, or nothing to schedule against: neither ahead nor behind
+  if(k<t.start)return 0;
+  const e=t.due||t.start;
+  return k>=e?n:Math.round(n*workDays(t.start,k)/Math.max(1,workDays(t.start,e))*10)/10;
+}
+// progress: a Done task counts its full plan, an open one its ticks (capped at the plan)
+const earned=t=>t.status==='Done'?target(t):Math.min(ticks(t),target(t));
+const pct=t=>target(t)?earned(t)/target(t)*100:0;
+// one calculation for every task total (stat tiles, area rows, total row, home card) so they always agree.
+// Only planned tasks (with dates or a session count) count towards progress; the rest are reported apart.
+function planTotals(ts,k){
+  const P=ts.filter(t=>target(t)>0),U=ts.filter(t=>!target(t)),sum=(a,f)=>a.reduce((x,t)=>x+f(t),0);
+  return{n:ts.length,done:ts.filter(t=>t.status==='Done').length,plan:sum(P,target),need:Math.round(sum(P,t=>neededBy(t,k))*10)/10,
+    act:sum(P,ticks),earn:sum(P,earned),allTicks:sum(ts,ticks),unplanned:U.length,unplannedTicks:sum(U,ticks)};
+}
+// status follows the ticks: first tick -> Đang làm, enough ticks -> Hoàn thành.
+// A manual status change still works; only a Done set automatically is undone by unticking below the plan.
+function autoStatus(t){
+  const n=target(t),d=ticks(t);
+  if(n&&d>=n&&t.status!=='Done'){t.status='Done';t.autoDone=true;return`${tr("🎉 Đủ")} ${n} ${tr("buổi — \"")}${t.name}${tr("\" chuyển sang Hoàn thành")}`}
+  if(t.autoDone&&t.status==='Done'&&d<n){t.status='Doing';delete t.autoDone;return`${tr("Chưa đủ")} ${n} ${tr("buổi — chuyển lại Đang làm")}`}
+  if(d&&t.status==='Plan'){t.status='Doing';return''}
+  return'';
+}
+function verdict(t){
+  if(t.status==='Done')return tr("Hoàn thành");
+  const d=ticks(t),n=target(t);
+  return!d?tr("Chưa bắt đầu"):n&&d>=n?tr("Đủ buổi, chưa đánh dấu xong"):tr("Đang thực hiện");
+}
+// older data tracked hours: every day that had a work-log row becomes a check-in, then hours are dropped
+function migrate(s){
+  for(const l of s.worklog||[]){const t=s.tasks.find(t=>t.id===l.taskId);if(t&&(l.hours>0||l.status==='Done'))(t.checkins??={})[l.date]=true}
+  for(const t of s.tasks)delete t.planH;
+  delete s.worklog;
+  return s;
+}
+// a task is scheduled only once it has both a start date and a deadline; before that it isn't shown on any day
+const activeOn=(t,k)=>t.status!=='Done'&&t.start&&t.due&&t.start<=k&&k<=t.due;
+const lateOn=(t,k)=>t.status!=='Done'&&t.due&&t.due<k;
+const recalls=t=>t.recalls||(t.recall?[{date:t.recall,done:!!t.recallDone}]:[]);
+const recallOn=(t,k)=>recalls(t).some(r=>r.date===k&&!r.done);
+
+// ---------- storage ----------
+// read du-lieu.json; throws if the file can't be read or is damaged, so a bad file is never replaced by an empty app
+function load(){
+  const txt=xhr('GET','/data').trim();
+  if(!txt)return{habits:[],logs:{},tasks:[],holidays:[]};
+  const s=JSON.parse(txt);if(!s||!Array.isArray(s.habits))throw new Error(tr("sai định dạng"));
+  delete s._bak;return migrate({tasks:[],...s});
+}
+let S={habits:[],logs:{},tasks:[],holidays:[]},LOAD_ERR='';
+if(SRV)try{S=load()}catch(e){LOAD_ERR=e.message||String(e)}
+const BLOCKED=!SRV||!!LOAD_ERR; // no file behind the app -> don't let anyone type into it
+function save(){
+  if(BLOCKED)return;
+  S.savedAt=Date.now();
+  queueWrite();
+}
+function setCount(h,k,n){
+  n=Math.max(0,Math.min(h.target,n));
+  (S.logs[h.id]??={})[k]=n;
+  if(!n)delete S.logs[h.id][k];
+  if(n&&k<h.created)h.created=k; // logging the past extends the habit's history
+  save();
+}
+
+// ---------- cute capybara warrior theme ("Capy Chiến Binh"): evolving capy, ranks, yuzu effects, chime ----------
+// done mark on check buttons: two crossed swords
+const MARK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2h3l9.5 9.5-2.6 2.6L3.4 4.6zM21 2h-3l-9.5 9.5 2.6 2.6 9.5-9.5zM5.2 14.8l4 4-1.6 1.6-1.4-1.4-2.4 2.4-1.2-1.2 2.4-2.4-1.4-1.4zM18.8 14.8l1.6 1.6-1.4 1.4 2.4 2.4-1.2 1.2-2.4-2.4-1.4 1.4-1.6-1.6z"/></svg>';
+// stage (keys kept from earlier themes): egg = relaxing in a hot spring, hatch = training (headband),
+// young = warrior (helmet + sword), king = champion (crown + cape), sleep = rest day
+function heroSVG(stage='young',size=64){
+  const ink='#4a2f1f',fur='#b98256',furD='#9a6a43',snout='#d6a77a',nose='#5b3a27',yuzu='#ffb13b',leaf='#6cbf5a',red='#e6533c',gold='#f2b544';
+  const v=`viewBox="0 0 100 100" width="${size}" height="${size}" aria-hidden="true"`;
+  const yuzuTop=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${yuzu}" stroke="${ink}" stroke-width="2.2"/><path d="M${x} ${y-r}q4-6 10-4-3 5-10 4z" fill="${leaf}" stroke="${ink}" stroke-width="1.6"/><circle cx="${x-r/3}" cy="${y-r/3}" r="${r/4}" fill="#ffd98a"/>`;
+  const water=`<path d="M0 84q8-5 17 0t17 0 17 0 17 0 17 0 17 0V100H0z" fill="#8fd3f4" stroke="${ink}" stroke-width="2"/>`;
+  const sword=`<g transform="rotate(32 84 62)"><rect x="81.5" y="12" width="5" height="44" rx="2.2" fill="#e6edf3" stroke="${ink}" stroke-width="2"/><rect x="75" y="54" width="18" height="5" rx="2.5" fill="${gold}" stroke="${ink}" stroke-width="2"/><rect x="82" y="59" width="4" height="10" rx="2" fill="#7a4b2a" stroke="${ink}" stroke-width="1.6"/></g>`;
+  const eyes={
+    egg:`<path class="eye" d="M30 46q5-4.5 10 0M60 46q5-4.5 10 0" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+    hatch:`<path d="M29 40l9 2.6M71 40l-9 2.6" stroke="${ink}" stroke-width="3" stroke-linecap="round"/><g class="eye"><circle cx="36" cy="46" r="3.2" fill="${ink}"/><circle cx="64" cy="46" r="3.2" fill="${ink}"/><circle cx="37.1" cy="44.9" r="1.1" fill="#fff"/><circle cx="65.1" cy="44.9" r="1.1" fill="#fff"/></g>`,
+    young:`<path d="M29 48l9 2.4M71 48l-9 2.4" stroke="${ink}" stroke-width="3.2" stroke-linecap="round"/><g class="eye"><circle cx="36" cy="53" r="3.3" fill="${ink}"/><circle cx="64" cy="53" r="3.3" fill="${ink}"/><circle cx="37.1" cy="51.9" r="1.1" fill="#fff"/><circle cx="65.1" cy="51.9" r="1.1" fill="#fff"/></g>`,
+    king:`<g class="eye"><circle cx="36" cy="46" r="4.3" fill="${ink}"/><circle cx="64" cy="46" r="4.3" fill="${ink}"/><circle cx="37.6" cy="44.4" r="1.6" fill="#fff"/><circle cx="65.6" cy="44.4" r="1.6" fill="#fff"/><circle cx="34.8" cy="47.6" r=".8" fill="#fff"/><circle cx="62.8" cy="47.6" r=".8" fill="#fff"/></g>`,
+    sleep:`<path d="M30 47q5 4 10 0M60 47q5 4 10 0" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/><text x="82" y="26" font-size="14" font-weight="800" fill="#7aa7c7">z</text><text x="90" y="15" font-size="10" font-weight="800" fill="#7aa7c7">z</text>`};
+  const mouth=stage==='king'?`<path d="M44 73q6 7 12 0z" fill="#f08080" stroke="${ink}" stroke-width="2.2" stroke-linejoin="round"/>`
+    :`<path d="M50 70v4M50 74q-4 3-7.5 1M50 74q4 3 7.5 1" stroke="${ink}" stroke-width="2.3" fill="none" stroke-linecap="round"/>`;
+  return`<svg class="hero" ${v}>
+    ${stage==='king'?`<circle class="aura" cx="50" cy="56" r="47" fill="${gold}" opacity=".18"/><path d="M14 62q-8 24 6 36h60q14-12 6-36z" fill="#d94a3a" stroke="${ink}" stroke-width="2.4" stroke-linejoin="round"/>`:''}
+    ${stage==='young'||stage==='king'?sword:''}
+    ${stage==='egg'||stage==='sleep'?`<path class="steam" d="M12 30q-4-5 0-10t0-10M88 34q4-5 0-10t0-10" stroke="#d9cfc4" stroke-width="2.6" fill="none" stroke-linecap="round"/>`:''}
+    <ellipse cx="29" cy="27" rx="5.5" ry="4.5" fill="${furD}" stroke="${ink}" stroke-width="2.4"/><ellipse cx="71" cy="27" rx="5.5" ry="4.5" fill="${furD}" stroke="${ink}" stroke-width="2.4"/>
+    <rect x="20" y="24" width="60" height="66" rx="21" fill="${fur}" stroke="${ink}" stroke-width="3"/>
+    <rect x="25" y="55" width="50" height="32" rx="15" fill="${snout}"/>
+    ${eyes[stage]||eyes.young}
+    <ellipse cx="28" cy="57" rx="4.5" ry="2.8" fill="#f4a3a3" opacity=".75"/><ellipse cx="72" cy="57" rx="4.5" ry="2.8" fill="#f4a3a3" opacity=".75"/>
+    <rect x="36" y="59" width="28" height="11" rx="5.5" fill="${nose}"/><ellipse cx="43.5" cy="64" rx="2.6" ry="1.6" fill="#2e1d13"/><ellipse cx="56.5" cy="64" rx="2.6" ry="1.6" fill="#2e1d13"/>
+    ${mouth}
+    ${stage==='egg'?yuzuTop(50,17,9)+water:''}
+    ${stage==='sleep'?`<path d="M28 25q22-9 44 0l-2 7q-20-7-40 0z" fill="#fff" stroke="${ink}" stroke-width="2.2" stroke-linejoin="round"/>`+water:''}
+    ${stage==='hatch'?`<path d="M19 33q31-10 62 0v7q-31-9-62 0z" fill="${red}" stroke="${ink}" stroke-width="2.4" stroke-linejoin="round"/><path d="M80 35l11-5-3 7 7 3-12 1z" fill="${red}" stroke="${ink}" stroke-width="2" stroke-linejoin="round"/><path d="M84 46q3 5 0 7.5q-3-2.5 0-7.5z" fill="#8fd3f4" stroke="${ink}" stroke-width="1.2"/>`:''}
+    ${stage==='young'?`<path d="M19 42q0-31 31-31t31 31z" fill="#cdd5df" stroke="${ink}" stroke-width="2.6"/><rect x="15" y="38" width="70" height="8" rx="4" fill="#aeb8c4" stroke="${ink}" stroke-width="2.2"/><path d="M50 11q1-11 14-11-3 9-11 13z" fill="${red}" stroke="${ink}" stroke-width="2" stroke-linejoin="round"/><circle cx="50" cy="25" r="3" fill="${gold}" stroke="${ink}" stroke-width="1.6"/>`:''}
+    ${stage==='king'?`<path d="M32 28l3-15 7.5 8 7.5-13 7.5 13 7.5-8 3 15z" fill="${gold}" stroke="${ink}" stroke-width="2.4" stroke-linejoin="round"/>${yuzuTop(50,22,4.5)}<path class="aura" d="M10 18l1.8 4.4 4.4 1.8-4.4 1.8L10 30.4l-1.8-4.4-4.4-1.8 4.4-1.8zM90 40l1.4 3.4 3.4 1.4-3.4 1.4L90 49.6l-1.4-3.4-3.4-1.4 3.4-1.4z" fill="${gold}"/>`:''}
+  </svg>`;
+}
+const heroStage=p=>p===null?'sleep':p>=1?'king':p>=.5?'young':p>0?'hatch':'egg';
+const CHEER=LANG==='en'?{
+  zero:['Capy is soaking in the hot spring... time for battle! ♨️','Slow and steady — start with one small task 🍊','Rise up, warrior, today we win! ⚔️'],
+  some:['Capy put on the headband — training has begun! 💪','Great start, keep a steady pace!','Step by step, Capy is right beside you 🍊'],
+  half:['Capy wears the helmet now — past halfway! ⚔️','Victory is near, do not stop!','Warrior Capy is proud of you 🛡️'],
+  all:['👑 Total victory! Capy has been crowned!','Excellent! Here is a yuzu for you 🍊','Today you are a legendary warrior 🏆'],
+  rest:['Capy is relaxing in the onsen... rest is strength too ♨️','Rest today, Capy charges again tomorrow!']}
+:{zero:['Capy đang ngâm suối nước nóng... ra trận thôi nào! ♨️','Chậm mà chắc — bắt đầu từ một việc nhỏ nhé 🍊','Đứng dậy nào chiến binh, hôm nay mình thắng! ⚔️'],
+  some:['Capy đã đeo băng đô, bắt đầu luyện tập! 💪','Khởi đầu tốt lắm, giữ nhịp đều nha!','Từng bước nhỏ, Capy luôn bên bạn 🍊'],
+  half:['Capy đội mũ giáp rồi — hơn nửa trận! ⚔️','Sắp thắng rồi, đừng dừng lại nhé!','Chiến binh Capy tự hào về bạn 🛡️'],
+  all:['👑 Toàn thắng! Capy lên ngôi vua rồi!','Xuất sắc! Thưởng bạn một quả yuzu 🍊','Hôm nay bạn là chiến binh huyền thoại 🏆'],
+  rest:['Capy đang ngâm onsen thư giãn... nghỉ ngơi cũng là sức mạnh ♨️','Hôm nay nghỉ, mai Capy lại xung trận!']};
+const QUOTES=LANG==='en'?['Slow and steady still wins — capybaras never rush. 🍊','Calm like a capybara, relentless like a warrior.','One small win a day becomes a legend in a year.','Discipline is the sword, habits are the shield. ⚔️','You do not need to be fast, you just need to not stop.','Relax when you can, fight when you must.','A little effort today, a lighter tomorrow.']
+:['Chậm mà chắc vẫn về đích — capybara chưa bao giờ vội. 🍊','Bình tĩnh như capybara, bền bỉ như chiến binh.','Mỗi ngày một trận thắng nhỏ, cả năm thành huyền thoại.','Kỷ luật là thanh kiếm, thói quen là tấm khiên. ⚔️','Không cần nhanh, chỉ cần không dừng lại.','Thư giãn khi có thể, chiến đấu khi cần.','Hôm nay cố một chút, ngày mai nhẹ cả người.'];
+// same line all day (no flicker on re-render)
+const pick=(a,salt=0)=>a[(today().getDate()+salt)%a.length];
+const cheer=p=>pick(CHEER[p===null?'rest':p>=1?'all':p>=.5?'half':p>0?'some':'zero']);
+const mascot=p=>`<div class="mascot" data-act="meow" title="${tr("Bấm để cổ vũ")}">${heroSVG(heroStage(p),76)}</div>`;
+// ranks: 1 XP per habit day completed and per task session ticked
+const RANKS=[[0,'🌱','Tân binh','Recruit'],[10,'🗡️','Chiến binh','Warrior'],[30,'🛡️','Hiệp sĩ','Knight'],[70,'🎖️','Đội trưởng','Captain'],[150,'⭐','Tướng quân','General'],[300,'🏅','Đại tướng','Marshal'],[600,'👑','Vua Capy','Capy King'],[1000,'🏆','Capy Huyền Thoại','Legendary Capy']];
+const xpTotal=()=>S.habits.reduce((a,h)=>a+total(S,h),0)+S.tasks.reduce((a,t)=>a+ticks(t),0);
+const rankAt=xp=>{let i=0;while(i+1<RANKS.length&&xp>=RANKS[i+1][0])i++;return i};
+const rankName=r=>LANG==='en'?r[3]:r[2];
+function rankCard(){
+  const xp=xpTotal(),i=rankAt(xp),r=RANKS[i],n=RANKS[i+1];
+  return`<div class="rank"><span class="badge">${r[1]}</span><div class="grow"><b>${rankName(r)}</b> <span class="meta">· ${xp} XP</span>
+    <div class="xpbar"><i style="width:${n?(xp-r[0])/(n[0]-r[0])*100:100}%"></i></div>
+    <small>${n?`${tr("Còn")} ${n[0]-xp} XP ${tr("để lên")} ${n[1]} ${rankName(n)}`:tr("Bạn đã đạt tước vị cao nhất! 🏆")}</small></div></div>`;
+}
+function rankUp(xp0){
+  const a=rankAt(xp0),b=rankAt(xpTotal());if(b<=a)return;
+  const r=RANKS[b];setTimeout(()=>{toast(`${tr("Thăng cấp")}: ${r[1]} ${rankName(r)}!`);gloryRain(40);fanfare()},350);
+}
+function sparkBurst(x,y,n=12){
+  const cs=['#f4b16a','#e9944a','#8fd18a','#ffd166','#f4a3a3'];
+  for(let i=0;i<n;i++){const el=document.createElement('div'),a=Math.PI*2*i/n+Math.random()*.5,d=35+Math.random()*50,c=cs[i%5];
+    el.className='spark';el.style.cssText=`left:${x}px;top:${y}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d-18}px;background:${c};box-shadow:0 0 8px ${c}`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),850)}
+}
+const COIN='<svg viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="8.5" fill="#ffb13b" stroke="#c97a14" stroke-width="1.4"/><path d="M12 5q3-4 8-2.6-2 4-8 2.6z" fill="#6cbf5a" stroke="#3f8a35" stroke-width="1"/><circle cx="9" cy="11" r="1.7" fill="#ffd98a"/></svg>';
+function gloryRain(n=30){
+  const extra=['🍃','✨','💛','⚔️'];
+  for(let i=0;i<n;i++){const el=document.createElement('div'),dur=1.7+Math.random()*1.4;
+    el.className='coin';el.innerHTML=i%4===3?`<span style="font-size:22px">${extra[i%extra.length]}</span>`:COIN;
+    el.style.cssText=`left:${Math.random()*100}vw;animation-duration:${dur}s;animation-delay:${Math.random()*.8}s;--r:${Math.random()*540-270}deg`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),(dur+1)*1000)}
+}
+// short synthesized chime / fanfare (no audio files); can be turned off in ⚙️
+const soundOn=()=>{try{return store.getItem(KEY+'-sound')!=='off'}catch(e){return true}};
+const soundLabel=()=>soundOn()?(LANG==='en'?'🔔 Sound: on':'🔔 Âm thanh: bật'):(LANG==='en'?'🔕 Sound: off':'🔕 Âm thanh: tắt');
+let actx;
+function tone(freq,at,dur,type='triangle',vol=.16){
+  const t=actx.currentTime+at,o=actx.createOscillator(),g=actx.createGain();o.type=type;o.frequency.value=freq;
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g).connect(actx.destination);o.start(t);o.stop(t+dur+.05);
+}
+function play(notes){if(!soundOn())return;try{actx??=new (window.AudioContext||window.webkitAudioContext)();notes.forEach(n=>tone(...n))}catch(e){}}
+const chime=()=>play([[880,0,.18,'sine',.14],[1174.66,.08,.28,'sine',.12],[1567.98,.16,.35,'triangle',.08]]); // a cute "boop-bip"
+const fanfare=()=>play([[523.25,0,.16,'square',.05],[659.25,.14,.16,'square',.05],[783.99,.28,.16,'square',.05],[1046.5,.44,.6,'triangle',.14],[1318.5,.44,.6,'sine',.07]]);
+
+// ---------- UI ----------
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let view='home',cur=today();
+
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200)}
+
+function render(){
+  {const r=RANKS[rankAt(xpTotal())];$('#rankchip').textContent=`${r[1]} ${rankName(r)}`}
+  document.querySelectorAll('#tabs [data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===view));
+  document.querySelectorAll('#tabs .menu').forEach(m=>{const act=m.querySelector('.pop .on'),g=m.querySelector('.grp');
+    g.classList.toggle('on',!!act);g.textContent=`${tr(m.dataset.l)}${act?' · '+act.textContent.replace(/^\S+\s/,''):''} ▾`});
+  const g=$('.gwrap'),pos=g&&[g.scrollLeft,g.scrollTop];
+  document.querySelector('.wrap').classList.toggle('wide',view==='t-plan');
+  $('#main').innerHTML={home:renderHome,'h-today':renderHabitToday,'h-list':renderHabitList,'h-stats':()=>S.habits.length?renderHabitStats():renderEmpty(),
+    't-today':renderTaskToday,'t-plan':renderPlan,'t-log':renderLog,'t-stats':renderPlanStats}[view]();
+  const ng=$('.gwrap');if(!ng)return;
+  // keep the Gantt scroll position on re-render; jump to today only when asked
+  if(planJump||!pos){const c=$('#gToday');ng.scrollLeft=c?c.offsetLeft-504-3*zoom:0;planJump=false}
+  else[ng.scrollLeft,ng.scrollTop]=pos;
+}
+
+function renderEmpty(){
+  return`<div class="empty">${heroSVG('egg',120)}<h3>${tr("Bắt đầu xây dựng thói quen")}</h3>
+  <p>${tr("Chọn nhanh một gợi ý bên dưới hoặc tự tạo thói quen của riêng bạn.")}</p>
+  <div class="chips">${TEMPLATES.map((t,i)=>`<button class="chip" data-act="tpl" data-i="${i}">${t.emoji} ${esc(t.name)}</button>`).join('')}</div>
+  <p style="margin-top:20px"><button class="primary" data-act="new">${tr("+ Tạo thói quen mới")}</button></p></div>`;
+}
+
+function ring(p){
+  if(p===null)return`<div class="ring" title="${tr("Ngày nghỉ")}"><b style="font-size:28px">🏖️</b></div>`;
+  const r=27,c=2*Math.PI*r;
+  return`<div class="ring"><svg width="64" height="64"><circle cx="32" cy="32" r="${r}" fill="none" stroke="var(--line)" stroke-width="6"/>
+  <defs><linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent2)"/></linearGradient></defs><circle cx="32" cy="32" r="${r}" fill="none" stroke="url(#ringg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p)}" style="transition:stroke-dashoffset .3s"/></svg><b>${Math.round(p*100)}%</b></div>`;
+}
+
+function habitCard(h,k,off){
+  const c=count(S,h,k),done=c>=h.target,st=streak(S,h);
+  const right=h.target>1
+    ?`<div class="counter"><button data-act="dec" aria-label="${tr("Giảm")}">−</button><span>${c}/${h.target} ${esc(h.unit||'')}</span><button data-act="inc" aria-label="${tr("Tăng")}">+</button></div>`
+    :`<button class="check" data-act="tap" aria-label="${done?tr("Bỏ đánh dấu"):tr("Đánh dấu hoàn thành")}">${done?MARK:''}</button>`;
+  return`<div class="habit ${done?'done':''} ${off?'off':''}" style="--c:${h.color}" data-act="tap" data-id="${h.id}">
+    <div class="ico">${esc(h.emoji)}</div>
+    <div class="info"><div class="name">${esc(h.name)}</div>
+      <div class="meta">${st?`🔥 ${st} ${sUnit(h)} ${tr("liên tiếp")}`:tr("Chưa có chuỗi")} · ${h.perWeek?`${tr("Tuần này")} ${weekCount(S,h,new Date(k+'T00:00'))}/${weekNeed(h,new Date(k+'T00:00'))}${weekMet(S,h,new Date(k+'T00:00'))?(' '+tr("✓ đủ tuần")):''}`:freqText(h)}${h.goal?` · 🎯 ${esc(h.goal)}`:''}</div>
+      ${h.target>1?`<div class="bar"><i style="width:${c/h.target*100}%"></i></div>`:''}</div>
+    ${right}<button class="edit" data-act="edit" aria-label="${tr("Sửa thói quen")}">✎</button></div>`;
+}
+
+function dayNav(pct,text){
+  const k=ymd(cur),isToday=k===ymd(today());
+  const title=isToday?tr("Hôm nay"):k===ymd(addDays(today(),-1))?tr("Hôm qua"):DAY_FULL[cur.getDay()];
+  return`<div class="daynav">
+    <button class="icon-btn" data-act="prev" aria-label="${tr("Ngày trước")}">‹</button>
+    ${mascot(pct)}
+    <div class="grow"><h2>${title}, ${dm(cur)}</h2><p>${text}</p><div class="bubble">${cheer(pct)}</div></div>
+    ${!isToday?`<button class="ghost" data-act="goToday">${tr("Về hôm nay")}</button>`:''}
+    <button class="ghost" data-act="hday" title="${tr("Ngày nghỉ được bỏ qua khi tính chuỗi 🔥 và tiến độ công việc")}">🏖️ ${holidayOn(k)?tr("Bỏ ngày nghỉ"):tr("Đánh dấu ngày nghỉ")}</button>
+    ${ring(pct)}
+    <button class="icon-btn" data-act="next" aria-label="${tr("Ngày sau")}" ${isToday?'disabled style="opacity:.3"':''}>›</button></div>`;
+}
+const quickAdd=()=>`<div class="card"><p class="meta" style="margin:0 0 10px">${tr("Chưa có thói quen nào. Thêm nhanh:")}</p><div class="chips" style="justify-content:flex-start">${TEMPLATES.map((t,i)=>`<button class="chip" data-act="tpl" data-i="${i}">${t.emoji} ${esc(t.name)}</button>`).join('')}</div></div>`;
+
+// Thói quen ▸ Hôm nay
+function renderHabitToday(){
+  const k=ymd(cur),on=S.habits.filter(h=>scheduled(h,cur)),off=S.habits.filter(h=>!scheduled(h,cur));
+  const done=on.filter(h=>doneToday(S,h,k)).length,hol=holidayOn(k);
+  if(hol)return dayNav(null,`🏖️ <b>${esc(hol.name)}</b> — ${tr("ngày nghỉ: làm thì tốt, không làm cũng không mất chuỗi 🔥")}`)
+    +`<div class="toolbar"><span style="flex:1"></span><button class="primary" data-act="new">${tr("+ Thói quen")}</button></div>`
+    +S.habits.map(h=>habitCard(h,k,true)).join('');
+  return dayNav(on.length?done/on.length:0,on.length?`${tr("Đã xong")} ${done}/${on.length} ${tr("thói quen")}${done===on.length?(' '+tr("— tuyệt vời! 🎉")):''}`:tr("Không có thói quen nào theo lịch"))
+    +`<div class="toolbar"><span class="meta">${tr("Bấm vào thẻ để đánh dấu đã làm · ✎ để sửa")}</span><span style="flex:1"></span><button class="primary" data-act="new">${tr("+ Thói quen")}</button></div>`
+    +(S.habits.length?'':quickAdd())
+    +on.map(h=>habitCard(h,k)).join('')
+    +(off.length?`<div class="section">${tr("Không theo lịch ngày này")}</div>${off.map(h=>habitCard(h,k,true)).join('')}`:'');
+}
+
+// Công việc ▸ Việc hôm nay
+function renderTaskToday(){
+  const k=ymd(cur),tl=todayTasks(k),td=tl.filter(t=>taskDoneOn(t,k)).length,hol=holidayOn(k);
+  return dayNav(hol?null:tl.length?td/tl.length:0,hol?`🏖️ <b>${esc(hol.name)}</b> — ${tr("ngày nghỉ: không bắt buộc làm, tiến độ không bị tính chậm")}`:tl.length?`${tr("Đã làm")} ${td}/${tl.length} ${tr("công việc")}${td===tl.length?(' '+tr("— tuyệt vời! 🎉")):''}`:tr("Không có công việc nào cho ngày này"))
+    +`<div class="toolbar"><span class="meta">${tr("Bấm ✓ khi hôm nay đã làm việc đó · bấm lại để bỏ tích · bấm \"Đang làm/Hoàn thành\" khi xong hẳn cả việc.")}</span><span style="flex:1"></span><button class="primary" data-act="tnew">${tr("+ Công việc")}</button></div>`
+    +renderTodayTasks(k);
+}
+
+// recurring tasks are better tracked as habits: suggest them and convert in one click
+const RECUR=/hàng ngày|mỗi ngày|\/ngày|hàng tuần|mỗi tuần|định kỳ|duy trì|daily|every day|\/day|weekly|every week|keep up|maintain/i;
+// one-off setup/research tasks often mention "hàng ngày" too, so they are excluded
+const ONEOFF=/^(thiết lập|xây dựng|lập |tạo |nghiên cứu|tìm hiểu|set up|build|create|research|learn about)/i;
+const suggestions=()=>S.tasks.filter(t=>t.status!=='Done'&&RECUR.test(t.name)&&!ONEOFF.test(t.name));
+const convFreq=t=>({days:[0,1,2,3,4,5,6],perWeek:/tuần|định kỳ|week/i.test(t.name)?1:0});
+function quickConvert(t){
+  const n=t.name;
+  convertTask(t.id,{name:n,emoji:/tiền|tài chính|chi tiêu/i.test(n)?'💰':/tập|thể dục|chạy|gym/i.test(n)?'🏃':/đọc|sách/i.test(n)?'📚':'🌱',
+    color:areaColor(t.area),...convFreq(t),target:1,unit:'',goal:t.group||'',goalArea:t.group?t.area:''});
+}
+
+// Thói quen ▸ Danh sách
+function renderHabitList(){
+  const sug=suggestions();
+  let html=`<div class="toolbar"><h2 style="margin:0;font-size:19px">${tr("Danh sách thói quen")}</h2><span style="flex:1"></span><button class="primary" data-act="new">${tr("+ Thói quen")}</button></div>`;
+  if(sug.length)html+=`<div class="card" style="border:1.5px dashed var(--accent)"><h4>${tr("💡 Có")} ${sug.length} ${tr("công việc lặp lại nên chuyển thành thói quen")}</h4>
+    <p class="meta" style="margin:-6px 0 6px">${tr("Việc lặp lại mãi nên theo dõi bằng chuỗi 🔥. Các ngày đã tích ✓ sẽ thành ngày đã làm của thói quen. Sau khi chuyển có thể bấm ✎ để đổi tên, ngày lặp.")}</p>
+    ${sug.map(t=>`<div class="sug" data-tid="${t.id}"><div class="info"><div class="name">${esc(t.name)}</div><div class="meta">${esc(tr(t.area))} ${tr("· sẽ lặp:")} ${freqText(convFreq(t))}${t.group?` · 🎯 ${esc(t.group)}`:''}</div></div><button class="ghost" data-act="conv1">${tr("🔁 Chuyển")}</button></div>`).join('')}
+    ${sug.length>1?('<div class="actions" style="margin-top:8px"><button class="primary" data-act="convall">'+tr("Chuyển tất cả")+'</button></div>'):''}</div>`;
+  if(!S.habits.length)return html+quickAdd();
+  return html+`<div class="card"><table class="data"><tr><th>${tr("Thói quen")}</th><th>${tr("Lặp lại")}</th><th>${tr("Mục tiêu/ngày")}</th><th>${tr("Gắn mục tiêu")}</th><th>${tr("🔥 Chuỗi")}</th><th>${tr("🏆 Kỷ lục")}</th><th>${tr("30 ngày")}</th><th></th></tr>
+    ${S.habits.map(h=>`<tr data-id="${h.id}" data-act="edit" style="cursor:pointer"><td><span class="dot" style="--c:${h.color};display:inline-block"></span> ${esc(h.emoji)} ${esc(h.name)}</td><td>${freqText(h)}</td><td>${h.target} ${esc(h.unit||tr("lần"))}</td>
+      <td class="meta">${h.goal?esc(h.goal):'—'}</td><td>${streak(S,h)} ${sUnit(h)}</td><td>${bestStreak(S,h)} ${sUnit(h)}</td><td>${rateCounts(S,h)[1]?rate(S,h)+'%':'—'}</td><td><button class="edit" data-act="edit" aria-label="${tr("Sửa thói quen")}">${tr("✎ Sửa")}</button></td></tr>`).join('')}</table></div>`;
+}
+
+// 🏠 Tổng quan: both areas at a glance, plus what needs attention today
+function renderHome(){
+  const now=today(),k=ymd(now),sum=(ts,f)=>ts.reduce((a,t)=>a+f(t),0);
+  const on=S.habits.filter(h=>scheduled(h,now)),hd=on.filter(h=>doneToday(S,h,k)).length;
+  const hol=holidayOn(k),tl=hol?[]:todayTasks(k),td=tl.filter(t=>taskDoneOn(t,k)).length,all=on.length+tl.length;
+  const [pd,ps]=S.habits.map(h=>rateCounts(S,h)).reduce((a,b)=>[a[0]+b[0],a[1]+b[1]],[0,0]);
+  const best=Math.max(0,...S.habits.map(h=>streak(S,h)));
+  const T=planTotals(S.tasks,k);
+  const late=S.tasks.filter(t=>lateOn(t,k)),rec=S.tasks.filter(t=>recallOn(t,k)),risk=on.filter(h=>!doneToday(S,h,k)&&streak(S,h)>0&&(!h.perWeek||weekNeed(h,now)-weekCount(S,h,now)>=freeLeft(now)));
+  const days=[...Array(14)].map((_,i)=>addDays(now,i-13)).map(d=>{const dk=ymd(d),hs=S.habits.filter(h=>scheduled(h,d));
+    return{d:dk,h:S.tasks.filter(t=>checkedOn(t,dk)).length,p:hs.length?hs.filter(h=>doneToday(S,h,dk)).length/hs.length*100:null}});
+  const maxH=Math.max(1,...days.map(x=>x.h));
+  const att=[
+    ...risk.map(h=>`<button class="att" data-v="h-today">${tr("🔥 Giữ chuỗi")} <b>${esc(h.name)}</b> (${streak(S,h)} ${sUnit(h)}${tr(") — chưa làm hôm nay")}</button>`),
+    ...rec.map(t=>`<button class="att" data-v="t-today">${tr("🔁 Đến ngày ôn tập:")} <b>${esc(t.name)}</b></button>`),
+    ...late.map(t=>`<button class="att" data-v="t-plan">${tr("⚠️ Quá hạn từ")} ${kdm(t.due)}: <b>${esc(t.name)}</b> <span class="meta">(${STATUS[t.status]})</span></button>`)];
+  const hp=hol?null:all?(hd+td)/all:0;
+  return`<div class="daynav">${mascot(hp)}<div class="grow"><h2>${tr("Tổng quan ·")} ${DAY_FULL[now.getDay()]}, ${dm(now)}</h2>
+      <p>${hol?`🏖️ <b>${esc(hol.name)}</b> — ${tr("hôm nay là ngày nghỉ, chuỗi và tiến độ được giữ nguyên")}`:all?`${tr("Hôm nay: xong")} ${hd}/${on.length} ${tr("thói quen · đã làm")} ${td}/${tl.length} ${tr("công việc")}`:tr("Chưa có thói quen hay công việc nào cho hôm nay")}</p><div class="bubble">${cheer(hp)}</div>${rankCard()}</div>${ring(hp)}</div>
+    <div class="duo">
+      <div class="card"><h4>${tr("🔁 Thói quen")}</h4><div class="nums"><div><b>${hd}/${on.length}</b>${tr("Xong hôm nay")}</div><div><b>🔥 ${best}</b>${tr("Chuỗi dài nhất")}</div><div><b>${ps?Math.round(pd/ps*100)+'%':'—'}</b>${tr("Tỉ lệ 30 ngày")}</div><div><b>${S.habits.length}</b>${tr("Thói quen")}</div></div>
+        <button class="primary" data-v="h-today">${tr("Đánh dấu thói quen hôm nay →")}</button></div>
+      <div class="card"><h4>${tr("📋 Công việc")}</h4><div class="nums"><div><b>${td}/${tl.length}</b>${tr("Đã làm hôm nay")}</div><div><b>${T.plan?(T.earn/T.plan*100).toFixed(1):0}%</b>${tr("Mức hoàn thành KH")}</div><div><b>${diffN(T.act-T.need)}</b>${tr("So với tiến độ")}</div><div><b>${T.done}/${T.n}</b>${tr("Việc đã xong")}</div></div>
+        <button class="primary" data-v="t-today">${tr("Xem việc hôm nay →")}</button></div>
+    </div>
+    <div class="card quote" style="margin-top:14px">${heroSVG('young',58)}<div><small>${tr("🍊 Lời Capy hôm nay")}</small><p>${pick(QUOTES)}</p></div></div>
+    <div class="card"><h4>${tr("👀 Cần chú ý (")}${att.length})</h4>${att.length?att.slice(0,8).join('')+(att.length>8?`<p class="meta">${tr("… và")} ${att.length-8} ${tr("mục khác")}</p>`:''):('<p class="meta" style="margin:0">'+tr("Không có gì cần chú ý. Tốt lắm! 👏")+'</p>')}</div>
+    <div class="duo">
+      <div class="card"><h4>${tr("📋 Việc đã làm 14 ngày qua")}</h4><div class="hbars">${days.map(x=>`<div title="${kdm(x.d)}: ${x.h} ${tr("việc")}">${x.h||''}<i style="height:${x.h/maxH*110}px"></i>${kdm(x.d).slice(0,2)}</div>`).join('')}</div></div>
+      <div class="card"><h4>${tr("✅ Thói quen hoàn thành 14 ngày qua")}</h4><div class="hbars">${days.map(x=>`<div title="${kdm(x.d)}: ${x.p===null?tr("không có lịch"):Math.round(x.p)+'%'}">${x.p?Math.round(x.p):''}<i style="height:${(x.p||0)*1.1}px;background:#22c55e"></i>${kdm(x.d).slice(0,2)}</div>`).join('')}</div></div>
+    </div>`;
+}
+
+// Daily Plan: tasks whose start..due covers the day, overdue ones, and Active Recall reviews due that day.
+// The list keeps items already ticked that day, so ticking them moves the % instead of removing them.
+const todayTasks=k=>S.tasks.filter(t=>activeOn(t,k)||lateOn(t,k)||recalls(t).some(r=>r.date===k)||checkedOn(t,k));
+// done for the day = ticked, or for a review-only item, reviewed
+const taskDoneOn=(t,k)=>checkedOn(t,k)||recalls(t).some(r=>r.date===k&&r.done)&&!activeOn(t,k)&&!lateOn(t,k);
+function renderTodayTasks(k){
+  if(!S.tasks.length)return`<div class="ahead"><span>${tr("📋 Công việc")}</span></div><div class="card"><p class="meta" style="margin:0">${tr("Chưa có công việc nào. Bấm \"+ Công việc\".")}</p></div>`;
+  // overdue first, then reviews due, then the rest; items already done today sink to the bottom
+  const rank=t=>taskDoneOn(t,k)?3:lateOn(t,k)?0:recallOn(t,k)?1:2;
+  const list=todayTasks(k).sort((a,b)=>rank(a)-rank(b));
+  const n=s=>list.filter(t=>t.status===s).length;
+  return`<div class="ahead"><span>${tr("📋 Công việc")}</span><span class="meta">${list.filter(t=>taskDoneOn(t,k)).length}/${list.length} ${tr("đã làm ·")} ${n('Plan')} ${tr("chưa bắt đầu ·")} ${n('Doing')} ${tr("đang làm")}</span></div>
+    ${list.length?list.map(t=>taskRow(t,k)).join(''):('<p class="meta" style="margin:0 4px">'+tr("Không có công việc nào cho ngày này.")+'</p>')}
+    ${(n=>n?`<p class="meta" style="margin:10px 4px">📭 ${n} ${tr("việc chưa lên lịch nên chưa hiện ở đây.")} <button class="tag" data-v="t-plan">${tr("Mở Kế hoạch để đặt ngày →")}</button></p>`:'')(S.tasks.filter(t=>!t.start&&t.status!=='Done').length)}`;
+}
+const sessText=t=>`${ticks(t)}/${target(t)||'–'} ${tr("buổi")}`;
+function taskRow(t,k){
+  const ck=checkedOn(t,k);
+  return`<div class="task trow ${t.status==='Done'?'isdone':''} ${ck?'ck':''}" style="--c:${areaColor(t.area)}" data-act="tedit" data-tid="${t.id}">
+    <div class="grow"><div class="name">${esc(t.name)}${t.note?` <span class="meta">· ${esc(t.note)}</span>`:''}</div><div class="tags">
+      <button type="button" class="tag st-${t.status}" data-act="tstatus" title="${tr("Bấm để đổi trạng thái của cả công việc")}">${STATUS[t.status]}</button>
+      <span class="tag ${t.priority==='Cao'?'neg':''}">${esc(tr(t.priority))}</span>
+      <span class="tag">${esc(tr(t.area))}</span>
+      <span class="tag">${kdm(t.start)} → ${kdm(t.due)}</span>
+      <span class="tag" title="${tr("Số buổi đã làm / dự kiến")}">✓ ${sessText(t)}</span>
+      ${(rs=>{if(!rs.length)return'';let i=rs.findIndex(r=>r.date===k);if(i<0)i=rs.findIndex(r=>!r.done);if(i<0)i=rs.length-1;
+        return`<button type="button" class="tag ${recallOn(t,k)?'st-Doing':''}" data-act="trecall" data-ri="${i}" title="${tr("Active Recall – bấm để đánh dấu lần này đã ôn")}">${rs[i].done?'✅':'🔁'} ${tr("Ôn")} ${i+1}/${rs.length}: ${kdm(rs[i].date)}</button>`})(recalls(t))}
+      ${lateOn(t,k)?('<span class="tag neg">'+tr("Quá hạn")+'</span>'):''}
+    </div></div>
+    ${canTick(t,k)?`<button type="button" class="check" data-act="tcheck" aria-label="${ck?tr("Bỏ tích đã làm ngày này"):tr("Đánh dấu đã làm ngày này")}" title="${ck?tr("Bỏ tích"):tr("Hôm nay đã làm")}">${ck?MARK:''}</button>`:''}</div>`;
+}
+
+let fArea='',fStatus='',zoom=28,planJump=true;
+const areaList=()=>[...new Set([...Object.keys(AREAS),...S.tasks.map(t=>t.area),...S.habits.map(h=>h.goalArea).filter(Boolean)])];
+// goals = task groups (plus goals habits already point at, so a goal whose tasks are gone stays selectable)
+function goalOptions(sel){
+  const m=new Map();
+  for(const t of S.tasks)if(t.group)m.set(t.area+'||'+t.group,[t.area,t.group]);
+  for(const h of S.habits)if(h.goal)m.set(h.goalArea+'||'+h.goal,[h.goalArea,h.goal]);
+  const pairs=[...m.values()];
+  return('<option value="">'+tr("— Không gắn —")+'</option>')+areaList().map(a=>{const gs=pairs.filter(p=>p[0]===a);
+    return gs.length?`<optgroup label="${esc(tr(a))}">${gs.map(([,g])=>`<option value="${esc(a+'||'+g)}" ${a+'||'+g===sel?'selected':''}>${esc(g)}</option>`).join('')}</optgroup>`:''}).join('');
+}
+// habit row inside the Gantt: a filled square on each day it was done, an empty one on scheduled days it was missed
+function habitGanttRow(h,days,k){
+  const cells=days.map(d=>{const dk=ymd(d),c=['d'];
+    if(d.getDay()%6===0)c.push('we');if(dk===k)c.push('tdy');if(d.getDate()===1)c.push('mst');if(offDay(dk))c.push('off');
+    const inner=dk>k||!scheduled(h,d)?'':isDone(S,h,dk)?`<i class="hk on" title="${dm(d)}${tr(": đã làm")}"></i>`:dk<k&&!h.perWeek?`<i class="hk" title="${dm(d)}${tr(": bỏ lỡ")}"></i>`:'';
+    return`<td class="${c.join(' ')}">${inner}</td>`}).join('');
+  return`<tr style="--c:${h.color}" data-id="${h.id}"><td class="s1" data-act="edit" title="${esc(h.name)}"><div class="name">${esc(h.emoji)} ${esc(h.name)}</div><div class="meta">${tr("Thói quen ·")} ${freqText(h)} · ${rate(S,h)}${tr("% trong 30 ngày")}</div></td>
+    <td class="s2"><span class="tag">${tr("🔁 Thói quen")}</span></td><td class="s3 meta">🔥 ${streak(S,h)} ${sUnit(h)}</td>${cells}</tr>`;
+}
+const MONTHS=[tr("Tháng 1"),tr("Tháng 2"),tr("Tháng 3"),tr("Tháng 4"),tr("Tháng 5"),tr("Tháng 6"),tr("Tháng 7"),tr("Tháng 8"),tr("Tháng 9"),tr("Tháng 10"),tr("Tháng 11"),tr("Tháng 12")];
+
+// one row of day cells: planned bar (start..due), overdue hatch (due..today), ✓ on ticked days, ◆ on review days.
+// Day cells of a task row up to today are clickable to tick/untick that day.
+function gcells(days,k,s,e,cls,id){
+  const task=id&&S.tasks.find(t=>t.id===id),late=task&&cls!=='Done'&&e&&e<k;
+  const rd=task?Object.fromEntries(recalls(task).map((r,i)=>[r.date,[i+1,r.done]])):{};
+  return days.map(d=>{
+    const dk=ymd(d),c=['d'];let inner='';
+    if(d.getDay()%6===0)c.push('we');if(dk===k)c.push('tdy');if(d.getDate()===1)c.push('mst');if(offDay(dk))c.push('off');
+    if(s&&dk>=s&&dk<=e)inner=`<i class="gb ${cls} ${dk===s?'bs':''} ${dk===e?'be':''}"></i>`;
+    else if(late&&dk>e&&dk<=k)inner=`<i class="gb late ${dk===k?'be':''}"></i>`;
+    if(task&&checkedOn(task,dk))inner+=`<b class="tk" title="${kdm(dk)}${tr(": đã làm")}">✓</b>`;
+    if(rd[dk])inner+=`<b class="rc ${rd[dk][1]?'ok':''}" title="${kdm(dk)}${tr(": ôn tập lần")} ${rd[dk][0]}${rd[dk][1]?(' '+tr("(đã ôn)")):''}">◆</b>`;
+    const click=task&&dk<=k&&canTick(task,dk)?` data-act="tday" data-k="${dk}" title="${dm(d)}${tr(": bấm để")} ${checkedOn(task,dk)?tr("bỏ tích"):tr("tích đã làm")}"`:'';
+    return`<td class="${c.join(' ')}"${click}>${inner}</td>`;
+  }).join('');
+}
+
+// Plan groups: one closed by hand stays closed; a finished one closes itself and a click reopens it until the app closes
+let closedGroups=(()=>{try{return JSON.parse(store.getItem(KEY+'-closed'))||[]}catch(e){return[]}})();
+const openedDone=new Set();
+const groupOpen=(key,done)=>done?openedDone.has(key):!closedGroups.includes(key);
+
+// Plan tab: Gantt table — sticky info columns on the left, one column per day on the right
+function renderPlan(){
+  const list=S.tasks.filter(t=>(!fArea||t.area===fArea)&&(!fStatus||t.status===fStatus)),k=ymd(today());
+  let html=`<div class="toolbar">
+    <select data-f="area" aria-label="${tr("Lọc lĩnh vực")}"><option value="">${tr("Tất cả lĩnh vực")}</option>${areaList().map(a=>`<option value="${esc(a)}" ${a===fArea?'selected':''}>${esc(tr(a))}</option>`).join('')}</select>
+    <select data-f="status" aria-label="${tr("Lọc trạng thái")}"><option value="">${tr("Mọi trạng thái")}</option>${Object.entries(STATUS).map(([v,l])=>`<option value="${v}" ${v===fStatus?'selected':''}>${l}</option>`).join('')}</select>
+    <nav class="tabs"><button data-act="zoom" data-z="28" class="${zoom===28?'on':''}">${tr("Theo ngày")}</button><button data-act="zoom" data-z="12" class="${zoom===12?'on':''}">${tr("Thu gọn")}</button></nav>
+    <button class="ghost" data-act="gtoday">${tr("Về hôm nay")}</button>
+    <span style="flex:1"></span><button class="primary" data-act="tnew">${tr("+ Công việc")}</button>
+    </div>`;
+  if(!S.tasks.length)return html+`<div class="empty">${heroSVG('sleep',120)}<h3>${tr("Chưa có công việc nào")}</h3><p>${tr("Bấm \"+ Công việc\" để lập kế hoạch.")}</p></div>`;
+  if(!list.length)return html+`<div class="empty"><p>${tr("Không có công việc nào khớp bộ lọc.")}</p></div>`;
+  const ds=list.flatMap(t=>[t.start,t.due,...recalls(t).map(r=>r.date)]).filter(Boolean).concat(k).sort();
+  const a=mondayOf(kDate(ds[0])),days=[...Array(span(ymd(a),ymd(addDays(mondayOf(kDate(ds.at(-1))),6)))+1)].map((_,i)=>addDays(a,i));
+  let months='',run=0;
+  days.forEach((d,i)=>{run++;if(i===days.length-1||days[i+1].getMonth()!==d.getMonth()){months+=`<th class="gm" colspan="${run}">${run*zoom>60?`${MONTHS[d.getMonth()]}/${d.getFullYear()}`:''}</th>`;run=0}});
+  const openT=S.tasks.filter(scheduled_);
+  const load=dk=>{const on=openT.filter(x=>x.start<=dk&&dk<=x.due),by={};on.forEach(x=>by[x.area]=(by[x.area]||0)+1);return{n:on.length,a:Math.max(0,...Object.values(by))}};
+  const dayHead=days.map(d=>{const dk=ymd(d),show=zoom>20||d.getDay()===1;
+    const hol=holidayOn(dk),L=hol?{n:0,a:0}:load(dk),ovl=L.n>LIMIT.tasks||L.a>LIMIT.area;
+    return`<th class="d ${d.getDay()%6===0?'we':''} ${dk===k?'tdy':''} ${hol?'off':''} ${ovl?'ovl':''}" ${dk===k?'id="gToday"':''} title="${DAY_FULL[d.getDay()]}, ${dm(d)}${hol?' · 🏖️ '+esc(hol.name):''}${ovl?` · ⚠️ ${L.n} ${tr("việc")} (${tr("tối đa")} ${LIMIT.tasks}, ${LIMIT.area}/${tr("lĩnh vực")})`:''}">${show?`${d.getDate()}${zoom>20?`<br><small>${DAY_SHORT[d.getDay()]}</small>`:''}`:''}</th>`}).join('');
+  html+=`<div class="legend"><span><i style="--c:var(--accent)" class="gb"></i>${tr("Chưa làm")}</span><span><i style="--c:var(--accent)" class="gb Doing"></i>${tr("Đang làm")}</span><span><i style="--c:var(--accent)" class="gb Done"></i>${tr("Hoàn thành")}</span><span><i class="gb late"></i>${tr("Quá hạn")}</span><span>${tr("✓ Ngày đã làm (bấm ô ngày để tích/bỏ)")}</span><span style="color:#8b5cf6">${tr("◆ Ngày ôn tập")}</span><span>${tr("■ Thói quen đã làm · □ bỏ lỡ")}</span><span style="color:#ef4444">${tr("▌Hôm nay")}</span><span><i class="offsw"></i>${tr("🏖️ Ngày nghỉ")}</span><span style="color:#ef4444;font-weight:600">${tr("■ Ngày quá tải")}</span><span>${tr("Bấm tên công việc để sửa · bấm trạng thái để đổi")}</span></div>
+  <div class="gwrap"><table class="gantt" style="--w:${zoom}px"><thead>
+    <tr><th class="s1" rowspan="2">${tr("Công việc")}</th><th class="s2" rowspan="2" style="text-align:center">${tr("Trạng thái")}</th><th class="s3" rowspan="2" style="text-align:center">${tr("Đã làm / KH")}</th>${months}</tr>
+    <tr>${dayHead}</tr></thead><tbody>`;
+  for(const area of areaList()){
+    const at=list.filter(t=>t.area===area),ah=fStatus?[]:S.habits.filter(h=>h.goal&&h.goalArea===area);
+    if(!at.length&&!ah.length)continue;
+    const plan=at.reduce((s,t)=>s+target(t),0),act=at.reduce((s,t)=>s+ticks(t),0);
+    html+=`<tr class="ar" style="--c:${areaColor(area)}"><td class="sa" colspan="3"><span class="dot" style="display:inline-block"></span> ${esc(tr(area))} <span class="meta" style="font-weight:400">· ${at.filter(t=>t.status==='Done').length}/${at.length} xong · ${act}/${plan||'–'} ${tr("buổi")}</span></td><td colspan="${days.length}"></td></tr>`;
+    for(const g of new Set([...at.map(t=>t.group||''),...ah.map(h=>h.goal)])){
+      const gt=at.filter(t=>(t.group||'')===g);
+      if(g){
+        const gs=gt.map(t=>t.start).filter(Boolean).sort()[0],ge=gt.map(t=>t.due||t.start).filter(Boolean).sort().at(-1);
+        // judged on the whole group, not the filter; habit rows never finish, so their group stays open
+        const key=area+'|'+g,done=!fStatus&&!ah.some(h=>h.goal===g)&&S.tasks.filter(t=>t.area===area&&(t.group||'')===g).every(t=>t.status==='Done');
+        if(!done)openedDone.delete(key);
+        const open=groupOpen(key,done);
+        html+=`<tr class="gr" style="--c:${areaColor(area)}" data-act="gtoggle" data-g="${esc(key)}" ${done?'data-done="1"':''}><td class="s1" title="${esc(g)}"><button type="button" class="gtg" aria-expanded="${open}" title="${tr("Bấm để đóng/mở nhóm")}"><b>${open?'▾':'▸'}</b> ${esc(g)}</button></td>
+          <td class="s2 meta">${gt.length?`${gt.filter(t=>t.status==='Done').length}/${gt.length} xong`:''}</td><td class="s3 meta">${gt.reduce((s,t)=>s+ticks(t),0)}/${gt.reduce((s,t)=>s+target(t),0)||'–'} ${tr("buổi")}</td>${gcells(days,k,gs,ge,'grp')}</tr>`;
+        if(!open)continue;
+      }
+      for(const t of gt){
+        const n=target(t),e=t.due||t.start,ck=checkedOn(t,k);
+        html+=`<tr style="--c:${areaColor(t.area)}" data-tid="${t.id}">
+          <td class="s1" data-act="tedit" title="${esc(t.name)}${t.note?' — '+esc(t.note):''}"><div class="name" ${t.status==='Done'?'style="text-decoration:line-through;color:var(--muted)"':''}>${esc(t.name)}</div>
+            <div class="meta"><span class="${t.priority==='Cao'?'neg':''}">${esc(tr(t.priority))}</span> · ${kdm(t.start)} → ${kdm(t.due)}${t.start&&t.due?` (${span(t.start,t.due)} ${tr("ngày)")}`:''}${recalls(t).length?` ${tr("· 🔁 Ôn:")} ${recalls(t).map(r=>(r.done?'✅':'')+kdm(r.date)).join(', ')}`:''}${lateOn(t,k)?(' · <span class="neg">'+tr("Quá hạn")+'</span>'):''}</div></td>
+          <td class="s2"><button type="button" class="tag st-${t.status}" data-act="tstatus" title="${tr("Bấm để đổi trạng thái")}">${STATUS[t.status]}</button></td>
+          <td class="s3">${canTick(t,k)?`<button type="button" class="tag ${ck?'st-Done':''}" data-act="tcheck" data-k="${k}" title="${ck?tr("Bỏ tích hôm nay"):tr("Tích: hôm nay đã làm")}">${ck?'✓ ':'☐ '}${sessText(t)}</button>`:`<span class="tag" title="${tr("Đã hoàn thành — bấm trạng thái để mở lại nếu muốn làm tiếp")}">🔒 ${sessText(t)}</span>`}<div class="mini"><i style="width:${n?Math.min(100,ticks(t)/n*100):0}%"></i></div></td>
+          ${gcells(days,k,t.start,e,t.status,t.id)}</tr>`;
+      }
+      html+=ah.filter(h=>h.goal===g).map(h=>habitGanttRow(h,days,k)).join('');
+    }
+  }
+  return html+'</tbody></table></div>';
+}
+
+// History: every ticked day, newest first (derived from the tasks' check-ins)
+function renderLog(){
+  const rows=S.tasks.flatMap(t=>Object.keys(t.checkins||{}).map(d=>({d,t})));
+  let html=`<div class="toolbar"><span class="meta">${tr("📒 Lịch sử các ngày bạn đã tích ✓ cho từng công việc. Muốn sửa thì bấm ô ngày trên Kế hoạch (Gantt) hoặc nút ✓ ở Việc hôm nay.")}</span></div>`;
+  if(!rows.length)return html+`<div class="empty">${heroSVG('hatch',120)}<h3>${tr("Chưa có lịch sử")}</h3><p>${tr("Bấm ✓ trên một công việc ở \"Việc hôm nay\" để bắt đầu.")}</p></div>`;
+  html+=`<div class="card"><table class="data"><tr><th>${tr("Ngày")}</th><th>${tr("Công việc")}</th><th>${tr("Lĩnh vực")}</th><th>${tr("Trạng thái")}</th></tr>`;
+  for(const d of [...new Set(rows.map(r=>r.d))].sort().reverse()){
+    const ts=rows.filter(r=>r.d===d).map(r=>r.t);
+    html+=`<tr class="sum"><td colspan="3">${DAY_FULL[kDate(d).getDay()]}, ${kdm(d)}/${d.slice(0,4)}</td><td class="meta">${ts.length} ${tr("việc")}</td></tr>`;
+    html+=ts.map(t=>`<tr><td></td><td><span class="dot" style="--c:${areaColor(t.area)};display:inline-block"></span> ${esc(t.name)}</td><td>${esc(tr(t.area))}</td><td><span class="tag st-${t.status}">${STATUS[t.status]}</span></td></tr>`).join('');
+  }
+  return html+'</table></div>';
+}
+
+const diffN=n=>{n=Math.round(n*10)/10;return`<span class="${n>0?'pos':n<0?'neg':''}">${n>0?'+':''}${n} ${tr("buổi")}</span>`};
+const prog=(p,c)=>`<div class="prog" style="--c:${c||'var(--accent)'}"><div class="pbar"><i style="width:${Math.min(100,p)}%"></i></div>${p.toFixed(1)}%</div>`;
+// Dashboard by sessions. "Chênh lệch" compares with what should be done by today, not the whole plan (future work isn't "behind")
+function renderPlanStats(){
+  if(!S.tasks.length)return`<div class="empty"><h3>${tr("Chưa có công việc")}</h3><p>${tr("Thêm công việc ở tab Kế hoạch để xem thống kê.")}</p></div>`;
+  const k=ymd(today());
+  const T=planTotals(S.tasks,k);
+  const rc=S.tasks.flatMap(recalls).filter(r=>r.date<=k||r.done);
+  const perDay=[...Array(14)].map((_,i)=>{const d=ymd(addDays(today(),i-13));return{d,n:S.tasks.filter(t=>checkedOn(t,d)).length}});
+  const maxN=Math.max(1,...perDay.map(x=>x.n)),activeDays=new Set(S.tasks.flatMap(t=>Object.keys(t.checkins||{}))).size;
+  const areas=areaList().map(a=>S.tasks.filter(t=>t.area===a)).filter(at=>at.length);
+  return`<div class="stats">
+    <div class="stat"><b>${T.done}/${T.n}</b><span>${tr("Công việc hoàn thành")}</span></div>
+    <div class="stat"><b>${T.plan?(T.earn/T.plan*100).toFixed(1):0}%</b><span>${tr("Mức hoàn thành kế hoạch")}</span></div>
+    <div class="stat"><b>${T.act}/${T.plan||'–'}</b><span>${tr("Buổi đã làm / dự kiến")}</span></div>
+    <div class="stat"><b>${diffN(T.act-T.need)}</b><span>${tr("So với tiến độ (cần")} ${T.need} ${tr("buổi đến nay)")}</span></div>
+    <div class="stat"><b>${rc.filter(r=>r.done).length}/${rc.length}</b><span>${tr("Active Recall đã ôn / đến hạn")}</span></div>
+    <div class="stat"><b>${activeDays}</b><span>${tr("Số ngày có làm")}</span></div></div>
+  <p class="meta" style="margin:-4px 4px 14px">${tr("Một \"buổi\" = một ngày bạn tích ✓ cho việc đó. Buổi dự kiến = số bạn đặt, hoặc mỗi ngày từ ngày bắt đầu đến ngày đến hạn là 1 buổi. Chênh lệch = buổi đã làm − buổi cần đạt đến hôm nay: âm là đang chậm. Mức hoàn thành = việc đã xong tính đủ, việc đang làm tính theo số buổi đã làm (tối đa bằng dự kiến). Tích đủ số buổi dự kiến thì việc tự chuyển sang Hoàn thành.")}${T.unplanned?`<br>📭 ${T.unplanned} ${tr("việc chưa có kế hoạch (chưa có ngày hoặc số buổi) không tính vào tiến độ")}${T.unplannedTicks?` ${tr("— đã tích")} ${T.unplannedTicks} ${tr("buổi")}`:''}.`:''}</p>
+  <div class="card"><h4>${tr("Theo lĩnh vực")}</h4><table class="data"><tr><th>${tr("Lĩnh vực")}</th><th>${tr("Việc xong")}</th><th>${tr("Buổi dự kiến")}</th><th>${tr("Cần đạt đến nay")}</th><th>${tr("Đã làm")}</th><th>${tr("Chênh lệch")}</th><th>${tr("Mức hoàn thành")}</th></tr>
+    ${[...areas.map(at=>[at[0].area,planTotals(at,k)]),[tr("Tổng cộng"),T]].map(([a,x],i,all)=>{const c=i<all.length-1?areaColor(a):'';
+      return`<tr class="${c?'':'sum'}"><td>${c?`<span class="dot" style="--c:${c};display:inline-block"></span> `:''}${esc(tr(a))}</td><td>${x.done}/${x.n}</td><td>${x.plan||'–'}</td><td>${x.plan?x.need:'–'}</td><td>${x.act}</td><td>${x.plan?diffN(x.act-x.need):'–'}</td><td>${prog(x.plan?x.earn/x.plan*100:0,c)}</td></tr>`}).join('')}</table></div>
+  <div class="card"><h4>${tr("Số việc đã làm mỗi ngày (14 ngày qua)")}</h4>
+    <div class="hbars">${perDay.map(x=>`<div title="${kdm(x.d)}: ${x.n} ${tr("việc")}">${x.n||''}<i style="height:${x.n/maxN*120}px"></i>${kdm(x.d).slice(0,2)}</div>`).join('')}</div></div>
+  <div class="card"><h4>${tr("Tiến độ từng công việc")}</h4><table class="data"><tr><th>${tr("Lĩnh vực")}</th><th>${tr("Công việc")}</th><th>${tr("Trạng thái")}</th><th>${tr("Buổi dự kiến")}</th><th>${tr("Cần đạt đến nay")}</th><th>${tr("Đã làm")}</th><th>${tr("Chênh lệch")}</th><th>${tr("Đánh giá")}</th><th>${tr("Tiến độ")}</th></tr>
+    ${areas.flat().map(t=>{const n=target(t),pd=neededBy(t,k);return`<tr><td>${esc(tr(t.area))}</td><td>${esc(t.name)}</td><td><span class="tag st-${t.status}">${STATUS[t.status]}</span></td><td>${n||'–'}</td><td>${n?Math.round(pd*10)/10:'–'}</td><td>${ticks(t)}</td><td>${n?diffN(ticks(t)-pd):'–'}</td><td>${n?verdict(t):tr("Chưa có kế hoạch")}</td><td>${n?prog(pct(t),areaColor(t.area)):'–'}</td></tr>`}).join('')}</table></div>`;
+}
+
+function heatmap(h){
+  const now=today(),start=mondayOf(addDays(now,-7*25)),t=ymd(now);let out='';
+  for(let d=start;ymd(d)<=ymd(addDays(mondayOf(now),6));d=addDays(d,1)){
+    const k=ymd(d);
+    if(k>t){out+='<i class="x"></i>';continue}
+    const p=count(S,h,k)/h.target,hol=holidayOn(k);
+    out+=`<i class="${hol?'off':''}" title="${dm(d)}: ${hol?'🏖️ '+esc(hol.name):count(S,h,k)+'/'+h.target}" style="${p?`background:color-mix(in srgb,${h.color} ${Math.round(25+75*Math.min(1,p))}%,transparent)`:''}"></i>`;
+  }
+  return`<div class="heat">${out}</div>`;
+}
+
+function renderHabitStats(){
+  const k=ymd(today()),on=S.habits.filter(h=>scheduled(h,today()));
+  const best=Math.max(0,...S.habits.map(h=>streak(S,h)));
+  const [pd,ps]=S.habits.map(h=>rateCounts(S,h)).reduce((a,b)=>[a[0]+b[0],a[1]+b[1]],[0,0]);
+  return`<div class="stats">
+    <div class="stat"><b>${S.habits.length}</b><span>${tr("Thói quen")}</span></div>
+    <div class="stat"><b>${on.filter(h=>doneToday(S,h,k)).length}/${on.length}</b><span>${tr("Xong hôm nay")}</span></div>
+    <div class="stat"><b>🔥 ${best}</b><span>${tr("Chuỗi dài nhất hiện tại")}</span></div>
+    <div class="stat"><b>${ps?Math.round(pd/ps*100)+'%':'—'}</b><span>${tr("Tỉ lệ hoàn thành 30 ngày (")}${pd}/${ps} ${tr("lượt)")}</span></div></div>
+  ${S.habits.map(h=>`<div class="card" style="--c:${h.color}">
+    <div class="hhead"><div class="ico">${esc(h.emoji)}</div><div class="info"><div class="name">${esc(h.name)}</div><div class="meta">${freqText(h)}${h.target>1?` · ${h.target} ${esc(h.unit||tr("lần"))}${tr("/ngày")}`:''}${h.goal?` · 🎯 ${esc(h.goal)}`:''}</div></div></div>
+    <div class="nums"><div><b>🔥 ${streak(S,h)}</b>${tr("Chuỗi hiện tại (")}${sUnit(h)})</div><div><b>🏆 ${bestStreak(S,h)}</b>${tr("Chuỗi kỷ lục (")}${sUnit(h)})</div><div><b>${rateCounts(S,h)[1]?rate(S,h)+'%':'—'}</b>${tr("30 ngày qua")}${h.perWeek?(' '+tr("(theo tuần)")):''}</div><div><b>${total(S,h)}</b>${tr("Tổng lần hoàn thành")}</div></div>
+    ${heatmap(h)}</div>`).join('')}`;
+}
+
+// ---------- add / edit dialog ----------
+let draft=null;
+function openForm(h,fromTask){
+  const t=fromTask;
+  draft=h?{goal:'',goalArea:'',...h,days:[...h.days]}
+    :{id:null,name:t?t.name:'',emoji:'🌱',color:t?areaColor(t.area):COLORS[0],days:[0,1,2,3,4,5,6],target:1,unit:'',goal:t&&t.group||'',goalArea:t&&t.group?t.area:'',fromTask:t&&t.id};
+  drawForm();$('#dlg').showModal();$('#fName').focus();
+}
+function drawForm(){
+  const d=draft;
+  $('#form').innerHTML=`<h3>${d.id?tr("Sửa thói quen"):d.fromTask?tr("Chuyển công việc thành thói quen"):tr("Thói quen mới")}</h3>
+  ${d.fromTask?('<p class="meta">'+tr("Các ngày đã tích ✓ sẽ thành ngày đã hoàn thành của thói quen (giữ được chuỗi 🔥). Công việc được bỏ khỏi Kế hoạch.")+'</p>'):''}
+  <label class="f" for="fName">${tr("Tên thói quen")}</label><input type="text" id="fName" maxlength="60" placeholder="${tr("VD: Đọc sách 20 phút")}" value="${esc(d.name)}">
+  <label class="f">${tr("Biểu tượng")}</label><div class="pick">${EMOJIS.map(e=>`<button type="button" data-emoji="${e}" class="${e===d.emoji?'on':''}">${e}</button>`).join('')}</div>
+  <label class="f">${tr("Màu sắc")}</label><div class="pick col">${COLORS.map(c=>`<button type="button" data-color="${c}" class="${c===d.color?'on':''}" style="background:${c}" aria-label="${tr("Màu")} ${c}"></button>`).join('')}</div>
+  <label class="f">${tr("Tần suất")}</label>
+  <nav class="tabs" style="display:inline-flex;overflow:visible;margin-bottom:8px"><button type="button" data-mode="days" class="${d.perWeek?'':'on'}">${tr("Ngày cố định")}</button><button type="button" data-mode="week" class="${d.perWeek?'on':''}">${tr("Số lần mỗi tuần")}</button></nav>
+  ${d.perWeek?`<div class="row"><div><input type="number" id="fWeek" min="1" max="7" value="${d.perWeek}" aria-label="${tr("Số lần mỗi tuần")}"></div><div class="meta" style="align-self:center">${tr("lần mỗi tuần (thứ Hai – Chủ nhật), làm ngày nào cũng được")}</div></div>`
+  :`<div class="days">${MON_FIRST.map(i=>`<button type="button" data-day="${i}" class="${d.days.includes(i)?'on':''}">${DAY_SHORT[i]}</button>`).join('')}</div>
+  <div class="presets"><button type="button" data-preset="0,1,2,3,4,5,6">${tr("Mỗi ngày")}</button><button type="button" data-preset="1,2,3,4,5">${tr("Ngày thường")}</button><button type="button" data-preset="0,6">${tr("Cuối tuần")}</button></div>`}
+  <div class="row"><div><label class="f" for="fTarget">${tr("Mục tiêu mỗi ngày")}</label><input type="number" id="fTarget" min="1" max="100" value="${d.target}"></div>
+  <div><label class="f" for="fUnit">${tr("Đơn vị (tuỳ chọn)")}</label><input type="text" id="fUnit" maxlength="12" placeholder="${tr("ly, trang, phút…")}" value="${esc(d.unit||'')}"></div></div>
+  <label class="f" for="fGoal">${tr("Gắn với mục tiêu trong Kế hoạch (tuỳ chọn)")}</label><select id="fGoal">${goalOptions(d.goal?d.goalArea+'||'+d.goal:'')}</select>
+  <div class="actions">${d.id?('<button type="button" class="danger" data-fact="del">'+tr("Xoá")+'</button>'):''}
+  <button type="button" class="ghost" data-fact="cancel">${tr("Huỷ")}</button><button type="submit" class="primary">${tr("Lưu")}</button></div>`;
+}
+$('#form').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  draft.name=$('#fName').value;draft.target=+$('#fTarget').value||1;draft.unit=$('#fUnit').value;
+  [draft.goalArea,draft.goal]=$('#fGoal').value?$('#fGoal').value.split('||'):['',''];
+  if($('#fWeek'))draft.perWeek=Math.max(1,Math.min(7,Math.round(+$('#fWeek').value||1)));
+  if(b.dataset.mode){draft.perWeek=b.dataset.mode==='week'?draft.perWeek||1:0;if(draft.perWeek)draft.days=[0,1,2,3,4,5,6]}
+  else if(b.dataset.emoji)draft.emoji=b.dataset.emoji;
+  else if(b.dataset.color)draft.color=b.dataset.color;
+  else if(b.dataset.day){const i=+b.dataset.day;draft.days=draft.days.includes(i)?draft.days.filter(x=>x!==i):[...draft.days,i]}
+  else if(b.dataset.preset)draft.days=b.dataset.preset.split(',').map(Number);
+  else if(b.dataset.fact==='cancel')return $('#dlg').close();
+  else if(b.dataset.fact==='del'){
+    if(!confirm(`${tr("Xoá \"")}${draft.name}${tr("\" cùng toàn bộ lịch sử? Không thể hoàn tác.")}`))return;
+    S.habits=S.habits.filter(h=>h.id!==draft.id);delete S.logs[draft.id];save();$('#dlg').close();render();return;
+  }else return;
+  drawForm();
+});
+$('#form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=$('#fName').value.trim(),target=Math.max(1,Math.min(100,Math.round(+$('#fTarget').value||1)));
+  if(!name){$('#fName').focus();return toast(tr("Hãy nhập tên thói quen"))}
+  const perWeek=$('#fWeek')?Math.max(1,Math.min(7,Math.round(+$('#fWeek').value||1))):0;
+  if(!perWeek&&!draft.days.length)return toast(tr("Chọn ít nhất 1 ngày trong tuần"));
+  const [goalArea,goal]=$('#fGoal').value?$('#fGoal').value.split('||'):['',''];
+  const {fromTask,...h}={...draft,name,target,unit:$('#fUnit').value.trim(),goal,goalArea,perWeek,days:perWeek?[0,1,2,3,4,5,6]:draft.days};
+  if(!await askHabitRoom(h))return;
+  if(fromTask)convertTask(fromTask,h);
+  else if(h.id)S.habits=S.habits.map(x=>x.id===h.id?h:x);
+  else S.habits.push({...h,id:uid(),created:ymd(today())});
+  save();$('#dlg').close();render();toast(fromTask?tr("Đã chuyển thành thói quen 🔁"):draft.id?tr("Đã cập nhật"):tr("Đã thêm thói quen mới ✨"));
+});
+// task -> habit: the task's ticked days become the habit's done days
+function convertTask(tid,h){
+  const t=S.tasks.find(x=>x.id===tid),id=uid(),dates=Object.keys(t.checkins||{}).sort();
+  S.logs[id]=Object.fromEntries(dates.map(d=>[d,h.target]));
+  S.habits.push({...h,id,srcTask:tid,created:[t.start,...dates].filter(Boolean).sort()[0]||ymd(today())});
+  S.tasks=S.tasks.filter(x=>x.id!==tid);
+}
+
+// ---------- rest days: manager dialog + single-day toggle ----------
+function drawHol(){
+  const L=[...(S.holidays||[])].sort((a,b)=>b.from.localeCompare(a.from)),k=ymd(today());
+  $('#hform').innerHTML=`<h3>🏖️ ${tr("Ngày nghỉ & kỳ nghỉ")}</h3>
+  <p class="meta">${tr("Ngày nghỉ được bỏ qua khi tính chuỗi 🔥 của thói quen và khi tính tiến độ công việc. Có thể đánh dấu cả ngày đã qua để giữ chuỗi.")}</p>
+  ${L.length?L.map(x=>`<div class="hrow"><div class="grow"><b>${esc(x.name)}</b><div class="meta">${kdm(x.from)}${x.to!==x.from?' → '+kdm(x.to):''} · ${span(x.from,x.to)+1} ${tr("ngày")}</div></div><button type="button" class="tag" data-fact="hdel" data-hid="${x.id}">${tr("Xoá")}</button></div>`).join(''):`<p class="meta">${tr("Chưa có ngày nghỉ nào.")}</p>`}
+  <label class="f" for="hName">${tr("Thêm kỳ nghỉ")}</label><input type="text" id="hName" maxlength="60" placeholder="${tr("VD: Tết, nghỉ phép, ốm")}">
+  <div class="row"><div><label class="f" for="hFrom">${tr("Từ ngày")}</label><input type="date" id="hFrom" value="${k}"></div><div><label class="f" for="hTo">${tr("Đến ngày")}</label><input type="date" id="hTo" value="${k}"></div></div>
+  <div class="actions"><button type="button" class="ghost" data-fact="close">${tr("Đóng")}</button><button type="button" class="primary" data-fact="hadd">${tr("+ Thêm kỳ nghỉ")}</button></div>`;
+}
+$('#hform').addEventListener('click',e=>{
+  const b=e.target.closest('[data-fact]');if(!b)return;
+  if(b.dataset.fact==='close'){$('#hdlg').close();return render()}
+  if(b.dataset.fact==='hdel'){const x=S.holidays.find(h=>h.id===b.dataset.hid);
+    if(!confirm(`${tr("Xoá kỳ nghỉ")} "${x.name}"? ${tr("Chuỗi có thể bị ngắt ở những ngày bạn chưa làm.")}`))return;
+    S.holidays=S.holidays.filter(h=>h!==x);save();return drawHol()}
+  const from=$('#hFrom').value,to=$('#hTo').value||from;
+  if(!from)return toast(tr("Hãy chọn ngày bắt đầu kỳ nghỉ"));
+  if(to<from)return toast(tr("Ngày kết thúc phải sau ngày bắt đầu"));
+  (S.holidays??=[]).push({id:uid(),name:$('#hName').value.trim()||tr("Ngày nghỉ"),from,to});save();drawHol();toast(tr("Đã thêm kỳ nghỉ 🏖️"));
+});
+// remove one day from whatever range covers it (splitting the range if needed)
+function removeHolidayDay(d){
+  const x=holidayOn(d),prev=ymd(addDays(kDate(d),-1)),next=ymd(addDays(kDate(d),1));
+  S.holidays=S.holidays.filter(h=>h!==x);
+  if(x.from<d)S.holidays.push({...x,to:prev});
+  if(d<x.to)S.holidays.push({...x,id:uid(),from:next});
+}
+
+// ---------- daily limits: keep each day doable ----------
+const LIMIT={habits:6,tasks:6,area:3};
+// weekdays on which h (if saved) would make more than LIMIT.habits habits
+const habitOverflow=h=>MON_FIRST.filter(d=>h.days.includes(d)&&S.habits.filter(x=>x.id!==h.id&&x.days.includes(d)).length+1>LIMIT.habits);
+// soft limit for habits: recommend deleting one, or add anyway after a confirm. Resolves true to go ahead.
+function askHabitRoom(h){
+  if(!habitOverflow(h).length)return Promise.resolve(true);
+  return new Promise(res=>{
+    const dlg=$('#cdlg'),f=$('#cform');
+    const done=ok=>{f.onclick=null;dlg.oncancel=null;dlg.close();res(ok)};
+    const draw=()=>{
+      const bad=habitOverflow(h),ok=!bad.length,pool=S.habits.filter(x=>x.id!==h.id&&x.days.some(d=>bad.includes(d)));
+      f.innerHTML=`<h3>${ok?'✅ '+tr("Đã đủ chỗ"):`⚠️ ${tr("Đã đạt giới hạn")} ${LIMIT.habits} ${tr("thói quen mỗi ngày")}`}</h3>
+        ${ok?`<p>${tr("Bây giờ có thể thêm")} <b>${esc(h.name)}</b>.</p>`
+        :`<p>${tr("Thêm")} <b>${esc(h.name)}</b> ${tr("sẽ làm những ngày này có quá")} ${LIMIT.habits} ${tr("thói quen:")} <b>${bad.map(d=>DAY_FULL[d]).join(', ')}</b>.</p>
+        <p class="meta">💡 ${tr("Nên xoá bớt một thói quen để giữ sức, rồi mới thêm cái mới:")}</p>
+        ${pool.map(x=>`<div class="hrow"><div class="grow">${esc(x.emoji)} ${esc(x.name)} <span class="meta">· ${freqText(x)}</span></div><button type="button" class="tag" data-c="del" data-id="${x.id}">🗑️ ${tr("Xoá")}</button></div>`).join('')}`}
+        <div class="actions"><button type="button" class="ghost" data-c="no">${tr("Huỷ")}</button>${ok?`<button type="button" class="primary" data-c="yes">${tr("Thêm ngay")}</button>`:`<button type="button" class="ghost" data-c="force" style="color:#ef4444">${tr("Vẫn thêm (vượt giới hạn)")}</button>`}</div>`;
+    };
+    f.onclick=e=>{
+      const b=e.target.closest('[data-c]');if(!b)return;const c=b.dataset.c;
+      if(c==='del'){const x=S.habits.find(y=>y.id===b.dataset.id);
+        if(!confirm(`${tr("Xoá \"")}${x.name}${tr("\" cùng toàn bộ lịch sử? Không thể hoàn tác.")}`))return;
+        S.habits=S.habits.filter(y=>y!==x);delete S.logs[x.id];save();render();return draw()}
+      if(c==='force'&&!confirm(tr("Chắc chắn thêm vượt giới hạn? Quá nhiều thói quen một ngày dễ khiến bạn bỏ cuộc.")))return;
+      done(c!=='no');
+    };
+    dlg.oncancel=()=>done(false);
+    draw();dlg.showModal();
+  });
+}
+// days on which task t (if saved) would put more than LIMIT.tasks open tasks, or more than LIMIT.area in its area.
+// A task occupies every non-rest day from start to deadline until it is Done. Tasks without a start date or a
+// deadline are not scheduled yet, so they don't count; the limits are checked as soon as a deadline is set.
+const scheduled_=x=>x.status!=='Done'&&x.start&&x.due;
+function taskOverload(t){
+  if(!scheduled_(t))return[];
+  const others=S.tasks.filter(x=>x.id!==t.id&&scheduled_(x)),bad=[];
+  for(let d=kDate(t.start);ymd(d)<=t.due;d=addDays(d,1)){
+    const k=ymd(d);if(offDay(k))continue;
+    const on=others.filter(x=>x.start<=k&&k<=x.due),n=on.length+1,a=on.filter(x=>x.area===t.area).length+1;
+    if(n>LIMIT.tasks||a>LIMIT.area)bad.push({k,n,a});
+  }
+  return bad;
+}
+// nearest later start (same length) that fits, up to 90 days ahead
+function freeSlot(t){
+  const len=t.due?span(t.start,t.due):0;
+  for(let i=1;i<=90;i++){const st=ymd(addDays(kDate(t.start),i)),c={...t,start:st,due:t.due?ymd(addDays(kDate(st),len)):''};if(!taskOverload(c).length)return c}
+  return null;
+}
+// hard limit for tasks: explain which days are full; nothing is saved until the plan is changed
+function showOverload(t,bad,onShift){
+  const dlg=$('#cdlg'),f=$('#cform'),slot=onShift&&freeSlot(t);
+  f.innerHTML=`<h3>⛔ ${tr("Quá tải — chưa lưu được")}</h3>
+    <p>${tr("Mỗi ngày tối đa")} <b>${LIMIT.tasks} ${tr("việc")}</b>, ${tr("mỗi lĩnh vực tối đa")} <b>${LIMIT.area} ${tr("việc")}</b>. <b>${esc(t.name)}</b> ${tr("làm quá tải")} ${bad.length} ${tr("ngày")}:</p>
+    ${bad.slice(0,6).map(x=>`<div class="hrow"><div class="grow"><b>${DAY_FULL[kDate(x.k).getDay()]}, ${kdm(x.k)}</b></div><span class="tag ${x.n>LIMIT.tasks?'neg':''}">${x.n}/${LIMIT.tasks} ${tr("việc")}</span><span class="tag ${x.a>LIMIT.area?'neg':''}">${esc(tr(t.area))}: ${x.a}/${LIMIT.area}</span></div>`).join('')}
+    ${bad.length>6?`<p class="meta">${tr("… và")} ${bad.length-6} ${tr("ngày khác")}</p>`:''}
+    <p class="meta">${tr("Hãy đổi ngày bắt đầu/đến hạn, đổi lĩnh vực, hoặc đánh dấu Hoàn thành một việc khác trong những ngày đó.")}</p>
+    <div class="actions"><button type="button" class="ghost" data-c="back">${tr("Quay lại sửa")}</button>${slot?`<button type="button" class="primary" data-c="shift">📅 ${tr("Dời sang")} ${kdm(slot.start)}${slot.due?' → '+kdm(slot.due):''}</button>`:''}</div>`;
+  f.onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;f.onclick=null;dlg.close();if(b.dataset.c==='shift')onShift(slot)};
+  dlg.showModal();
+}
+
+// ---------- task dialog ----------
+const opts=(list,sel)=>list.map(([v,l])=>`<option value="${esc(v)}" ${v===sel?'selected':''}>${esc(l)}</option>`).join('');
+function openTask(t){
+  const d=t||{id:'',name:'',area:fArea||'Học tập',group:'',priority:'Trung bình',status:'Plan',start:ymd(today()),due:'',recalls:[],note:''};
+  const f=$('#tform');f.dataset.id=d.id;
+  f.innerHTML=`<h3>${d.id?tr("Sửa công việc"):tr("Công việc mới")}</h3>
+  <label class="f" for="tName">${tr("Nội dung công việc")}</label><input type="text" id="tName" maxlength="200" value="${esc(d.name)}">
+  <div class="row"><div><label class="f" for="tArea">${tr("Lĩnh vực")}</label><select id="tArea">${opts(areaList().map(a=>[a,tr(a)]),d.area)}<option value="__new">${tr("➕ Thêm lĩnh vực mới…")}</option></select>
+    <input type="text" id="tAreaNew" maxlength="40" placeholder="${tr("Tên lĩnh vực mới")}" hidden style="margin-top:6px"></div>
+  <div><label class="f" for="tPrio">${tr("Độ ưu tiên")}</label><select id="tPrio">${opts(PRIOS.map(p=>[p,tr(p)]),d.priority)}</select></div></div>
+  <label class="f" for="tGroup">${tr("Nhóm mục tiêu (tuỳ chọn)")}</label><input type="text" id="tGroup" list="groupDl" maxlength="120" placeholder="${tr("VD: 4. Luyện thi Tiếng Anh TOEIC")}" value="${esc(d.group||'')}">
+  <div class="row"><div><label class="f" for="tStatus">${tr("Trạng thái")}</label><select id="tStatus">${opts(Object.entries(STATUS),d.status)}</select></div>
+  <div><label class="f" for="tTarget">${tr("Số buổi dự kiến (tuỳ chọn)")}</label><input type="number" id="tTarget" min="1" max="1000" step="1" placeholder="${tr("Trống = mỗi ngày 1 buổi")}" value="${d.targetN||''}"></div></div>
+  <div class="row"><div><label class="f" for="tStart">${tr("Ngày bắt đầu")}</label><input type="date" id="tStart" value="${d.start}"></div>
+  <div><label class="f" for="tDue">${tr("Ngày đến hạn")}</label><input type="date" id="tDue" value="${d.due}"></div></div>
+  <label class="f">${tr("Lịch ôn tập (Active Recall) — tối đa 4 lần, không cần thì để trống")}</label>
+  <div class="rgrid">${[0,1,2,3].map(i=>{const r=recalls(d)[i]||{};return`<div class="rrow"><span class="meta" style="white-space:nowrap">${tr("Lần")} ${i+1}</span><input type="date" id="tR${i}" value="${r.date||''}" aria-label="${tr("Ngày ôn tập lần")} ${i+1}"><label class="meta" style="white-space:nowrap"><input type="checkbox" id="tRd${i}" ${r.done?'checked':''}> ${tr("Đã ôn")}</label></div>`}).join('')}</div>
+  <button type="button" class="tag" data-fact="rsuggest" style="margin-top:8px">${tr("✨ Gợi ý lịch ôn: +1, +3, +7, +14 ngày sau ngày đến hạn")}</button>
+  <label class="f" for="tNote">${tr("Ghi chú")}</label><input type="text" id="tNote" maxlength="300" value="${esc(d.note||'')}">
+  <datalist id="groupDl">${[...new Set(S.tasks.map(x=>x.group).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}</datalist>
+  ${d.id?('<p class="meta">'+tr("Việc lặp lại mãi (VD: tập 30 phút/ngày)? Nên quản lý như một thói quen để theo dõi chuỗi 🔥.")+'</p>'):''}
+  <div class="actions">${d.id?('<button type="button" class="danger" data-fact="del">'+tr("Xoá")+'</button>'):''}${d.id?('<button type="button" class="ghost" data-fact="conv" style="margin-right:auto">'+tr("🔁 Chuyển thành thói quen")+'</button>'):''}<button type="button" class="ghost" data-fact="cancel">${tr("Huỷ")}</button><button type="submit" class="primary">${tr("Lưu")}</button></div>`;
+  $('#tdlg').showModal();$('#tName').focus();
+}
+$('#tform').addEventListener('click',e=>{
+  const b=e.target.closest('[data-fact]');if(!b)return;
+  if(b.dataset.fact==='cancel')return $('#tdlg').close();
+  const id=$('#tform').dataset.id,t=S.tasks.find(x=>x.id===id);
+  if(b.dataset.fact==='conv'){$('#tdlg').close();return openForm(null,t)}
+  if(b.dataset.fact==='rsuggest'){ // fill only the empty slots, counting from the due date
+    const base=$('#tDue').value||$('#tStart').value;if(!base)return toast(tr("Hãy nhập ngày đến hạn trước"));
+    [1,3,7,14].forEach((n,i)=>{const x=$('#tR'+i);if(!x.value)x.value=ymd(addDays(kDate(base),n))});return;
+  }
+  if(!confirm(`${tr("Xoá \"")}${t.name}"${ticks(t)?` ${tr("cùng")} ${ticks(t)} ${tr("ngày đã tích")}`:''}${tr("? Không thể hoàn tác.")}`))return;
+  S.tasks=S.tasks.filter(x=>x.id!==id);save();$('#tdlg').close();render();
+});
+$('#tform').addEventListener('change',e=>{
+  if(e.target.id!=='tArea')return;
+  const n=$('#tAreaNew');n.hidden=e.target.value!=='__new';if(!n.hidden)n.focus();
+});
+$('#tform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=s=>$(s).value.trim(),id=$('#tform').dataset.id;
+  let area=v('#tArea');
+  if(area==='__new'){area=v('#tAreaNew');if(!area){$('#tAreaNew').focus();return toast(tr("Hãy nhập tên lĩnh vực mới"))}
+    area=areaList().find(a=>a.toLowerCase()===area.toLowerCase())||area} // reuse an existing area typed with other casing
+  const recs=[0,1,2,3].map(i=>({date:v('#tR'+i),done:$('#tRd'+i).checked})).filter(r=>r.date).sort((a,b)=>a.date.localeCompare(b.date));
+  const t={id:id||uid(),name:v('#tName'),area,group:v('#tGroup'),priority:v('#tPrio'),status:v('#tStatus'),
+    start:v('#tStart'),due:v('#tDue'),targetN:Math.max(0,Math.round(+v('#tTarget')||0)),recalls:recs,note:v('#tNote'),
+    checkins:(S.tasks.find(x=>x.id===id)||{}).checkins||{}};
+  const old=S.tasks.find(x=>x.id===id);if(old&&old.autoDone&&old.status===t.status){t.autoDone=true;autoStatus(t)} // keep the flag only if status untouched; raising the plan reopens the task
+  if(!t.name){$('#tName').focus();return toast(tr("Hãy nhập nội dung công việc"))}
+  if(t.start&&t.due&&t.due<t.start)return toast(tr("Ngày đến hạn phải sau ngày bắt đầu"));
+  if(t.due&&!t.start&&t.status!=='Done'){$('#tStart').focus();return toast(tr("Có deadline thì cần cả ngày bắt đầu để kiểm tra giới hạn việc"))}
+  const bad=taskOverload(t);
+  if(bad.length)return showOverload(t,bad,sl=>{$('#tStart').value=sl.start;$('#tDue').value=sl.due;toast(tr("Đã dời ngày — bấm Lưu để lưu"))});
+  S.tasks=id?S.tasks.map(x=>x.id===id?t:x):[...S.tasks,t];
+  save();$('#tdlg').close();render();toast(id?tr("Đã cập nhật"):tr("Đã thêm công việc"));
+});
+
+document.addEventListener('change',e=>{
+  const f=e.target.dataset.f;if(!f)return;
+  if(f==='area')fArea=e.target.value;else fStatus=e.target.value;
+  render();
+});
+
+// ---------- main click handling ----------
+document.addEventListener('click',e=>{
+  const xp0=xpTotal();setTimeout(()=>rankUp(xp0)); // after the action below has run
+  document.querySelectorAll('.menu.open').forEach(m=>{if(!m.contains(e.target)||e.target.closest('.pop'))m.classList.remove('open')});
+  const nav=e.target.closest('[data-v]');if(nav){view=nav.dataset.v;planJump=true;scrollTo(0,0);return render()}
+  const a=e.target.closest('[data-act]');if(!a)return;
+  const act=a.dataset.act,row=a.closest('[data-id]'),h=row&&S.habits.find(x=>x.id===row.dataset.id);
+  const trow=a.closest('[data-tid]'),t=trow&&S.tasks.find(x=>x.id===trow.dataset.tid);
+  const k=ymd(cur),before=view==='h-today'&&allDone(k),wasDone=!!h&&isDone(S,h,k);
+  switch(act){
+    case'new':return openForm();
+    case'tnew':return openTask();
+    case'tedit':return openTask(t);
+    case'tstatus':{const ns={Plan:'Doing',Doing:'Done',Done:'Plan'}[t.status];
+      if(t.status==='Done'){const bad=taskOverload({...t,status:ns});if(bad.length)return showOverload({...t,status:ns},bad)} // reopening takes a slot again
+      t.status=ns;delete t.autoDone;save();break}
+    case'trecall':{const rs=recalls(t).map(r=>({...r})),i=+a.dataset.ri;rs[i].done=!rs[i].done;t.recalls=rs;delete t.recall;delete t.recallDone;save();break}
+    case'tcheck':case'tday':{const d=a.dataset.k||k;if(d>ymd(today())||!canTick(t,d))return; // tick/untick "worked on it that day"
+      const c=t.checkins??={};if(c[d])delete c[d];else c[d]=true;
+      const msg=autoStatus(t);save();render();if(msg)toast(msg);
+      if(c[d]){sparkBurst(e.clientX,e.clientY);chime();if(msg&&t.status==='Done')gloryRain();
+        else if(view==='t-today'){const tl=todayTasks(k);if(tl.length&&tl.every(x=>taskDoneOn(x,k))){gloryRain();fanfare();toast(tr("🏆 Toàn thắng! Mọi việc hôm nay đã hoàn thành"))}}}
+      return}
+    case'conv1':if(!confirm(`${tr("Chuyển \"")}${t.name}${tr("\" thành thói quen (")}${freqText(convFreq(t))}${tr(")? Công việc sẽ được bỏ khỏi Kế hoạch.")}`))return;
+      askHabitRoom({id:null,name:t.name,days:convFreq(t).days}).then(ok=>{if(ok){quickConvert(t);save();render();toast(tr("Đã chuyển thành thói quen 🔁"))}});return;
+    case'convall':{const ls=suggestions();if(!confirm(`${tr("Chuyển cả")} ${ls.length} ${tr("công việc lặp lại thành thói quen?")}`))return;
+      (async()=>{let n=0;for(const x of ls){if(!await askHabitRoom({id:null,name:x.name,days:convFreq(x).days}))break;quickConvert(x);n++;save()}
+        render();toast(`${tr("Đã chuyển")} ${n} ${tr("công việc thành thói quen 🔁")}`)})();return}
+    case'zoom':zoom=+a.dataset.z;planJump=true;break;
+    case'gtoday':planJump=true;break;
+    case'gtoggle':{const g=a.dataset.g;
+      if(a.dataset.done)openedDone.has(g)?openedDone.delete(g):openedDone.add(g);
+      else{closedGroups=closedGroups.includes(g)?closedGroups.filter(x=>x!==g):[...closedGroups,g];try{store.setItem(KEY+'-closed',JSON.stringify(closedGroups))}catch(e){}}
+      break}
+    case'tpl':{const nh={days:[0,1,2,3,4,5,6],target:1,unit:'',...TEMPLATES[a.dataset.i],id:uid(),created:ymd(today())};
+      askHabitRoom(nh).then(ok=>{if(ok){S.habits.push(nh);save();render()}});return}
+    case'edit':return openForm(h);
+    case'tap':setCount(h,k,h.target>1?count(S,h,k)+1:isDone(S,h,k)?0:1);break;
+    case'inc':setCount(h,k,count(S,h,k)+1);break;
+    case'dec':setCount(h,k,count(S,h,k)-1);break;
+    case'prev':cur=addDays(cur,-1);break;
+    case'next':if(ymd(cur)<ymd(today()))cur=addDays(cur,1);break;
+    case'goToday':cur=today();break;
+    case'menu':return a.closest('.menu').classList.toggle('open');
+    case'theme':return toggleTheme();
+    case'meow':chime();sparkBurst(e.clientX,e.clientY,6);return toast(pick([...CHEER.zero,...CHEER.some,...CHEER.half,...CHEER.all],Math.floor(Math.random()*12)));
+    case'sound':try{store.setItem(KEY+'-sound',soundOn()?'off':'on')}catch(e){}$('#soundb').textContent=soundLabel();if(soundOn())chime();return;
+    case'export':return exportData();
+    case'import':return $('#file').click();
+    case'fs':return saveState==='ok'?toast(`${tr("Dữ liệu đang tự lưu vào")} ${INFO.data||'du-lieu.json'}`):writeNow();
+    case'fsdir':return fetch('/open-folder',{method:'POST',headers:{'X-Capy':'1'}}).catch(()=>toast(tr("Không mở được thư mục")));
+    case'wipe':if(!confirm(tr("Xoá TOÀN BỘ thói quen, công việc và lịch sử đã làm?")+`\nFile du-lieu.json ${tr("cũng sẽ được làm trống (bản cũ vẫn được giữ trong thư mục sao-luu).")}`+tr("\nKhông thể hoàn tác. Nên bấm \"Sao lưu dữ liệu\" trước nếu chưa chắc.")))return;
+      shrinkOK=true;S={habits:[],logs:{},tasks:[],holidays:[]};save();toast(tr("Đã xoá toàn bộ dữ liệu"));break;
+    case'fsbak':return fsRestoreBak();
+    case'hmgr':drawHol();return $('#hdlg').showModal();
+    case'hday':{const d=ymd(cur),x=holidayOn(d);
+      if(x){if(!confirm(x.from===x.to?tr("Bỏ đánh dấu ngày nghỉ? Chuỗi có thể bị ngắt nếu bạn chưa làm hôm đó."):`${tr("Bỏ ngày này khỏi kỳ nghỉ")} "${x.name}"? ${tr("Các ngày còn lại của kỳ nghỉ vẫn giữ.")}`))return;
+        removeHolidayDay(d);save();toast(tr("Đã bỏ ngày nghỉ"));break}
+      askText(tr("Tên ngày nghỉ (VD: Tết, nghỉ phép, ốm):"),tr("Ngày nghỉ")).then(name=>{if(name===null)return;
+        (S.holidays??=[]).push({id:uid(),name:name.trim()||tr("Ngày nghỉ"),from:d,to:d});save();render();toast(tr("Đã đánh dấu ngày nghỉ 🏖️ — chuỗi được giữ nguyên"))});return}
+    case'lang':try{store.setItem(KEY+'-lang',LANG==='en'?'vi':'en')}catch(e){}return location.reload();
+  }
+  render();
+  if(['tap','inc'].includes(act)&&h&&!wasDone&&isDone(S,h,k)){sparkBurst(e.clientX,e.clientY);chime()}
+  if(view==='h-today'&&!before&&allDone(k)&&['tap','inc'].includes(act)){toast(tr("🎉 Hoàn thành tất cả thói quen! Giỏi lắm!"));gloryRain();fanfare()}
+});
+function allDone(k){const on=S.habits.filter(h=>scheduled(h,cur));return on.length&&on.every(h=>doneToday(S,h,k))}
+
+// ---------- theme / backup ----------
+function toggleTheme(){
+  const dark=document.documentElement.dataset.theme?document.documentElement.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  const t=dark?'light':'dark';document.documentElement.dataset.theme=t;
+  try{store.setItem(KEY+'-theme',t)}catch(e){}
+}
+try{const t=store.getItem(KEY+'-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+
+function exportData(){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'}));
+  a.download=`thoi-quen-${ymd(today())}.json`;a.click();URL.revokeObjectURL(a.href);
+}
+$('#file').addEventListener('change',async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{
+    const d=JSON.parse(await f.text());
+    // a file may hold only some parts; only those parts get replaced
+    const okH=!d.habits||Array.isArray(d.habits)&&d.logs&&typeof d.logs==='object'&&d.habits.every(h=>h.id&&h.name&&Array.isArray(h.days)&&h.target>=1&&h.created);
+    const okT=!d.tasks||Array.isArray(d.tasks)&&d.tasks.every(t=>t.id&&t.name&&t.area&&STATUS[t.status]);
+    const okL=!d.worklog||Array.isArray(d.worklog)&&d.worklog.every(l=>l.id&&l.taskId&&l.date&&typeof l.hours==='number'&&STATUS[l.status]);
+    if(!okH||!okT||!okL||!(d.habits||d.tasks))throw new Error(tr("File không đúng định dạng"));
+    const parts=[d.habits&&`${d.habits.length} ${tr("thói quen")}`,d.tasks&&`${d.tasks.length} ${tr("công việc")}`].filter(Boolean).join(', ');
+    if(!confirm(`${tr("Khôi phục")} ${parts}${tr("? Phần dữ liệu tương ứng hiện tại sẽ bị thay thế.")}`))return;
+    if(d.holidays&&!(Array.isArray(d.holidays)&&d.holidays.every(x=>x.from&&x.to&&x.from<=x.to)))throw new Error(tr("File không đúng định dạng"));
+    shrinkOK=true;S=migrate({...S,...(d.habits&&{habits:d.habits,logs:d.logs}),...(d.tasks&&{tasks:d.tasks,worklog:d.worklog}),...(d.holidays&&{holidays:d.holidays})});
+    save();render();toast(tr("Đã khôi phục dữ liệu"));
+  }catch(err){alert((tr("Không đọc được file:")+' ')+err.message)}
+});
+
+// ---------- writing du-lieu.json (through electron/main.cjs) ----------
+// electron/main.cjs keeps one copy per day in sao-luu\ and refuses (409) a write that would wipe out most of the data
+// unless the request says the user meant it (X-Allow-Shrink).
+let INFO={};try{if(SRV&&!BLOCKED)INFO=JSON.parse(xhr('GET','/info'))}catch(e){}
+let wTimer=null,saveState='ok',shrinkOK=false;
+function drawFs(){
+  const b=$('#fsb');if(!b)return;b.hidden=BLOCKED;
+  b.className='fsb'+(saveState==='err'||saveState==='down'?' bad':'');
+  b.textContent={ok:tr("✅ Đã lưu vào máy"),pending:tr("💾 Đang lưu…"),err:tr("⚠️ Chưa lưu được — đang thử lại"),down:tr("⚠️ Mất kết nối — đóng app và mở lại bằng shortcut")}[saveState];
+  b.title=`${tr("Dữ liệu lưu tại:")} ${INFO.data||'du-lieu.json'}`;
+}
+function queueWrite(){clearTimeout(wTimer);saveState='pending';drawFs();wTimer=setTimeout(writeNow,300)}
+async function writeNow(keepalive){
+  clearTimeout(wTimer);wTimer=null;
+  const body=JSON.stringify(S,null,1),h={'X-Capy':'1'};if(shrinkOK)h['X-Allow-Shrink']='1';
+  try{
+    const r=await fetch('/data',{method:'POST',body,headers:h,keepalive:!!keepalive&&body.length<60000});
+    if(r.status===409){
+      const x=await r.json();
+      if(confirm(`⚠️ ${tr("App sắp ghi đè du-lieu.json")} (${x.old} ${tr("thói quen/công việc")}) ${tr("bằng dữ liệu chỉ có")} ${x.new}.\n\n${tr("OK = vẫn ghi (bản cũ được giữ trong thư mục sao-luu)")}\n${tr("Cancel = KHÔNG ghi, mở lại dữ liệu từ file")}`)){shrinkOK=true;return writeNow()}
+      S=load();saveState='ok';render();drawFs();return toast(tr("Đã mở lại dữ liệu từ file"));
+    }
+    if(!r.ok)throw new Error(await r.text());
+    saveState='ok';shrinkOK=false;
+  }catch(e){saveState='err';wTimer=setTimeout(writeNow,5000)}
+  drawFs();
+}
+// closing the window right after a change: send the last write on the way out
+addEventListener('pagehide',()=>{if(wTimer&&!BLOCKED)writeNow(true)});
+// shows a warning if the app's data server stops answering
+function heartbeat(){fetch('/ping').then(r=>{if(r.ok&&saveState==='down'){saveState='ok';drawFs()}}).catch(()=>{saveState='down';drawFs()})}
+// Electron has no prompt()
+function askText(msg,def=''){return new Promise(res=>{
+  const dlg=$('#cdlg'),f=$('#cform');
+  f.innerHTML=`<p style="white-space:pre-line">${esc(msg)}</p><input type="text" id="askv" maxlength="60" value="${esc(def)}">
+    <div class="actions"><button type="button" class="ghost" data-c="no">${tr("Huỷ")}</button><button type="submit" class="primary">OK</button></div>`;
+  const done=v=>{f.onclick=f.onsubmit=dlg.oncancel=null;dlg.close();res(v)};
+  f.onclick=e=>{if(e.target.closest('[data-c=no]'))done(null)};
+  f.onsubmit=e=>{e.preventDefault();done($('#askv').value)};
+  dlg.oncancel=()=>done(null);
+  dlg.showModal();$('#askv').select();
+})}
+async function fsRestoreBak(){
+  let list;try{list=await (await fetch('/backups')).json()}catch(e){return toast(tr("Không đọc được thư mục sao lưu"))}
+  if(!list.length)return toast(tr("Chưa có bản tự sao lưu nào"));
+  const n=await askText(`${tr("Chọn số bản sao lưu để khôi phục:")}\n${list.map((b,i)=>`${i+1}. ${b.name} — ${b.habits} ${tr("thói quen")}, ${b.tasks} ${tr("công việc")}`).join('\n')}`,'1');
+  if(n===null)return;const b=list[+n-1];if(!b)return toast(tr("Số không hợp lệ"));
+  let d;try{d=JSON.parse(await (await fetch('/backup?n='+encodeURIComponent(b.name))).text())}catch(e){return alert(e.message)}
+  if(!d||!Array.isArray(d.habits))return alert(tr("File không đúng định dạng"));
+  if(!confirm(`${tr("Khôi phục bản")} ${b.name}? ${tr("Dữ liệu hiện tại vẫn được giữ trong thư mục sao-luu.")}`))return;
+  delete d._bak;shrinkOK=true;S=migrate({tasks:[],...d});save();render();toast(tr("Đã khôi phục dữ liệu"));
+}
+
+// ---------- self-check: open ThoiQuen.html#test ----------
+if(location.hash==='#test'){
+  const now=new Date(2026,9,19),h={id:'t',created:'2026-10-01',days:[0,1,2,3,4,5,6],target:1};
+  const T={logs:{t:{'2026-10-17':1,'2026-10-18':1,'2026-10-19':1,'2026-10-10':1,'2026-10-11':1,'2026-10-12':1,'2026-10-13':1}}};
+  const w={...h,id:'w',days:[1,3,5]}; // Mon/Wed/Fri; 19/10/2026 is Monday
+  T.logs.w={'2026-10-14':1,'2026-10-16':1};
+  const r=[
+    streak(T,h,now)===3, bestStreak(T,h,now)===4,
+    streak(T,h,addDays(now,1))===3, // tomorrow not done yet: streak kept
+    streak(T,w,now)===2, // today Mon not done, Wed+Fri done
+    rate(T,w,6,now)===100, rate(T,h,19,now)===37, // 7/19 days
+    target({start:'2026-10-12',due:'2026-10-21'})===10, target({targetN:4,start:'2026-10-12',due:'2026-10-21'})===4, target({})===0,
+    neededBy({status:'Doing',start:'2026-10-12',due:'2026-10-21'},'2026-10-16')===5, neededBy({status:'Plan',start:'2026-10-20',due:'2026-10-21'},'2026-10-19')===0,
+    neededBy({status:'Doing',targetN:4,start:'2026-10-01',due:'2026-10-05'},'2026-10-19')===4,
+    earned({status:'Done',targetN:6})===6, earned({status:'Doing',targetN:6,checkins:{a:1,b:1}})===2, earned({status:'Doing',targetN:1,checkins:{a:1,b:1}})===1,
+    neededBy({status:'Doing',checkins:{a:1}},'2026-10-19')===1, neededBy({status:'Doing',targetN:5,checkins:{a:1}},'2026-10-19')===1, // unschedulable: neutral
+    pct({status:'Doing',targetN:2,checkins:{a:1,b:1,c:1}})===100,
+    (()=>{const ts=[{status:'Doing',start:'2026-10-12',due:'2026-10-21',checkins:{a:1,b:1,c:1}},{status:'Doing',checkins:{a:1,b:1}},{status:'Done',targetN:4,checkins:{a:1}}],x=planTotals(ts,'2026-10-16');
+      return x.plan===14&&x.act===4&&x.need===6&&x.earn===7&&x.unplanned===1&&x.unplannedTicks===2&&x.done===1&&x.allTicks===6})(),
+    (()=>{const t={name:'x',status:'Plan',targetN:2,checkins:{a:1}};autoStatus(t);const s1=t.status;t.checkins.b=1;autoStatus(t);const s2=t.status;delete t.checkins.b;autoStatus(t);
+      const u={name:'y',status:'Done',targetN:3,checkins:{a:1}};autoStatus(u); // manual Done stays
+      return s1==='Doing'&&s2==='Done'&&t.status==='Doing'&&u.status==='Done'})(),
+    canTick({status:'Doing'},'a'), !canTick({status:'Done'},'a'), canTick({status:'Done',checkins:{a:1}},'a'),
+    groupOpen('-|-',false), !groupOpen('-|-',true),
+    verdict({status:'Doing'})==='Chưa bắt đầu', verdict({status:'Doing',targetN:2,checkins:{a:1}})==='Đang thực hiện', verdict({status:'Done'})==='Hoàn thành',
+    migrate({tasks:[{id:'a',planH:3}],worklog:[{taskId:'a',date:'2026-10-01',hours:1},{taskId:'a',date:'2026-10-02',hours:0,status:'Doing'}]}).tasks[0].checkins['2026-10-01']===true,
+    Object.keys(migrate({tasks:[{id:'a'}],worklog:[{taskId:'a',date:'2026-10-02',hours:0,status:'Doing'}]}).tasks[0].checkins||{}).length===0,
+    ...(()=>{const W={logs:{w1:{'2026-10-13':1,'2026-10-19':1}}},h={id:'w1',created:'2026-10-01',days:[0,1,2,3,4,5,6],target:1,perWeek:1};
+      const W2={logs:{w1:{'2026-10-13':1}}};
+      return[streak(W,h,now)===2,bestStreak(W,h,now)===2,rateCounts(W,h,30,now).join()==='2,4',doneToday(W,h,'2026-10-21'),
+        streak(W2,h,now)===1,!doneToday(W2,h,'2026-10-19'),freqText(h)==='1 lần/tuần (ngày nào cũng được)']})(),
+    span('2026-10-12','2026-10-15')===3,
+    ...(()=>{const keep=S;S={habits:[...Array(6)].map((_,i)=>({id:'x'+i,name:'h'+i,days:[1,2,3,4,5]})),logs:{},tasks:[],holidays:[]};
+      const r=[habitOverflow({id:null,days:[0,6]}).length===0,habitOverflow({id:null,days:[1]}).join()==='1',habitOverflow({id:'x0',days:[1,2,3,4,5]}).length===0];
+      const mk=(id,area,a,b)=>({id,name:id,area,status:'Doing',start:a,due:b});
+      S.tasks=[mk('a','A','2026-10-20','2026-10-25'),mk('b','A','2026-10-20','2026-10-21'),mk('c','A','2026-10-22','2026-10-23'),mk('d','B','2026-10-20','2026-10-30'),mk('e','C','2026-10-20','2026-10-30'),mk('f','D','2026-10-20','2026-10-30')];
+      r.push(taskOverload(mk('n','A','2026-10-20','2026-10-20')).length===0,taskOverload(mk('m','A','2026-10-22','2026-10-22')).length===0);
+      S.tasks.push(mk('n','A','2026-10-20','2026-10-20')); // the 20th now holds 6 tasks, 3 of them in A
+      const z=mk('z','B','2026-10-20','2026-10-20'),y=taskOverload(mk('y','A','2026-10-21','2026-10-21'));
+      r.push(taskOverload(z).length===1&&taskOverload(z)[0].n===7,y.length===0,taskOverload(mk('w','A','2026-10-20','2026-10-21'))[0].a===4,
+        freeSlot(z).start==='2026-10-21',taskOverload({...z,status:'Done'}).length===0,taskOverload({...z,start:''}).length===0);
+      S.holidays=[{id:'h',name:'x',from:'2026-10-20',to:'2026-10-20'}];r.push(taskOverload(z).length===0); // rest days don't count
+      S=keep;return r})(),
+    ...(()=>{const keep=S.holidays;S.holidays=[{id:'h',name:'x',from:'2026-10-15',to:'2026-10-16'}];
+      const H={logs:{t:{'2026-10-13':1,'2026-10-14':1,'2026-10-17':1,'2026-10-18':1,'2026-10-19':1}}},h={id:'t',created:'2026-10-01',days:[0,1,2,3,4,5,6],target:1};
+      const r=[streak(H,h,now)===5,bestStreak(H,h,now)===5,rateCounts(H,h,7,now).join()==='5,5',target({start:'2026-10-12',due:'2026-10-21'})===8,workDays('2026-10-14','2026-10-17')===2,
+        weekNeed({perWeek:7},new Date(2026,9,15))===5,neededBy({status:'Doing',start:'2026-10-12',due:'2026-10-21'},'2026-10-16')===3];
+      S.holidays=[{id:'w',name:'x',from:'2026-10-12',to:'2026-10-18'}];
+      const W={logs:{w:{'2026-10-06':1,'2026-10-19':1}}},w={id:'w',created:'2026-10-01',days:[0,1,2,3,4,5,6],target:1,perWeek:1};
+      r.push(streak(W,w,now)===2,bestStreak(W,w,now)===2);
+      S.holidays=keep;return r})(),
+    activeOn({status:'Doing',start:'2026-10-14',due:'2026-12-31'},'2026-10-19'), !activeOn({status:'Plan',start:'2026-10-12',due:'2026-10-18'},'2026-10-19'),
+  ];
+  alert(r.every(Boolean)?'Self-check OK ✅':'Self-check FAILED: '+r.map((x,i)=>x?'':i).filter(String).join(','));
+}
+
+// static page text (title, header, menus) follows the language too
+(()=>{
+  document.documentElement.lang=LANG;
+  $('#logohero').innerHTML=heroSVG('king',52);$('#soundb').textContent=soundLabel();
+  $('#langb').textContent=LANG==='en'?'🌐 Tiếng Việt':'🌐 English';
+  if(LANG!=='en')return;
+  document.title=tr(document.title);
+  const w=document.createTreeWalker(document.querySelector('header'),NodeFilter.SHOW_TEXT);let n;
+  while(n=w.nextNode()){const t=n.nodeValue.trim();if(t&&EN[t])n.nodeValue=n.nodeValue.replace(t,EN[t])}
+  document.querySelectorAll('header [aria-label]').forEach(e=>e.setAttribute('aria-label',tr(e.getAttribute('aria-label'))));
+})();
+if(BLOCKED){
+  document.querySelector('.wrap').innerHTML=`<div class="card" style="max-width:620px;margin:60px auto;padding:28px;line-height:1.7">
+    <h2>🐹 Capy Chiến Binh</h2>${SRV?`<p><b>${tr("Không đọc được file dữ liệu du-lieu.json")}</b> (${esc(LOAD_ERR)}).</p>
+    <p>${tr("App dừng lại để không ghi đè lên file. Bản sao lưu hằng ngày nằm trong thư mục sao-luu cạnh file app — chép một bản đè lên du-lieu.json rồi mở lại app.")}</p>`
+    :`<p>${tr("App lưu dữ liệu trong file trên máy, không lưu trong trình duyệt.")}</p>
+    <p>${tr("Hãy mở app bằng shortcut")} <b>Capy Chiến Binh</b> ${tr("trên Desktop, hoặc bấm đúp file")} <b>Mo-Capy.vbs</b> ${tr("trong thư mục app.")}</p>`}</div>`;
+}else{render();drawFs();setInterval(heartbeat,30000)}
+</script>
+</body>
+</html>
