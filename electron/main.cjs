@@ -5,6 +5,9 @@ const fs = require("node:fs");
 const http = require("node:http");
 const path = require("node:path");
 
+// ô chọn ngày theo kiểu Việt Nam (ngày/tháng/năm), dù Windows đang để định dạng Mỹ
+app.commandLine.appendSwitch("lang", "vi");
+
 // Dữ liệu nằm riêng với chỗ cài app, nên cập nhật hay gỡ app cũng không mất.
 const HOME = "D:\\Datacenter\\6. Personal Projects\\ThoiQuen-KeHoach";
 const ROOT = process.env.CAPY_DATA_DIR || (fs.existsSync(HOME) ? HOME : path.join(app.getPath("documents"), "Capy Chien Binh"));
