@@ -253,6 +253,7 @@ form h3{color:var(--accent)}
         <button data-act="export">💾 Sao lưu dữ liệu (.json)</button>
         <button data-act="import">📂 Khôi phục từ file</button>
         <button data-act="hmgr">🏖️ Ngày nghỉ & kỳ nghỉ…</button>
+        <button data-act="weekend" id="weekendb"></button>
         <button data-act="wipe" style="color:#ef4444">🗑️ Xoá toàn bộ dữ liệu</button>
         <button data-act="fsbak">🕘 Khôi phục bản tự sao lưu…</button>
         <button data-act="fsdir">📁 Mở thư mục dữ liệu & sao lưu</button>
@@ -391,6 +392,9 @@ const EN={
 "Bỏ tích": "Untick",
 "Bỏ tích hôm nay": "Untick today",
 "Bấm để đóng/mở nhóm": "Click to collapse or expand this group",
+"Cuối tuần": "Weekend",
+"Thứ 7 & CN là ngày nghỉ — chuỗi 🔥 không bị ngắt": "Saturday & Sunday are rest days — streaks 🔥 won't break",
+"Thứ 7 & CN tính như ngày làm việc": "Saturday & Sunday count as working days",
 "Đã hoàn thành — bấm trạng thái để mở lại nếu muốn làm tiếp": "Completed — click the status to reopen it if you want to keep working",
 "Bỏ tích đã làm ngày này": "Untick this day",
 "Bỏ đánh dấu": "Unmark",
@@ -624,7 +628,7 @@ const EN={
 "✎ Sửa": "✎ Edit",
 "✓ Ngày đã làm (bấm ô ngày để tích/bỏ)": "✓ Day worked on (click a day cell to tick/untick)",
 "✓ đủ tuần": "✓ week done",
-"✨ Gợi ý lịch ôn: +1, +3, +7, +14 ngày sau ngày đến hạn": "✨ Suggest reviews: +1, +3, +7, +14 days after the due date",
+"✨ Gợi ý lịch ôn: +1, +3, +7, +14 ngày sau ngày đến hạn (né ngày nghỉ)": "✨ Suggest reviews: +1, +3, +7, +14 days after the due date (skipping rest days)",
 "➕ Thêm lĩnh vực mới…": "➕ Add a new area…",
 "🎉 Hoàn thành tất cả thói quen! Giỏi lắm!": "🎉 All habits done! Great job!",
 "🎉 Đủ": "🎉 Reached",
@@ -696,7 +700,10 @@ const isDone=(S,h,k)=>count(S,h,k)>=h.target;
 // ---------- rest days / holidays (S.holidays = [{id,name,from,to}], inclusive) ----------
 // A rest day is skipped by every habit (its streak neither breaks nor grows) and is not a working day for tasks.
 const holidayOn=k=>(S.holidays||[]).find(x=>x.from<=k&&k<=x.to);
-const offDay=k=>!!holidayOn(k);
+// weekends off (⚙️, on unless turned off): Saturday and Sunday are rest days too
+let weekendOff=(()=>{try{return store.getItem(KEY+'-weekend')!=='work'}catch(e){return true}})();
+const restOn=k=>holidayOn(k)||(weekendOff&&kDate(k).getDay()%6===0?{name:tr("Cuối tuần")}:null);
+const offDay=k=>!!restOn(k);
 const scheduled=(h,d)=>h.days.includes(d.getDay())&&ymd(d)>=h.created&&!offDay(ymd(d));
 
 // flexible weekly habits (h.perWeek = N): any N days in a Mon–Sun week; days is all 7 so it shows every day
@@ -937,6 +944,7 @@ function gloryRain(n=30){
 }
 // short synthesized chime / fanfare (no audio files); can be turned off in ⚙️
 const soundOn=()=>{try{return store.getItem(KEY+'-sound')!=='off'}catch(e){return true}};
+const weekendLabel=()=>weekendOff?(LANG==='en'?'🛌 Sat & Sun: rest days':'🛌 Thứ 7 & CN: nghỉ'):(LANG==='en'?'💼 Sat & Sun: working days':'💼 Thứ 7 & CN: vẫn làm');
 const soundLabel=()=>soundOn()?(LANG==='en'?'🔔 Sound: on':'🔔 Âm thanh: bật'):(LANG==='en'?'🔕 Sound: off':'🔕 Âm thanh: tắt');
 let actx;
 function tone(freq,at,dur,type='triangle',vol=.16){
@@ -1014,7 +1022,7 @@ const quickAdd=()=>`<div class="card"><p class="meta" style="margin:0 0 10px">${
 // Thói quen ▸ Hôm nay
 function renderHabitToday(){
   const k=ymd(cur),on=S.habits.filter(h=>scheduled(h,cur)),off=S.habits.filter(h=>!scheduled(h,cur));
-  const done=on.filter(h=>doneToday(S,h,k)).length,hol=holidayOn(k);
+  const done=on.filter(h=>doneToday(S,h,k)).length,hol=restOn(k);
   if(hol)return dayNav(null,`🏖️ <b>${esc(hol.name)}</b> — ${tr("ngày nghỉ: làm thì tốt, không làm cũng không mất chuỗi 🔥")}`)
     +`<div class="toolbar"><span style="flex:1"></span><button class="primary" data-act="new">${tr("+ Thói quen")}</button></div>`
     +S.habits.map(h=>habitCard(h,k,true)).join('');
@@ -1027,7 +1035,7 @@ function renderHabitToday(){
 
 // Công việc ▸ Việc hôm nay
 function renderTaskToday(){
-  const k=ymd(cur),tl=todayTasks(k),td=tl.filter(t=>taskDoneOn(t,k)).length,hol=holidayOn(k);
+  const k=ymd(cur),tl=todayTasks(k),td=tl.filter(t=>taskDoneOn(t,k)).length,hol=restOn(k);
   return dayNav(hol?null:tl.length?td/tl.length:0,hol?`🏖️ <b>${esc(hol.name)}</b> — ${tr("ngày nghỉ: không bắt buộc làm, tiến độ không bị tính chậm")}`:tl.length?`${tr("Đã làm")} ${td}/${tl.length} ${tr("công việc")}${td===tl.length?(' '+tr("— tuyệt vời! 🎉")):''}`:tr("Không có công việc nào cho ngày này"))
     +`<div class="toolbar"><span class="meta">${tr("Bấm ✓ khi hôm nay đã làm việc đó · bấm lại để bỏ tích · bấm \"Đang làm/Hoàn thành\" khi xong hẳn cả việc.")}</span><span style="flex:1"></span><button class="primary" data-act="tnew">${tr("+ Công việc")}</button></div>`
     +renderTodayTasks(k);
@@ -1063,7 +1071,7 @@ function renderHabitList(){
 function renderHome(){
   const now=today(),k=ymd(now),sum=(ts,f)=>ts.reduce((a,t)=>a+f(t),0);
   const on=S.habits.filter(h=>scheduled(h,now)),hd=on.filter(h=>doneToday(S,h,k)).length;
-  const hol=holidayOn(k),tl=hol?[]:todayTasks(k),td=tl.filter(t=>taskDoneOn(t,k)).length,all=on.length+tl.length;
+  const hol=restOn(k),tl=hol?[]:todayTasks(k),td=tl.filter(t=>taskDoneOn(t,k)).length,all=on.length+tl.length;
   const [pd,ps]=S.habits.map(h=>rateCounts(S,h)).reduce((a,b)=>[a[0]+b[0],a[1]+b[1]],[0,0]);
   const best=Math.max(0,...S.habits.map(h=>streak(S,h)));
   const T=planTotals(S.tasks,k);
@@ -1187,7 +1195,7 @@ function renderPlan(){
   const openT=S.tasks.filter(scheduled_);
   const load=dk=>{const on=openT.filter(x=>x.start<=dk&&dk<=x.due),by={};on.forEach(x=>by[x.area]=(by[x.area]||0)+1);return{n:on.length,a:Math.max(0,...Object.values(by))}};
   const dayHead=days.map(d=>{const dk=ymd(d),show=zoom>20||d.getDay()===1;
-    const hol=holidayOn(dk),L=hol?{n:0,a:0}:load(dk),ovl=L.n>LIMIT.tasks||L.a>LIMIT.area;
+    const hol=restOn(dk),L=hol?{n:0,a:0}:load(dk),ovl=L.n>LIMIT.tasks||L.a>LIMIT.area;
     return`<th class="d ${d.getDay()%6===0?'we':''} ${dk===k?'tdy':''} ${hol?'off':''} ${ovl?'ovl':''}" ${dk===k?'id="gToday"':''} title="${DAY_FULL[d.getDay()]}, ${dm(d)}${hol?' · 🏖️ '+esc(hol.name):''}${ovl?` · ⚠️ ${L.n} ${tr("việc")} (${tr("tối đa")} ${LIMIT.tasks}, ${LIMIT.area}/${tr("lĩnh vực")})`:''}">${show?`${d.getDate()}${zoom>20?`<br><small>${DAY_SHORT[d.getDay()]}</small>`:''}`:''}</th>`}).join('');
   html+=`<div class="legend"><span><i style="--c:var(--accent)" class="gb"></i>${tr("Chưa làm")}</span><span><i style="--c:var(--accent)" class="gb Doing"></i>${tr("Đang làm")}</span><span><i style="--c:var(--accent)" class="gb Done"></i>${tr("Hoàn thành")}</span><span><i class="gb late"></i>${tr("Quá hạn")}</span><span>${tr("✓ Ngày đã làm (bấm ô ngày để tích/bỏ)")}</span><span style="color:#8b5cf6">${tr("◆ Ngày ôn tập")}</span><span>${tr("■ Thói quen đã làm · □ bỏ lỡ")}</span><span style="color:#ef4444">${tr("▌Hôm nay")}</span><span><i class="offsw"></i>${tr("🏖️ Ngày nghỉ")}</span><span style="color:#ef4444;font-weight:600">${tr("■ Ngày quá tải")}</span><span>${tr("Bấm tên công việc để sửa · bấm trạng thái để đổi")}</span></div>
   <div class="gwrap"><table class="gantt" style="--w:${zoom}px"><thead>
@@ -1272,7 +1280,7 @@ function heatmap(h){
   for(let d=start;ymd(d)<=ymd(addDays(mondayOf(now),6));d=addDays(d,1)){
     const k=ymd(d);
     if(k>t){out+='<i class="x"></i>';continue}
-    const p=count(S,h,k)/h.target,hol=holidayOn(k);
+    const p=count(S,h,k)/h.target,hol=restOn(k);
     out+=`<i class="${hol?'off':''}" title="${dm(d)}: ${hol?'🏖️ '+esc(hol.name):count(S,h,k)+'/'+h.target}" style="${p?`background:color-mix(in srgb,${h.color} ${Math.round(25+75*Math.min(1,p))}%,transparent)`:''}"></i>`;
   }
   return`<div class="heat">${out}</div>`;
@@ -1467,7 +1475,7 @@ function openTask(t){
   <div><label class="f" for="tDue">${tr("Ngày đến hạn")}</label><input type="date" id="tDue" value="${d.due}"></div></div>
   <label class="f">${tr("Lịch ôn tập (Active Recall) — tối đa 4 lần, không cần thì để trống")}</label>
   <div class="rgrid">${[0,1,2,3].map(i=>{const r=recalls(d)[i]||{};return`<div class="rrow"><span class="meta" style="white-space:nowrap">${tr("Lần")} ${i+1}</span><input type="date" id="tR${i}" value="${r.date||''}" aria-label="${tr("Ngày ôn tập lần")} ${i+1}"><label class="meta" style="white-space:nowrap"><input type="checkbox" id="tRd${i}" ${r.done?'checked':''}> ${tr("Đã ôn")}</label></div>`}).join('')}</div>
-  <button type="button" class="tag" data-fact="rsuggest" style="margin-top:8px">${tr("✨ Gợi ý lịch ôn: +1, +3, +7, +14 ngày sau ngày đến hạn")}</button>
+  <button type="button" class="tag" data-fact="rsuggest" style="margin-top:8px">${tr("✨ Gợi ý lịch ôn: +1, +3, +7, +14 ngày sau ngày đến hạn (né ngày nghỉ)")}</button>
   <label class="f" for="tNote">${tr("Ghi chú")}</label><input type="text" id="tNote" maxlength="300" value="${esc(d.note||'')}">
   <datalist id="groupDl">${[...new Set(S.tasks.map(x=>x.group).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}</datalist>
   ${d.id?('<p class="meta">'+tr("Việc lặp lại mãi (VD: tập 30 phút/ngày)? Nên quản lý như một thói quen để theo dõi chuỗi 🔥.")+'</p>'):''}
@@ -1481,7 +1489,9 @@ $('#tform').addEventListener('click',e=>{
   if(b.dataset.fact==='conv'){$('#tdlg').close();return openForm(null,t)}
   if(b.dataset.fact==='rsuggest'){ // recount from the current due date; reviews already marked done keep their date
     const base=$('#tDue').value||$('#tStart').value;if(!base)return toast(tr("Hãy nhập ngày đến hạn trước"));
-    [1,3,7,14].forEach((n,i)=>{if(!$('#tRd'+i).checked)$('#tR'+i).value=ymd(addDays(kDate(base),n))});return;
+    // a review landing on a rest day moves to the next free day, never onto the previous review's day
+    let prev='';[1,3,7,14].forEach((n,i)=>{if($('#tRd'+i).checked)return;let d=addDays(kDate(base),n);
+      while(offDay(ymd(d))||ymd(d)<=prev)d=addDays(d,1);prev=ymd(d);$('#tR'+i).value=prev});return;
   }
   if(!confirm(`${tr("Xoá \"")}${t.name}"${ticks(t)?` ${tr("cùng")} ${ticks(t)} ${tr("ngày đã tích")}`:''}${tr("? Không thể hoàn tác.")}`))return;
   S.tasks=S.tasks.filter(x=>x.id!==id);save();$('#tdlg').close();render();
@@ -1577,6 +1587,8 @@ document.addEventListener('click',e=>{
       askText(tr("Tên ngày nghỉ (VD: Tết, nghỉ phép, ốm):"),tr("Ngày nghỉ")).then(name=>{if(name===null)return;
         (S.holidays??=[]).push({id:uid(),name:name.trim()||tr("Ngày nghỉ"),from:d,to:d});save();render();toast(tr("Đã đánh dấu ngày nghỉ 🏖️ — chuỗi được giữ nguyên"))});return}
     case'lang':try{store.setItem(KEY+'-lang',LANG==='en'?'vi':'en')}catch(e){}return location.reload();
+    case'weekend':weekendOff=!weekendOff;try{store.setItem(KEY+'-weekend',weekendOff?'off':'work')}catch(e){}
+      $('#weekendb').textContent=weekendLabel();toast(weekendOff?tr("Thứ 7 & CN là ngày nghỉ — chuỗi 🔥 không bị ngắt"):tr("Thứ 7 & CN tính như ngày làm việc"));break;
   }
   render();
   if(['tap','inc'].includes(act)&&h&&!wasDone&&isDone(S,h,k)){sparkBurst(e.clientX,e.clientY);chime()}
@@ -1673,6 +1685,7 @@ if(location.hash==='#test'){
   const T={logs:{t:{'2026-10-17':1,'2026-10-18':1,'2026-10-19':1,'2026-10-10':1,'2026-10-11':1,'2026-10-12':1,'2026-10-13':1}}};
   const w={...h,id:'w',days:[1,3,5]}; // Mon/Wed/Fri; 19/10/2026 is Monday
   T.logs.w={'2026-10-14':1,'2026-10-16':1};
+  const keepW=weekendOff;weekendOff=false; // the checks below count weekends as working days
   const r=[
     streak(T,h,now)===3, bestStreak(T,h,now)===4,
     streak(T,h,addDays(now,1))===3, // tomorrow not done yet: streak kept
@@ -1719,14 +1732,19 @@ if(location.hash==='#test'){
       r.push(streak(W,w,now)===2,bestStreak(W,w,now)===2);
       S.holidays=keep;return r})(),
     activeOn({status:'Doing',start:'2026-10-14',due:'2026-12-31'},'2026-10-19'), !activeOn({status:'Plan',start:'2026-10-12',due:'2026-10-18'},'2026-10-19'),
+    ...(()=>{weekendOff=true; // Sat/Sun off: 12–21/10 has 8 weekdays, Fri→Mon keeps a streak, a week needs at most 5
+      const r=[target({start:'2026-10-12',due:'2026-10-21'})===8,offDay('2026-10-18')&&!offDay('2026-10-19'),
+        streak({logs:{t:{'2026-10-16':1,'2026-10-19':1}}},h,now)===2,weekNeed({perWeek:7},now)===5,restOn('2026-10-17').name===tr("Cuối tuần")];
+      weekendOff=keepW;return r})(),
   ];
+  weekendOff=keepW;
   alert(r.every(Boolean)?'Self-check OK ✅':'Self-check FAILED: '+r.map((x,i)=>x?'':i).filter(String).join(','));
 }
 
 // static page text (title, header, menus) follows the language too
 (()=>{
   document.documentElement.lang=LANG;
-  $('#logohero').innerHTML=heroSVG('king',52);$('#soundb').textContent=soundLabel();
+  $('#logohero').innerHTML=heroSVG('king',52);$('#soundb').textContent=soundLabel();$('#weekendb').textContent=weekendLabel();
   $('#langb').textContent=LANG==='en'?'🌐 Tiếng Việt':'🌐 English';
   if(LANG!=='en')return;
   document.title=tr(document.title);
