@@ -142,7 +142,7 @@ else {
   app.whenReady().then(() => {
     fs.mkdirSync(BAK_DIR, { recursive: true });
     Menu.setApplicationMenu(null);
-    server.listen(0, "127.0.0.1", () => { port = server.address().port; createWindow(); });
+    server.listen(+process.env.CAPY_PORT || 0, "127.0.0.1", () => { port = server.address().port; createWindow(); });
   });
   app.on("window-all-closed", () => app.quit());
 }

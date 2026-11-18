@@ -51,6 +51,7 @@ Cần [Node.js](https://nodejs.org) (bản LTS).
 ```bash
 npm install
 npm start          # chạy thử
+npm run dev        # chạy thử ở http://127.0.0.1:3000 với dữ liệu riêng trong .dev-data
 npm run dist       # đóng gói file cài: ban-dong-goi/Capy-Chien-Binh-Setup-<version>.exe
 ```
 
