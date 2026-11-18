@@ -85,6 +85,18 @@ input:focus{outline:2px solid var(--accent);outline-offset:-1px}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 select,input[type=date]{padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
 form select,form input[type=date]{width:100%;background:var(--bg)}
+/* soft dropdowns: Chromium's customizable select, so the open list matches the app instead of the OS */
+select,::picker(select){appearance:base-select}
+select{cursor:pointer;transition:border-color .15s,box-shadow .15s}
+select:hover,select:open{border-color:var(--accent)}select:open{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+select::picker-icon{color:var(--accent);transition:rotate .2s}select:open::picker-icon{rotate:180deg}
+::picker(select){border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--text);padding:6px;margin-block:6px;max-height:320px;
+  box-shadow:0 14px 34px rgba(90,58,38,.18);opacity:1;translate:0;transition:opacity .16s,translate .16s,overlay .16s allow-discrete,display .16s allow-discrete}
+@starting-style{::picker(select):popover-open{opacity:0;translate:0 -6px}}
+select option{padding:8px 12px;border-radius:10px;cursor:pointer;gap:8px}
+select option:hover,select option:focus-visible{background:var(--soft);outline:none}
+select option:checked{background:color-mix(in srgb,var(--accent) 18%,transparent);font-weight:700}
+select option::checkmark{color:var(--accent)}
 .area{margin-bottom:20px}
 .ahead{display:flex;align-items:center;gap:10px;margin:14px 4px 8px;font-weight:700;flex-wrap:wrap}.ahead .meta{font-weight:400;margin-left:auto}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
