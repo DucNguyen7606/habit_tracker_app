@@ -310,8 +310,6 @@ const EN={
 "thói quen:": "habits on:",
 "Nên xoá bớt một thói quen để giữ sức, rồi mới thêm cái mới:": "Best to delete one habit to keep things doable, then add the new one:",
 "Thêm ngay": "Add now",
-"Vẫn thêm (vượt giới hạn)": "Add anyway (over the limit)",
-"Chắc chắn thêm vượt giới hạn? Quá nhiều thói quen một ngày dễ khiến bạn bỏ cuộc.": "Add it over the limit? Too many habits a day makes it easy to give up.",
 "Quá tải — chưa lưu được": "Overloaded — not saved",
 "Mỗi ngày tối đa": "Each day allows at most",
 "mỗi lĩnh vực tối đa": "and each area at most",
@@ -1390,10 +1388,10 @@ function removeHolidayDay(d){
 }
 
 // ---------- daily limits: keep each day doable ----------
-const LIMIT={habits:6,tasks:6,area:3};
+const LIMIT={habits:7,tasks:6,area:3};
 // weekdays on which h (if saved) would make more than LIMIT.habits habits
 const habitOverflow=h=>MON_FIRST.filter(d=>h.days.includes(d)&&S.habits.filter(x=>x.id!==h.id&&x.days.includes(d)).length+1>LIMIT.habits);
-// soft limit for habits: recommend deleting one, or add anyway after a confirm. Resolves true to go ahead.
+// hard limit for habits: over it, the only way in is deleting one first. Resolves true to go ahead.
 function askHabitRoom(h){
   if(!habitOverflow(h).length)return Promise.resolve(true);
   return new Promise(res=>{
@@ -1406,14 +1404,13 @@ function askHabitRoom(h){
         :`<p>${tr("Thêm")} <b>${esc(h.name)}</b> ${tr("sẽ làm những ngày này có quá")} ${LIMIT.habits} ${tr("thói quen:")} <b>${bad.map(d=>DAY_FULL[d]).join(', ')}</b>.</p>
         <p class="meta">💡 ${tr("Nên xoá bớt một thói quen để giữ sức, rồi mới thêm cái mới:")}</p>
         ${pool.map(x=>`<div class="hrow"><div class="grow">${esc(x.emoji)} ${esc(x.name)} <span class="meta">· ${freqText(x)}</span></div><button type="button" class="tag" data-c="del" data-id="${x.id}">🗑️ ${tr("Xoá")}</button></div>`).join('')}`}
-        <div class="actions"><button type="button" class="ghost" data-c="no">${tr("Huỷ")}</button>${ok?`<button type="button" class="primary" data-c="yes">${tr("Thêm ngay")}</button>`:`<button type="button" class="ghost" data-c="force" style="color:#ef4444">${tr("Vẫn thêm (vượt giới hạn)")}</button>`}</div>`;
+        <div class="actions"><button type="button" class="ghost" data-c="no">${tr("Huỷ")}</button>${ok?`<button type="button" class="primary" data-c="yes">${tr("Thêm ngay")}</button>`:''}</div>`;
     };
     f.onclick=e=>{
       const b=e.target.closest('[data-c]');if(!b)return;const c=b.dataset.c;
       if(c==='del'){const x=S.habits.find(y=>y.id===b.dataset.id);
         if(!confirm(`${tr("Xoá \"")}${x.name}${tr("\" cùng toàn bộ lịch sử? Không thể hoàn tác.")}`))return;
         S.habits=S.habits.filter(y=>y!==x);delete S.logs[x.id];save();render();return draw()}
-      if(c==='force'&&!confirm(tr("Chắc chắn thêm vượt giới hạn? Quá nhiều thói quen một ngày dễ khiến bạn bỏ cuộc.")))return;
       done(c!=='no');
     };
     dlg.oncancel=()=>done(false);
@@ -1702,7 +1699,7 @@ if(location.hash==='#test'){
       return[streak(W,h,now)===2,bestStreak(W,h,now)===2,rateCounts(W,h,30,now).join()==='2,4',doneToday(W,h,'2026-10-21'),
         streak(W2,h,now)===1,!doneToday(W2,h,'2026-10-19'),freqText(h)==='1 lần/tuần (ngày nào cũng được)']})(),
     span('2026-10-12','2026-10-15')===3,
-    ...(()=>{const keep=S;S={habits:[...Array(6)].map((_,i)=>({id:'x'+i,name:'h'+i,days:[1,2,3,4,5]})),logs:{},tasks:[],holidays:[]};
+    ...(()=>{const keep=S;S={habits:[...Array(LIMIT.habits)].map((_,i)=>({id:'x'+i,name:'h'+i,days:[1,2,3,4,5]})),logs:{},tasks:[],holidays:[]};
       const r=[habitOverflow({id:null,days:[0,6]}).length===0,habitOverflow({id:null,days:[1]}).join()==='1',habitOverflow({id:'x0',days:[1,2,3,4,5]}).length===0];
       const mk=(id,area,a,b)=>({id,name:id,area,status:'Doing',start:a,due:b});
       S.tasks=[mk('a','A','2026-10-20','2026-10-25'),mk('b','A','2026-10-20','2026-10-21'),mk('c','A','2026-10-22','2026-10-23'),mk('d','B','2026-10-20','2026-10-30'),mk('e','C','2026-10-20','2026-10-30'),mk('f','D','2026-10-20','2026-10-30')];

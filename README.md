@@ -12,7 +12,7 @@
 - **Hôm nay**: bấm để đánh dấu đã làm; thói quen có thể làm mỗi ngày, theo thứ trong tuần, hoặc linh hoạt "N lần/tuần".
 - **Danh sách** và **Thống kê**: chuỗi ngày liên tiếp (streak), chuỗi dài nhất, tỉ lệ hoàn thành.
 - **Ngày nghỉ** 🏖️: đặt ngày nghỉ mà không làm đứt chuỗi.
-- Gợi ý tối đa 6 thói quen/ngày; vượt thì app hỏi lại hoặc gợi ý bớt.
+- Tối đa 7 thói quen/ngày; muốn thêm khi đã đủ thì phải xoá bớt một thói quen trước.
 
 **📋 Công việc**
 - **Việc hôm nay**: tích ✓ mỗi ngày đã làm việc đó.
